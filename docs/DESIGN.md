@@ -26,7 +26,7 @@ Menu mobilne ujawnia nawigację, Escape je zamyka. Galeria używa natywnego `dia
 
 Pierwszy ekran: trzy linie nagłówka odsłaniają się w rytmie 650 ms z opóźnieniami 0/75/150 ms. Opis i działania dołączają łagodnie, a główne zdjęcie jest widoczne od razu. Fokus klawiatury natychmiast odsłania działania.
 
-Sekcje: jednorazowe wejście 20 px / 620 ms na komputerze oraz 12 px / 460 ms na telefonie. Karty i etapy procesu mają niewielkie przesunięcia czasowe. IntersectionObserver uruchamia Web Animations API; po zakończeniu usuwa efekt i jego warstwę. Domyślne style nie ukrywają treści. Skrypt nie opóźnia dostępu do informacji ani nie steruje przewijaniem. Fokus odsłania animowany element natychmiast.
+Przewijanie: zdjęcia i ich kontenery zachowują pełną widoczność oraz stałe położenie w układzie; bez wygaszania, przesuwania i powiększania po najechaniu kursorem. Interakcję na kartach sygnalizuje strzałka. Tekst ma jednorazowy ruch 8 px / 320 ms na komputerze i 6 px / 240 ms na telefonie, bez zmiany przezroczystości i opóźnień między elementami. IntersectionObserver startuje 120 px przed dolną krawędzią ekranu. Przy szybkim przewinięciu lub przywróceniu pozycji pomija animowanie już widocznej treści. Po zakończeniu usuwa efekt; fokus i ograniczony ruch anulują go natychmiast. Skrypt nie steruje przewijaniem.
 
 Koncepcje: natywne przejście między dokumentami łączy tylko wybrane zdjęcie z okładką projektu, także przy powrocie. Czas 620 ms na komputerze i 420 ms na telefonie. Nazwy przejścia są tymczasowe, obsługiwane w `pageswap` i `pagereveal`, z czyszczeniem dla historii przeglądarki. Pozostaje klasyczna nawigacja wielostronicowa; brak dodatkowego routera i bibliotek.
 

@@ -300,8 +300,7 @@
   .button:hover,
   .button:active,
   .button svg,
-  .image-arrow svg,
-  .project-image-link:hover img {
+  .image-arrow svg {
     transform: none;
   }
 }

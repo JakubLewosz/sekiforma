@@ -1,38 +1,64 @@
 import { test, expect } from '@playwright/test';
 
-test('sekcje pojawiają się raz, a zmiana preferencji ruchu kończy efekt', async ({
+test('tekst porusza się raz przed wejściem w ekran, a ograniczenie ruchu kończy efekt', async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/');
-  const card = page.locator('.project-card').first();
-  await card.evaluate((element) =>
-    element.scrollIntoView({ block: 'center', behavior: 'instant' }),
+  const text = page.locator('.process-grid > li').first();
+  await text.evaluate((element) =>
+    window.scrollTo({
+      top: element.getBoundingClientRect().top + scrollY - innerHeight - 60,
+      behavior: 'instant',
+    }),
   );
   await expect
     .poll(() =>
-      card.evaluate((element) =>
-        element.getAnimations().some((a) => a.playState === 'running'),
+      text.evaluate((element) =>
+        element
+          .getAnimations()
+          .some((animation) => animation.playState === 'running'),
       ),
     )
     .toBe(true);
+  expect(
+    await text.evaluate((element) => getComputedStyle(element).opacity),
+  ).toBe('1');
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await expect
     .poll(() =>
-      card.evaluate((element) => ({
-        opacity: getComputedStyle(element).opacity,
+      text.evaluate((element) => ({
+        transform: getComputedStyle(element).transform,
         animations: element.getAnimations().length,
       })),
     )
-    .toEqual({ opacity: '1', animations: 0 });
+    .toEqual({ transform: 'none', animations: 0 });
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
-  await card.evaluate((element) =>
+  await text.evaluate((element) =>
     element.scrollIntoView({ block: 'center', behavior: 'instant' }),
   );
-  expect(await card.evaluate((element) => element.getAnimations().length)).toBe(
+  expect(await text.evaluate((element) => element.getAnimations().length)).toBe(
     0,
   );
+});
+
+test('szybkie przewinięcie nie uruchamia animacji już widocznego tekstu', async ({
+  page,
+}) => {
+  await page.goto('/');
+  const text = page.locator('.process-grid > li').first();
+  await text.evaluate(async (element) => {
+    element.scrollIntoView({ block: 'center', behavior: 'instant' });
+    await new Promise(requestAnimationFrame);
+    await new Promise(requestAnimationFrame);
+  });
+  expect(await text.evaluate((element) => element.getAnimations().length)).toBe(
+    0,
+  );
+  expect(
+    await text.evaluate((element) => getComputedStyle(element).opacity),
+  ).toBe('1');
 });
 
 test('ograniczony ruch: brak wejścia nagłówka i animacji sekcji', async ({

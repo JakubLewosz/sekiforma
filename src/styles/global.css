@@ -434,16 +434,12 @@ p {
   aspect-ratio: 4/4.25;
   width: 100%;
   object-fit: cover;
-  transition: transform 0.6s;
 }
 .project-card:nth-child(1) img {
   object-position: 35% center;
 }
 .project-card:nth-child(2) img {
   object-position: 50% center;
-}
-.project-image-link:hover img {
-  transform: scale(1.035);
 }
 .image-note {
   position: absolute;

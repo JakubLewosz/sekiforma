@@ -3,34 +3,22 @@ const compact = window.matchMedia('(max-width: 799px)');
 const animations = new Map<HTMLElement, Animation>();
 let observer: IntersectionObserver | undefined;
 
-// Nothing is hidden in the stylesheet: the document stays fully readable
-// without JavaScript, before initialization and when motion is disabled.
-const groups = [
-  '.projects-grid',
-  '.process-grid',
-  '.service-list',
-  '.values-grid',
-];
-for (const selector of groups) {
-  document.querySelectorAll(selector).forEach((group) => {
-    Array.from(group.children).forEach((child, index) => {
-      if (!(child instanceof HTMLElement)) return;
-      child.dataset.reveal = '';
-      child.dataset.revealDelay = String(Math.min(index, 3) * 85);
-    });
-  });
-}
+// Photographs and their containers stay in the normal scroll layer. Only
+// text gets a small movement, with full opacity throughout the animation.
 const selectors = [
+  '.project-meta',
+  '.process-grid > *',
+  '.service-list > *',
+  '.values-grid > *',
   '.section-heading',
   '.offer-grid > div:first-child',
   '.material-controls',
-  '.material-panels',
+  '.material-panel-copy',
   '.faq-grid > div',
   '.invitation-inner > div',
-  '.service-block > div',
-  '.studio-intro > *',
+  '.service-description',
+  '.studio-intro > div',
   '.project-story > div',
-  '.gallery > figure',
 ];
 for (const selector of selectors) {
   document.querySelectorAll<HTMLElement>(selector).forEach((element) => {
@@ -42,28 +30,27 @@ function reveal(element: HTMLElement) {
   if (element.dataset.revealDone) return;
   element.dataset.revealDone = 'true';
   observer?.unobserve(element);
-  if (preference.matches || element.contains(document.activeElement)) return;
-  const delay =
-    Number(element.dataset.revealDelay ?? 0) * (compact.matches ? 0.65 : 1);
+  // Start just below the viewport. A fast scroll or restored position must
+  // never reset content that has already become visible.
+  if (
+    preference.matches ||
+    element.contains(document.activeElement) ||
+    element.getBoundingClientRect().top < window.innerHeight
+  )
+    return;
   const animation = element.animate(
     [
-      {
-        opacity: 0,
-        transform: `translate3d(0, ${compact.matches ? 12 : 20}px, 0)`,
-      },
-      { opacity: 1, transform: 'translate3d(0, 0, 0)' },
+      { transform: `translateY(${compact.matches ? 6 : 8}px)` },
+      { transform: 'none' },
     ],
     {
-      duration: compact.matches ? 460 : 620,
-      delay,
+      duration: compact.matches ? 240 : 320,
       easing: 'cubic-bezier(.22, 1, .36, 1)',
-      fill: 'both',
     },
   );
   animations.set(element, animation);
   const cleanup = () => {
     if (animations.get(element) === animation) animations.delete(element);
-    // Release the compositor layer and the transform after the effect finishes.
     animation.cancel();
   };
   animation.finished.then(cleanup, () => animations.delete(element));
@@ -78,7 +65,7 @@ function observe() {
         if (entry.isIntersecting && entry.target instanceof HTMLElement)
           reveal(entry.target);
       }),
-    { threshold: 0.08, rootMargin: '0px 0px -24px 0px' },
+    { threshold: 0, rootMargin: '0px 0px 120px 0px' },
   );
   document
     .querySelectorAll<HTMLElement>('[data-reveal]:not([data-reveal-done])')

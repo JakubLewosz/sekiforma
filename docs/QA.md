@@ -10,7 +10,7 @@ macOS arm64, Node 24.11.0, npm 11.6.1, Astro 7.4.0, lokalny Google Chrome 154 w 
 
 - `npm run build`: poprawny statyczny build, 8 adresów treściowych oraz 404, razem 9 stron.
 - `npm run check`: bez błędów i ostrzeżeń.
-- `npm test`: **20 testów przeszło**. Pełny zapis: [qa-tests.json](qa-tests.json).
+- `npm test`: **23 testy przeszły**. Pełny zapis: [qa-tests.json](qa-tests.json).
 
 ## Testy przeglądarkowe
 
@@ -24,13 +24,15 @@ macOS arm64, Node 24.11.0, npm 11.6.1, Astro 7.4.0, lokalny Google Chrome 154 w 
 8. Automatyczna kontrola reguł WCAG 2 A/AA, 2.1 AA i 2.2 AA: **0 zgłoszonych naruszeń** na ośmiu stronach, we wszystkich krokach formularza i po podsumowaniu. Skan wykonano po zakończeniu trwających animacji, aby ocenić docelowy kontrast. To zakres reguł obsługiwanych przez axe, bez deklaracji pełnej zgodności WCAG.
 9. Główna treść i linki dostępne bez JavaScript; demonstracyjny przycisk formularza pozostaje wyłączony. Własna strona 404 zwraca HTTP 404. Powiększenie tekstu do 200% w symulacji 390 px nie powoduje poziomego przewijania. `prefers-reduced-motion` wyłącza płynne przewijanie.
 
-10. Nowy system ruchu: sekcje pojawiają się raz, po przewinięciu nie odtwarzają efektu ponownie. Zmiana preferencji na ograniczony ruch anuluje aktywne animacje, przywraca pełną widoczność i nie przesuwa treści.
-11. Natychmiastowe wyłączenie wejścia nagłówka i sekcji przy `prefers-reduced-motion: reduce`, z zachowaniem nawigacji.
+10. Tekst porusza się jednorazowo przed wejściem na ekran, zawsze przy pełnej widoczności. Powrót do sekcji nie odtwarza efektu. Zmiana preferencji na ograniczony ruch anuluje aktywny efekt. Szybkie przejście bezpośrednio do widocznej treści pomija animację.
+11. Natychmiastowe wyłączenie wejścia nagłówka i tekstu przy `prefers-reduced-motion: reduce`, z zachowaniem nawigacji.
 12. Natywne przejście wybranego zdjęcia z karty do okładki koncepcji i po powrocie sprawdzono przy 390 i 1440 px. Przeglądarka faktycznie utworzyła wspólną grupę obrazu z czasem 420 lub 620 ms.
 13. Po wyłączeniu natywnych przejść w CSS nawigacja, otwarcie galerii i jej zamknięcie nadal działają. To symulacja braku efektu w Chrome, bez deklaracji sprawdzenia innych silników.
 
 14. Paleta materiałów: wskaźnik i klawiatura (strzałki, Home, End, Enter, Spacja, Tab), właściwy obraz, opis i odnośnik, jeden aktywny panel. Wszystkie trzy wybory sprawdzono przy 320 i 1440 px, także przy ograniczonym ruchu i powiększonym tekście. W zwykłym widoku zmiana materiału nie przesuwa kolejnej treści; brak poziomego przewijania.
 15. Każdy panel palety przeszedł skan axe WCAG A/AA. Bez JavaScript wszystkie trzy opisy pozostają widoczne, a nieaktywne kontrolki są ukryte.
+
+16. Regresja migania zdjęć: przed poprawką test przy 390 i 1440 px odtworzył spadek efektywnej przezroczystości zdjęć do 0 podczas scrollowania. Po poprawce, na stronie głównej, katalogu, ofercie, szczegółach kuchni i w pracowni, próbki kolejnych klatek przy przewijaniu w dół i w górę zachowują przezroczystość 1 i brak transformacji zdjęć oraz ich przodków. Kursor pozostaje nieruchomy nad treścią, aby objąć przypadkowe wyzwalanie hover przy scrollowaniu. Przewijanie obejrzano również w otwartym podglądzie aplikacji. To kontrola widoczności i położenia, bez deklaracji stałej liczby FPS na każdym urządzeniu.
 
 W czasie kontroli poprawiono kontrast numerów usług i etapów, łamanie tekstu przy powiększeniu oraz zawijanie fokusu w galerii oraz dostępność pól dopiero po uruchomieniu interakcji, aby wybór przed hydratacją nie został utracony. Końcowa regresja wykryła wyścig opóźnionego fokusu błędu z szybkim wypełnianiem pól; fokus przenosi się teraz po aktualizacji DOM w efekcie układu, bez opóźnionego requestAnimationFrame.
 
@@ -38,7 +40,7 @@ W czasie kontroli poprawiono kontrast numerów usług i etapów, łamanie tekstu
 
 Obejrzano zrzuty strony głównej na komputerze i telefonie, szczegóły kuchni, formularz na telefonie i podsumowanie na komputerze. Sprawdzono hierarchię, kadry, widoczność oznaczeń demo, rytm sekcji i stopkę. Dopracowano rozmiary opisów oraz układ stopki mobilnej. Obejrzano też pełną stronę główną z wczytanym detalem materiału, nowy katalog na komputerze i telefonie, trzy warianty palety oraz dodatkowe ujęcie w powiększeniu. Poprawiono szerokość zakładek przy powiększeniu tekstu, stałą wysokość opisów na małym ekranie oraz położenie dialogu galerii.
 
-[Zrzuty ekranu](screenshots/) są rzeczywistymi obrazami strony. Pełne zrzuty pokazują ustalony układ przy ograniczonym ruchu, aby uniknąć uchwycenia połowy wejścia sekcji; osobne kadry przejść i nagrania zachowują animacje. [Nagranie](video/przejscie-przez-strone.webm) pokazuje przejście od strony głównej przez kuchnię do podsumowania briefu. Dodatkowe nagrania prezentują animacje na [komputerze](video/animacje-desktop.webm) i [telefonie](video/animacje-mobile.webm). Obejrzano również kadry w trakcie natywnego przejścia przy obu szerokościach. Paletę i dodatkowe ujęcia dokumentują nagrania na [komputerze](video/materialy-i-ujecia-desktop.webm) i [telefonie](video/materialy-i-ujecia-mobile.webm). Przejrzano próbne kadry z obu nagrań. Scenariusze można odtworzyć przez `npm run qa:capture`, `node scripts/capture-motion.mjs` i `node scripts/capture-materials.mjs` przy działającym preview na porcie 4322.
+[Zrzuty ekranu](screenshots/) są rzeczywistymi obrazami strony. Pełne zrzuty pokazują ustalony układ przy ograniczonym ruchu, aby uniknąć uchwycenia połowy wejścia sekcji; osobne kadry przejść i nagrania zachowują animacje. [Nagranie](video/przejscie-przez-strone.webm) pokazuje przejście od strony głównej przez kuchnię do podsumowania briefu. Dodatkowe nagrania prezentują animacje na [komputerze](video/animacje-desktop.webm) i [telefonie](video/animacje-mobile.webm). Obejrzano również kadry w trakcie natywnego przejścia przy obu szerokościach. Paletę i dodatkowe ujęcia dokumentują nagrania na [komputerze](video/materialy-i-ujecia-desktop.webm) i [telefonie](video/materialy-i-ujecia-mobile.webm). Przejrzano próbne kadry z obu nagrań. Poprawione przewijanie pokazują osobne nagrania [desktop](video/scroll-desktop.webm) i [mobile](video/scroll-mobile.webm), odtwarzane przez `node scripts/capture-scroll.mjs`. Scenariusze można odtworzyć przez `npm run qa:capture`, `node scripts/capture-motion.mjs` i `node scripts/capture-materials.mjs` przy działającym preview na porcie 4322.
 
 ## Kontrast
 
@@ -53,7 +55,7 @@ Obliczone współczynniki dla głównych par sRGB:
 
 ## Lighthouse mobile
 
-Końcowy pomiar po dodaniu animacji, palety i dodatkowych obrazów: 19 października 2026 około 10:40 czasu Europe/Warsaw, Lighthouse **13.5.0**, Chrome **154**, lokalny build na `127.0.0.1:4322`. Domyślny mobilny profil symulacji: RTT 150 ms, przepustowość 1638,4 Kbps, spowolnienie CPU ×4, `throttlingMethod: simulate`. Brak ostrzeżeń w obu raportach. Tabela przedstawia ostatni zapisany pomiar każdej strony.
+Ostatni zapisany pomiar po dodaniu palety i dodatkowych obrazów, przed korektą animacji przewijania: 19 października 2026 około 10:40 czasu Europe/Warsaw, Lighthouse **13.5.0**, Chrome **154**, lokalny build na `127.0.0.1:4322`. Domyślny mobilny profil symulacji: RTT 150 ms, przepustowość 1638,4 Kbps, spowolnienie CPU ×4, `throttlingMethod: simulate`. Brak ostrzeżeń w obu raportach. Tabela przedstawia ostatni zapisany pomiar każdej strony.
 
 | Strona                         | Performance | Accessibility | Best Practices | SEO |   LCP |  TBT |   CLS |
 | ------------------------------ | ----------: | ------------: | -------------: | --: | ----: | ---: | ----: |
