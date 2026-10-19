@@ -35,7 +35,7 @@ W czasie kontroli poprawiono kontrast numerów usług i etapów, łamanie tekstu
 
 Obejrzano zrzuty strony głównej na komputerze i telefonie, szczegóły kuchni, formularz na telefonie i podsumowanie na komputerze. Sprawdzono hierarchię, kadry, widoczność oznaczeń demo, rytm sekcji i stopkę. Dopracowano rozmiary opisów oraz układ stopki mobilnej. Obejrzano też pełną stronę główną z wczytanym detalem materiału.
 
-[Zrzuty ekranu](screenshots/) są rzeczywistymi obrazami strony. [Nagranie](video/przejscie-przez-strone.webm) pokazuje przejście od strony głównej przez kuchnię do podsumowania briefu. Dodatkowe nagrania prezentują animacje na [komputerze](video/animacje-desktop.webm) i [telefonie](video/animacje-mobile.webm). Obejrzano również kadry w trakcie natywnego przejścia przy obu szerokościach. Scenariusz można odtworzyć przez `npm run qa:capture` przy działającym preview na porcie 4322.
+[Zrzuty ekranu](screenshots/) są rzeczywistymi obrazami strony. Pełne zrzuty pokazują ustalony układ przy ograniczonym ruchu, aby uniknąć uchwycenia połowy wejścia sekcji; osobne kadry przejść i nagrania zachowują animacje. [Nagranie](video/przejscie-przez-strone.webm) pokazuje przejście od strony głównej przez kuchnię do podsumowania briefu. Dodatkowe nagrania prezentują animacje na [komputerze](video/animacje-desktop.webm) i [telefonie](video/animacje-mobile.webm). Obejrzano również kadry w trakcie natywnego przejścia przy obu szerokościach. Scenariusz można odtworzyć przez `npm run qa:capture` przy działającym preview na porcie 4322.
 
 ## Kontrast
 
