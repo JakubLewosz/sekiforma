@@ -24,12 +24,10 @@ test('zdjęcie ma animowane wejście, a ograniczenie ruchu odsłania wszystkie e
     ),
   ).toHaveCount(0);
   expect(
-    await frame
-      .locator('img')
-      .evaluate((image) => ({
-        opacity: getComputedStyle(image).opacity,
-        transform: getComputedStyle(image).transform,
-      })),
+    await frame.locator('img').evaluate((image) => ({
+      opacity: getComputedStyle(image).opacity,
+      transform: getComputedStyle(image).transform,
+    })),
   ).toEqual({ opacity: '1', transform: 'none' });
 });
 
