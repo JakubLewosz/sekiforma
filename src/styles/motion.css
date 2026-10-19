@@ -1,0 +1,316 @@
+:root {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Native navigation: every page remains an ordinary static document. */
+@view-transition {
+  navigation: auto;
+}
+::view-transition-old(root) {
+  animation-duration: 160ms;
+}
+::view-transition-new(root) {
+  animation-duration: 220ms;
+}
+::view-transition-group(project-image) {
+  animation-duration: 620ms;
+  animation-timing-function: var(--ease-out);
+  overflow: clip;
+  border-radius: 4px;
+  z-index: 1;
+}
+::view-transition-old(project-image),
+::view-transition-new(project-image) {
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: normal;
+  animation-duration: 620ms;
+  animation-timing-function: var(--ease-out);
+}
+
+.hero-line {
+  display: block;
+  overflow: clip;
+  padding-right: 0.15em;
+  margin-right: -0.15em;
+  padding-bottom: 0.13em;
+  margin-bottom: -0.13em;
+}
+.hero-line > span {
+  display: block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-line > span {
+    animation: hero-line-in 650ms var(--ease-out) both;
+    animation-delay: calc(var(--line, 0) * 75ms);
+  }
+  .hero-copy > .eyebrow {
+    animation: soft-entry 550ms var(--ease-out) both;
+  }
+  .hero-copy > p {
+    animation: soft-entry 560ms 160ms var(--ease-out) both;
+  }
+  .hero-actions {
+    animation: soft-entry 500ms 240ms var(--ease-out) both;
+  }
+  .hero-foot {
+    animation: soft-entry 550ms 300ms var(--ease-out) both;
+  }
+  .hero-visual figcaption {
+    animation: caption-entry 500ms 200ms var(--ease-out) both;
+  }
+  .hero-actions:focus-within {
+    animation: none;
+  }
+  .brief-step,
+  .form-done {
+    animation: brief-entry 280ms var(--ease-out) both;
+  }
+  .lightbox[open] {
+    animation: dialog-entry 280ms var(--ease-out) both;
+  }
+  .lightbox[open]::backdrop {
+    animation: backdrop-entry 220ms ease-out both;
+  }
+}
+
+@keyframes hero-line-in {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes soft-entry {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes caption-entry {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes brief-entry {
+  from {
+    opacity: 0.2;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes dialog-entry {
+  from {
+    opacity: 0.2;
+    transform: translateY(12px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes backdrop-entry {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.button {
+  transition:
+    background 180ms,
+    transform 220ms var(--ease-out),
+    border-color 180ms;
+}
+.button svg,
+.button > span[aria-hidden] {
+  transition: transform 240ms var(--ease-out);
+}
+.button:active {
+  transform: translateY(0) scale(0.985);
+}
+.image-arrow {
+  transition:
+    background 240ms,
+    border-color 240ms,
+    transform 320ms var(--ease-out);
+}
+.image-arrow svg {
+  transition: transform 320ms var(--ease-out);
+}
+.project-image-link:focus-visible .image-arrow {
+  background: var(--forest);
+}
+.choice {
+  transition:
+    background 180ms,
+    border-color 180ms,
+    box-shadow 180ms;
+}
+.choice:has(input:focus-visible) {
+  outline: 2px solid var(--forest);
+  outline-offset: 3px;
+}
+.lightbox-image {
+  min-height: 1px;
+}
+.lightbox-close,
+.lightbox-nav button {
+  transition:
+    background 180ms,
+    color 180ms,
+    transform 180ms;
+}
+.lightbox-nav button:hover,
+.lightbox-close:hover {
+  background: #e8ece1;
+}
+.lightbox-nav button:active {
+  transform: scale(0.95);
+}
+.form-progress li {
+  position: relative;
+  overflow: hidden;
+}
+.form-progress li::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--forest);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 360ms var(--ease-out);
+}
+.form-progress li.active {
+  background: #e3e5dc;
+}
+.form-progress li.active::after {
+  transform: scaleX(1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button:hover svg,
+  .button:hover > span[aria-hidden] {
+    transform: translate(2px, -2px);
+  }
+  .project-image-link:hover .image-arrow {
+    background: var(--forest);
+    border-color: var(--forest);
+  }
+  .project-image-link:hover .image-arrow svg {
+    transform: rotate(45deg);
+  }
+  .main-nav > a:not(.nav-cta):not([aria-current])::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 2px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 240ms var(--ease-out);
+  }
+  .main-nav > a:not(.nav-cta):hover::after {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 799px) {
+  ::view-transition-group(project-image),
+  ::view-transition-old(project-image),
+  ::view-transition-new(project-image) {
+    animation-duration: 420ms;
+  }
+  .main-nav {
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition:
+      opacity 180ms ease-out,
+      transform 220ms var(--ease-out),
+      visibility 0s 180ms;
+  }
+  .main-nav.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+    transition-delay: 0s;
+  }
+  .menu-lines {
+    position: relative;
+    height: 16px;
+    border: 0;
+  }
+  .menu-lines::before,
+  .menu-lines::after {
+    content: '';
+    position: absolute;
+    width: 19px;
+    height: 1px;
+    background: currentColor;
+    left: 0;
+    top: 5px;
+    transition: transform 220ms var(--ease-out);
+  }
+  .menu-lines::after {
+    top: 11px;
+  }
+  .menu-toggle[aria-expanded='true'] .menu-lines {
+    transform: none;
+  }
+  .menu-toggle[aria-expanded='true'] .menu-lines::before {
+    transform: translateY(3px) rotate(45deg);
+  }
+  .menu-toggle[aria-expanded='true'] .menu-lines::after {
+    transform: translateY(-3px) rotate(-45deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+  .hero-line {
+    overflow: visible;
+  }
+  .button:hover,
+  .button:active,
+  .button svg,
+  .image-arrow svg,
+  .project-image-link:hover img {
+    transform: none;
+  }
+}
+@media print {
+  .hero-line {
+    overflow: visible;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

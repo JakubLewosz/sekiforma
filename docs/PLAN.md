@@ -11,4 +11,8 @@ Publikacja oraz rzeczywista wysyłka danych są poza tą realizacją. Marka i wn
 
 ## Stan końcowy — 19 października 2026
 
-Etapy 1–6 wykonane. Powstał lokalny serwis, komplet treści i wizualizacji, formularz, galeria, dokumentacja, zrzuty i nagranie. Build i typy przechodzą; 11 testów przeszło. Lighthouse mobile: 100 dla strony głównej i 95 dla najcięższej koncepcji. Szczegóły w QA.md. Publikacja pozostaje osobnym krokiem.
+Etapy 1–6 wykonane. Powstał lokalny serwis, komplet treści i wizualizacji, formularz, galeria, dokumentacja, zrzuty i nagranie. Build i typy przechodzą; 16 testów przeszło. Lighthouse mobile po animacjach: 100 dla strony głównej i 100 dla najcięższej koncepcji. Szczegóły w QA.md. Publikacja pozostaje osobnym krokiem.
+
+## Etap animacji — wykonany
+
+Dodano wejście trzech linii nagłówka, jednorazowe pojawianie sekcji, natywne przejście zdjęcia między kartą a koncepcją w obie strony oraz mikrointerakcje menu, galerii, przycisków i formularza. Zachowano zwykłą nawigację, treść bez JavaScript i obsługę ograniczonego ruchu. Bez dodatkowych zależności. Przygotowano nowe nagrania desktop/mobile i ponowiono pomiary.

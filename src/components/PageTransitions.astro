@@ -1,0 +1,73 @@
+<script is:inline>
+  // Register before the first render so native document transitions can name
+  // only the photograph that connects the outgoing and incoming pages.
+  (() => {
+    const preference = matchMedia('(prefers-reduced-motion: reduce)');
+    const projectFrom = (url) =>
+      new URL(url, location.href).pathname.match(
+        /^\/projekty\/([^/]+)\/?$/,
+      )?.[1];
+    const isIndex = (url) =>
+      ['/', '/projekty', '/projekty/'].includes(
+        new URL(url, location.href).pathname,
+      );
+    const photograph = (slug, cover) =>
+      [...document.querySelectorAll('[data-project-visual]')]
+        .find(
+          (element) =>
+            element.dataset.projectVisual === slug &&
+            element.hasAttribute('data-project-cover') === cover,
+        )
+        ?.querySelector('img');
+
+    function share(image, transition, snapshotReady = false) {
+      if (!image) return;
+      const card = image.closest('[data-reveal]');
+      if (card) {
+        card.dataset.revealDone = 'true';
+        card.getAnimations().forEach((animation) => animation.cancel());
+      }
+      image.style.viewTransitionName = 'project-image';
+      const cleanup = () => image.style.removeProperty('view-transition-name');
+      (snapshotReady ? transition.ready : transition.finished).then(
+        cleanup,
+        cleanup,
+      );
+    }
+
+    window.addEventListener('pageswap', (event) => {
+      if (!event.viewTransition) return;
+      if (preference.matches) {
+        event.viewTransition.skipTransition();
+        return;
+      }
+      const destination = event.activation?.entry?.url;
+      if (!destination) return;
+      const nextProject = projectFrom(destination);
+      const currentProject = projectFrom(location.href);
+      if (nextProject) {
+        share(photograph(nextProject, false), event.viewTransition);
+      } else if (currentProject && isIndex(destination)) {
+        share(photograph(currentProject, true), event.viewTransition);
+      }
+    });
+
+    window.addEventListener('pagereveal', (event) => {
+      if (!event.viewTransition) return;
+      if (preference.matches) {
+        event.viewTransition.skipTransition();
+        return;
+      }
+      const previous = window.navigation?.activation?.from?.url;
+      if (!previous) return;
+      const currentProject = projectFrom(location.href);
+      if (currentProject && (isIndex(previous) || projectFrom(previous))) {
+        share(photograph(currentProject, true), event.viewTransition, true);
+      } else if (isIndex(location.href)) {
+        const previousProject = projectFrom(previous);
+        if (previousProject)
+          share(photograph(previousProject, false), event.viewTransition, true);
+      }
+    });
+  })();
+</script>

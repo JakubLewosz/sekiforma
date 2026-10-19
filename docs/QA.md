@@ -10,7 +10,7 @@ macOS arm64, Node 24.11.0, npm 11.6.1, Astro 7.4.0, lokalny Google Chrome 154 w 
 
 - `npm run build`: poprawny statyczny build, 8 adresów treściowych oraz 404, razem 9 stron.
 - `npm run check`: bez błędów i ostrzeżeń.
-- `npm test`: **11 testów przeszło**. Pełny zapis: [qa-tests.json](qa-tests.json).
+- `npm test`: **16 testów przeszło**. Pełny zapis: [qa-tests.json](qa-tests.json).
 
 ## Testy przeglądarkowe
 
@@ -21,8 +21,13 @@ macOS arm64, Node 24.11.0, npm 11.6.1, Astro 7.4.0, lokalny Google Chrome 154 w 
 5. Mobilne menu i FAQ działają klawiaturą. Escape zamyka menu i przywraca fokus.
 6. Każdy z ośmiu adresów sprawdzono przy **320, 390, 768 i 1440 px**: brak poziomego przewijania, pojedynczy H1, metadane, wczytanie obrazów, działające lokalne linki i brak wyjątków JavaScript.
 7. Pełną ścieżkę formularza przeprowadzono także przy **320 px samą klawiaturą**, łącznie z podsumowaniem i resetem.
-8. Automatyczna kontrola reguł WCAG 2 A/AA, 2.1 AA i 2.2 AA: **0 zgłoszonych naruszeń** na ośmiu stronach, we wszystkich krokach formularza i po podsumowaniu. To zakres reguł obsługiwanych przez axe, bez deklaracji pełnej zgodności WCAG.
+8. Automatyczna kontrola reguł WCAG 2 A/AA, 2.1 AA i 2.2 AA: **0 zgłoszonych naruszeń** na ośmiu stronach, we wszystkich krokach formularza i po podsumowaniu. Skan wykonano po zakończeniu trwających animacji, aby ocenić docelowy kontrast. To zakres reguł obsługiwanych przez axe, bez deklaracji pełnej zgodności WCAG.
 9. Główna treść i linki dostępne bez JavaScript; demonstracyjny przycisk formularza pozostaje wyłączony. Własna strona 404 zwraca HTTP 404. Powiększenie tekstu do 200% w symulacji 390 px nie powoduje poziomego przewijania. `prefers-reduced-motion` wyłącza płynne przewijanie.
+
+10. Nowy system ruchu: sekcje pojawiają się raz, po przewinięciu nie odtwarzają efektu ponownie. Zmiana preferencji na ograniczony ruch anuluje aktywne animacje, przywraca pełną widoczność i nie przesuwa treści.
+11. Natychmiastowe wyłączenie wejścia nagłówka i sekcji przy `prefers-reduced-motion: reduce`, z zachowaniem nawigacji.
+12. Natywne przejście wybranego zdjęcia z karty do okładki koncepcji i po powrocie sprawdzono przy 390 i 1440 px. Przeglądarka faktycznie utworzyła wspólną grupę obrazu z czasem 420 lub 620 ms.
+13. Po wyłączeniu natywnych przejść w CSS nawigacja, otwarcie galerii i jej zamknięcie nadal działają. To symulacja braku efektu w Chrome, bez deklaracji sprawdzenia innych silników.
 
 W czasie kontroli poprawiono kontrast numerów usług i etapów, łamanie tekstu przy powiększeniu oraz zawijanie fokusu w galerii oraz dostępność pól dopiero po uruchomieniu interakcji, aby wybór przed hydratacją nie został utracony.
 
@@ -30,7 +35,7 @@ W czasie kontroli poprawiono kontrast numerów usług i etapów, łamanie tekstu
 
 Obejrzano zrzuty strony głównej na komputerze i telefonie, szczegóły kuchni, formularz na telefonie i podsumowanie na komputerze. Sprawdzono hierarchię, kadry, widoczność oznaczeń demo, rytm sekcji i stopkę. Dopracowano rozmiary opisów oraz układ stopki mobilnej. Obejrzano też pełną stronę główną z wczytanym detalem materiału.
 
-[Zrzuty ekranu](screenshots/) są rzeczywistymi obrazami strony. [Nagranie](video/przejscie-przez-strone.webm) pokazuje przejście od strony głównej przez kuchnię do podsumowania briefu. Scenariusz można odtworzyć przez `npm run qa:capture` przy działającym preview na porcie 4322.
+[Zrzuty ekranu](screenshots/) są rzeczywistymi obrazami strony. [Nagranie](video/przejscie-przez-strone.webm) pokazuje przejście od strony głównej przez kuchnię do podsumowania briefu. Dodatkowe nagrania prezentują animacje na [komputerze](video/animacje-desktop.webm) i [telefonie](video/animacje-mobile.webm). Obejrzano również kadry w trakcie natywnego przejścia przy obu szerokościach. Scenariusz można odtworzyć przez `npm run qa:capture` przy działającym preview na porcie 4322.
 
 ## Kontrast
 
@@ -45,14 +50,14 @@ Obliczone współczynniki dla głównych par sRGB:
 
 ## Lighthouse mobile
 
-Pomiar 19 października 2026 około 09:05 czasu Europe/Warsaw, Lighthouse **13.5.0**, Chrome **154**, lokalny build na `127.0.0.1:4322`. Domyślny mobilny profil symulacji: RTT 150 ms, przepustowość 1638,4 Kbps, spowolnienie CPU ×4, `throttlingMethod: simulate`. Brak ostrzeżeń w obu raportach. Jeden zapisany pomiar na stronę.
+Końcowy pomiar po dodaniu animacji: 19 października 2026 około 10:10 czasu Europe/Warsaw, Lighthouse **13.5.0**, Chrome **154**, lokalny build na `127.0.0.1:4322`. Domyślny mobilny profil symulacji: RTT 150 ms, przepustowość 1638,4 Kbps, spowolnienie CPU ×4, `throttlingMethod: simulate`. Brak ostrzeżeń w obu raportach. Tabela przedstawia ostatni zapisany pomiar każdej strony.
 
 | Strona                         | Performance | Accessibility | Best Practices | SEO |   LCP |  TBT |   CLS |
 | ------------------------------ | ----------: | ------------: | -------------: | --: | ----: | ---: | ----: |
-| `/`                            |     **100** |           100 |            100 |  66 | 1,7 s | 0 ms | 0,002 |
-| `/projekty/garderoba-we-wnece` |      **95** |           100 |            100 |  66 | 2,6 s | 0 ms |     0 |
+| `/`                            |     **100** |           100 |            100 |  66 | 1,7 s | 0 ms |     0 |
+| `/projekty/garderoba-we-wnece` |     **100** |           100 |            100 |  66 | 1,7 s | 0 ms | 0,001 |
 
-Najcięższą podstronę wybrano po porównaniu zakodowanych zasobów wszystkich koncepcji przy 412 × 823 px, DPR 1,75, z wczytaniem wszystkich zdjęć i osobnym kontekstem bez cache. Garderoba: 348 710 B; salon: 338 932 B; kuchnia: 327 460 B. Szczegóły: [page-weights.json](audits/page-weights.json).
+Najcięższą podstronę wybrano przed etapem animacji, porównując zakodowane zasoby wszystkich koncepcji przy 412 × 823 px, DPR 1,75, z wczytaniem wszystkich zdjęć i osobnym kontekstem bez cache. Garderoba: 348 710 B; salon: 338 932 B; kuchnia: 327 460 B. Szczegóły: [page-weights.json](audits/page-weights.json).
 
 - [Strona główna — raport HTML](audits/home.html), [JSON](audits/home.json).
 - [Garderoba — raport HTML](audits/wardrobe.html), [JSON](audits/wardrobe.json).

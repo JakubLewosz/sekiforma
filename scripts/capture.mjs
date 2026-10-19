@@ -21,6 +21,16 @@ async function loaded(page) {
       .filter((i) => i.hasAttribute('src'))
       .every((i) => i.complete && i.naturalWidth > 0),
   );
+  await page.evaluate(async () => {
+    await new Promise(requestAnimationFrame);
+    await new Promise(requestAnimationFrame);
+    await Promise.all(
+      document
+        .getAnimations()
+        .filter((animation) => animation.playState === 'running')
+        .map((animation) => animation.finished.catch(() => {})),
+    );
+  });
 }
 
 for (const [width, height, path, name, fullPage] of [

@@ -38,7 +38,11 @@ const related = projects.filter((p) => p.slug !== project.slug);
         <p>{project.intro}</p>
       </div>
     </section>
-    <figure class="project-cover">
+    <figure
+      class="project-cover"
+      data-project-visual={project.slug}
+      data-project-cover
+    >
       <Image
         src={project.image}
         alt={project.alt}

@@ -30,6 +30,7 @@ Testy wykorzystują lokalny Google Chrome w standardowej lokalizacji macOS. Na i
 
 - Osiem adresów treściowych: strona główna, oferta, koncepcje, trzy szczegóły, pracownia i kontakt; dodatkowo własne 404.
 - Trzy spójne koncepcje z opisami założeń, materiałów i decyzji.
+- Animowane wejście nagłówka, jednorazowe pojawianie sekcji oraz natywne przejście zdjęcia z karty do koncepcji i z powrotem. Krótszy ruch na telefonie oraz obsługa `prefers-reduced-motion`, także podczas trwania efektu.
 - Galeria obsługiwana klawiaturą, Escape i przywracanie fokusu; FAQ; mobilne menu.
 - Trzy kroki briefu: rodzaj projektu → etap i potrzeba → przykładowe dane. Walidacja, cofanie z zachowaniem danych, podsumowanie rzeczywistych odpowiedzi oraz reset.
 - Przejścia z koncepcji do formularza ze wskazanym rodzajem projektu.
@@ -39,7 +40,7 @@ Testy wykorzystują lokalny Google Chrome w standardowej lokalizacji macOS. Na i
 
 **Sęk i Forma jest fikcyjną marką.** Wnętrza są wizualizacjami AI, bez przypisywania ich realnym klientom. Nie ma fikcyjnych opinii, adresu pracowni, liczb realizacji ani cen.
 
-Formularz **niczego nie wysyła**. Używaj danych przykładowych. Odpowiedzi pozostają w stanie komponentu React; nie ma bazy, localStorage, sessionStorage, analityki ani zewnętrznego formularza. Opuszczenie strony lub jej odświeżenie usuwa odpowiedzi. Bez JavaScriptu pola i przycisk przejścia pozostają wyłączone; metoda `dialog` dodatkowo nie inicjuje transmisji formularza.
+Formularz **niczego nie wysyła**. Używaj danych przykładowych. Odpowiedzi pozostają w stanie komponentu React; nie ma bazy, localStorage, sessionStorage, analityki ani zewnętrznego formularza. Odpowiedzi istnieją tylko w pamięci bieżącego dokumentu; ponowne załadowanie strony je usuwa. Bez JavaScriptu pola i przycisk przejścia pozostają wyłączone; metoda `dialog` dodatkowo nie inicjuje transmisji formularza.
 
 Realny kontakt do Jakuba jest oddzielony w sekcji „O projekcie / Prawdziwy kontakt”. Email i profil GitHub pochodzą z publicznego README autora.
 
@@ -47,7 +48,7 @@ Nie ma CMS, edytora dla klienta, rzeczywistej obsługi zapytań ani publicznego 
 
 ## Technologia i układ
 
-Astro 7.4.0, React 19.3.1, Tailwind CSS 4.3.3, TypeScript 6.0.3. Dokładne wersje i zależności są w `package-lock.json`. Główna treść jest statycznym HTML; React jest dołączany tylko na stronie formularza.
+Astro 7.4.0, React 19.3.1, Tailwind CSS 4.3.3, TypeScript 6.0.3. Dokładne wersje i zależności są w `package-lock.json`. Główna treść jest statycznym HTML; React jest dołączany tylko na stronie formularza. Przejścia między dokumentami korzystają z natywnego View Transitions API. W przeglądarkach bez tej funkcji działają zwykłe odnośniki. Nie dodano routera SPA ani biblioteki animacji.
 
 ```text
 src/data/projects.ts        koncepcje, proces, FAQ
@@ -57,6 +58,8 @@ src/components/            nawigacja, galeria, brief, bloki
 src/styles/global.css      system i responsywność
 src/assets/                lokalne WebP i detale
 public/                    ikona, robots, Open Graph
+src/scripts/motion.ts      pojawianie sekcji i preferencje ruchu
+src/styles/motion.css      spójny system animacji
 scripts/                   przygotowanie obrazów, zrzuty, audyt
 ```
 
@@ -71,7 +74,10 @@ npm run format
 node scripts/prepare-assets.mjs
 npm run qa:capture   # wymaga działającego preview na 4322
 npm run qa:audit     # wymaga preview na 4322 i lokalnego Chrome
+node scripts/capture-motion.mjs # nagrania animacji desktop i mobile
 ```
+
+Nagrania nowego systemu ruchu: [desktop](docs/video/animacje-desktop.webm) i [mobile](docs/video/animacje-mobile.webm).
 
 Dokumentacja:
 

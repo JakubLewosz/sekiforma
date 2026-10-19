@@ -43,14 +43,17 @@ const links = [
 <script>
   const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
   const nav = document.querySelector<HTMLElement>('#main-nav');
+  const mobile = window.matchMedia('(max-width: 799px)');
   function closeMenu() {
     toggle?.setAttribute('aria-expanded', 'false');
     nav?.classList.remove('is-open');
+    if (nav) nav.inert = mobile.matches;
   }
   toggle?.addEventListener('click', () => {
     const open = toggle.getAttribute('aria-expanded') !== 'true';
     toggle.setAttribute('aria-expanded', String(open));
     nav?.classList.toggle('is-open', open);
+    if (nav) nav.inert = !open && mobile.matches;
   });
   document.addEventListener('keydown', (e) => {
     if (
@@ -68,5 +71,11 @@ const links = [
     )
       closeMenu();
   });
-  window.matchMedia('(min-width: 800px)').addEventListener('change', closeMenu);
+  mobile.addEventListener('change', closeMenu);
+  nav?.addEventListener('click', (event) => {
+    if (event.target instanceof Element && event.target.closest('a'))
+      closeMenu();
+  });
+  window.addEventListener('pageshow', closeMenu);
+  closeMenu();
 </script>

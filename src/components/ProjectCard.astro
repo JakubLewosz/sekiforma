@@ -8,10 +8,11 @@ interface Props {
 const { project } = Astro.props;
 ---
 
-<article class="project-card">
+<article class="project-card" data-reveal>
   <a
     href={`/projekty/${project.slug}`}
     class="project-image-link"
+    data-project-visual={project.slug}
     aria-label={`Zobacz koncepcję: ${project.title}`}
   >
     <Image

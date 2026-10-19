@@ -21,6 +21,18 @@ async function readyImages(page: Page) {
     )
     .toEqual([]);
 }
+async function settleMotion(page: Page) {
+  await page.evaluate(async () => {
+    await new Promise(requestAnimationFrame);
+    await new Promise(requestAnimationFrame);
+    await Promise.all(
+      document
+        .getAnimations()
+        .filter((animation) => animation.playState === 'running')
+        .map((animation) => animation.finished.catch(() => {})),
+    );
+  });
+}
 const routes = [
   '/',
   '/oferta',
@@ -218,6 +230,7 @@ test('dostępność automatyczna WCAG 2.2 AA na głównych stronach i krokach fo
 }) => {
   for (const route of routes) {
     await page.goto(route);
+    await settleMotion(page);
     const result = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
       .analyze();
@@ -233,6 +246,7 @@ test('dostępność automatyczna WCAG 2.2 AA na głównych stronach i krokach fo
   await page.goto('/kontakt');
   await page.getByLabel('Kuchnia', { exact: true }).check();
   await page.getByRole('button', { name: 'Dalej' }).click();
+  await settleMotion(page);
   expect(
     (
       await new AxeBuilder({ page })
@@ -242,6 +256,7 @@ test('dostępność automatyczna WCAG 2.2 AA na głównych stronach i krokach fo
   ).toEqual([]);
   await page.getByLabel('Mam wymiary', { exact: true }).check();
   await page.getByRole('button', { name: 'Dalej' }).click();
+  await settleMotion(page);
   expect(
     (
       await new AxeBuilder({ page })
@@ -254,6 +269,7 @@ test('dostępność automatyczna WCAG 2.2 AA na głównych stronach i krokach fo
     .getByLabel('Przykładowy e-mail', { exact: true })
     .fill('anna@example.com');
   await page.getByRole('button', { name: 'Zobacz podsumowanie' }).click();
+  await settleMotion(page);
   expect(
     (
       await new AxeBuilder({ page })

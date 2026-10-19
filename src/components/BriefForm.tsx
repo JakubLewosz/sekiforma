@@ -139,7 +139,13 @@ export default function BriefForm() {
         </>
       )}
       {step < 3 ? (
-        <form method="dialog" noValidate onSubmit={next}>
+        <form
+          key={step}
+          className="brief-step"
+          method="dialog"
+          noValidate
+          onSubmit={next}
+        >
           {step === 0 && (
             <fieldset aria-describedby={errors.type ? 'type-error' : undefined}>
               <legend>Co planujesz?</legend>

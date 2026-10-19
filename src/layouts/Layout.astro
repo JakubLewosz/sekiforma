@@ -1,7 +1,9 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import PageTransitions from '../components/PageTransitions.astro';
 import '../styles/global.css';
+import '../styles/motion.css';
 interface Props {
   title: string;
   description: string;
@@ -19,6 +21,7 @@ const canonical = Astro.site
 <html lang="pl">
   <head>
     <meta charset="UTF-8" />
+    <PageTransitions />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="robots" content="noindex, nofollow" />
@@ -42,5 +45,8 @@ const canonical = Astro.site
       <slot />
     </main>
     <Footer />
+    <script>
+      import '../scripts/motion';
+    </script>
   </body>
 </html>

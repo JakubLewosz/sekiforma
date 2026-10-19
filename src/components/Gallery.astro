@@ -68,55 +68,111 @@ const pictures = await Promise.all(
     document.querySelectorAll<HTMLButtonElement>('.gallery-trigger'),
   );
   const dialog = document.querySelector<HTMLDialogElement>('.lightbox');
-  const img = dialog?.querySelector<HTMLImageElement>('.lightbox-image');
+  const image = dialog?.querySelector<HTMLImageElement>('.lightbox-image');
+  const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
   let active = 0;
+  let request = 0;
+  let closing = false;
   let opener: HTMLButtonElement | undefined;
+  let imageAnimation: Animation | undefined;
+  let closingAnimation: Animation | undefined;
+
   function display(index: number) {
     active = (index + triggers.length) % triggers.length;
     const button = triggers[active];
-    if (img) {
-      img.src = button.dataset.full ?? '';
-      img.alt = button.dataset.alt ?? '';
-    }
+    const token = ++request;
     const caption = dialog?.querySelector('.lightbox-caption');
-    if (caption) caption.textContent = button.dataset.caption ?? '';
     const counter = dialog?.querySelector('.lightbox-count');
+    const thumbnail = button.querySelector('img')?.currentSrc;
+    if (image && !dialog?.open && thumbnail) image.src = thumbnail;
+    if (caption && !dialog?.open)
+      caption.textContent = button.dataset.caption ?? '';
     if (counter) counter.textContent = `${active + 1} / ${triggers.length}`;
+    dialog?.setAttribute('aria-busy', 'true');
+    const fullImage = new Image();
+    fullImage.src = button.dataset.full ?? '';
+    const show = () => {
+      if (token !== request || !image) return;
+      imageAnimation?.cancel();
+      image.src = fullImage.src;
+      image.alt = button.dataset.alt ?? '';
+      if (caption) caption.textContent = button.dataset.caption ?? '';
+      dialog?.setAttribute('aria-busy', 'false');
+      if (!preference.matches && dialog?.open) {
+        imageAnimation = image.animate([{ opacity: 0.35 }, { opacity: 1 }], {
+          duration: 220,
+          easing: 'ease-out',
+        });
+      }
+    };
+    fullImage.decode().then(show, show);
   }
+
+  function close() {
+    if (!dialog?.open || closing) return;
+    closing = true;
+    ++request;
+    imageAnimation?.cancel();
+    const finish = () => {
+      dialog.close();
+      closing = false;
+    };
+    if (preference.matches) {
+      finish();
+      return;
+    }
+    closingAnimation = dialog.animate(
+      [
+        { opacity: 1, transform: 'none' },
+        { opacity: 0, transform: 'translateY(8px)' },
+      ],
+      {
+        duration: 160,
+        easing: 'ease-in',
+      },
+    );
+    closingAnimation.finished.then(finish, finish);
+  }
+
   triggers.forEach((button, index) =>
     button.addEventListener('click', () => {
       opener = button;
+      closing = false;
       display(index);
       dialog?.showModal();
       document.body.style.overflow = 'hidden';
     }),
   );
-  dialog
-    ?.querySelector('.lightbox-close')
-    ?.addEventListener('click', () => dialog.close());
+  dialog?.querySelector('.lightbox-close')?.addEventListener('click', close);
   dialog
     ?.querySelector('.lightbox-prev')
     ?.addEventListener('click', () => display(active - 1));
   dialog
     ?.querySelector('.lightbox-next')
     ?.addEventListener('click', () => display(active + 1));
+  dialog?.addEventListener('cancel', (event) => {
+    event.preventDefault();
+    close();
+  });
   dialog?.addEventListener('close', () => {
+    ++request;
     document.body.style.overflow = '';
+    dialog.removeAttribute('aria-busy');
     opener?.focus();
   });
   dialog?.addEventListener('click', (event) => {
-    if (event.target === dialog) {
-      const bounds = dialog.getBoundingClientRect();
-      if (
-        event.clientX < bounds.left ||
-        event.clientX > bounds.right ||
-        event.clientY < bounds.top ||
-        event.clientY > bounds.bottom
-      )
-        dialog.close();
-    }
+    if (event.target !== dialog) return;
+    const bounds = dialog.getBoundingClientRect();
+    if (
+      event.clientX < bounds.left ||
+      event.clientX > bounds.right ||
+      event.clientY < bounds.top ||
+      event.clientY > bounds.bottom
+    )
+      close();
   });
   dialog?.addEventListener('keydown', (event) => {
+    if (closing) return;
     if (event.key === 'ArrowRight') {
       display(active + 1);
       event.preventDefault();
@@ -125,15 +181,9 @@ const pictures = await Promise.all(
       display(active - 1);
       event.preventDefault();
     }
-  });
-</script>
-
-<script>
-  const modal = document.querySelector<HTMLDialogElement>('.lightbox');
-  modal?.addEventListener('keydown', (event) => {
     if (event.key !== 'Tab') return;
     const controls = Array.from(
-      modal.querySelectorAll<HTMLButtonElement>('button'),
+      dialog.querySelectorAll<HTMLButtonElement>('button'),
     );
     const first = controls[0],
       last = controls.at(-1);
@@ -143,6 +193,12 @@ const pictures = await Promise.all(
     } else if (!event.shiftKey && document.activeElement === last) {
       event.preventDefault();
       first?.focus();
+    }
+  });
+  preference.addEventListener('change', () => {
+    if (preference.matches) {
+      imageAnimation?.cancel();
+      closingAnimation?.cancel();
     }
   });
 </script>
