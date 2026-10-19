@@ -236,6 +236,7 @@ for (const width of [320, 390, 768, 1440])
 test('dostępność automatyczna WCAG 2.2 AA na głównych stronach i krokach formularza', async ({
   page,
 }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
   for (const route of routes) {
     await page.goto(route);
     await settleMotion(page);

@@ -50,4 +50,4 @@ for (const [device, width, height] of [
   await rename(await video.path(), `docs/video/scroll-${device}.webm`);
 }
 await browser.close();
-console.log('Zapisano przewijanie bez wygaszania i powiększania zdjęć.');
+console.log('Zapisano płynne wejścia zdjęć i tekstów podczas przewijania.');

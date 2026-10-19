@@ -25,7 +25,10 @@
       const card = image.closest('[data-reveal]');
       if (card) {
         card.dataset.revealDone = 'true';
-        card.getAnimations().forEach((animation) => animation.cancel());
+        card.dataset.revealState = 'done';
+        card
+          .getAnimations({ subtree: true })
+          .forEach((animation) => animation.cancel());
       }
       image.style.viewTransitionName = 'project-image';
       const cleanup = () => image.style.removeProperty('view-transition-name');

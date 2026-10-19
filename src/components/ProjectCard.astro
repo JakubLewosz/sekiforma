@@ -20,14 +20,16 @@ const imageSizes = featured
     data-project-visual={project.slug}
     aria-label={`Zobacz koncepcję: ${project.title}`}
   >
-    <Image
-      src={project.image}
-      alt={project.alt}
-      widths={featured ? [480, 800, 1200, 1536] : [400, 640, 1000]}
-      sizes={imageSizes}
-      format="webp"
-      loading="lazy"
-    />
+    <span class="project-photo">
+      <Image
+        src={project.image}
+        alt={project.alt}
+        widths={featured ? [480, 800, 1200, 1536] : [400, 640, 1000]}
+        sizes={imageSizes}
+        format="webp"
+        loading="lazy"
+      />
+    </span>
     <span class="image-note">Koncepcja demonstracyjna</span>
     <span class="image-arrow">
       <Icon name="diagonal" />

@@ -313,3 +313,51 @@
     transform: none !important;
   }
 }
+
+/* Entrance styles are armed only while the element is still off screen. */
+.project-photo {
+  display: block;
+  transform-origin: center;
+  transition: transform 700ms var(--ease-out);
+}
+.project-image-link,
+.gallery .gallery-trigger,
+.service-photo,
+.studio-visual,
+.material-panel-visual {
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--sand);
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal='text'][data-reveal-state='pending'] {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  [data-reveal='visual'][data-reveal-state='pending'] {
+    transform: translateY(22px);
+  }
+  [data-reveal='visual'][data-reveal-state='pending'] img {
+    opacity: 0;
+    transform: scale(1.045);
+  }
+}
+@media (max-width: 799px) and (prefers-reduced-motion: no-preference) {
+  [data-reveal='text'][data-reveal-state='pending'] {
+    transform: translateY(12px);
+  }
+  [data-reveal='visual'][data-reveal-state='pending'] {
+    transform: translateY(14px);
+  }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .project-image-link:hover .project-photo {
+    transform: scale(1.025);
+  }
+}
+@media print {
+  [data-reveal] img {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

@@ -32,7 +32,7 @@ Testy wykorzystują lokalny Google Chrome w standardowej lokalizacji macOS. Na i
 - Trzy spójne koncepcje z opisami założeń, materiałów i decyzji. Każda ma dwa ujęcia AI i jeden opisany wycinek.
 - Zróżnicowany układ strony głównej i katalogu, większa prezentacja pierwszej koncepcji i galerie z trzema obrazami.
 - Interaktywna paleta dębu, kamienia i zieleni: zmiana obrazu, opisu i odnośnika, obsługa klawiaturą oraz pełna treść bez JavaScript.
-- Animowane wejście nagłówka, subtelny ruch tekstu przed wejściem na ekran oraz natywne przejście zdjęcia z karty do koncepcji i z powrotem. Krótszy ruch na telefonie oraz obsługa `prefers-reduced-motion`, także podczas trwania efektu.
+- Animowane wejście nagłówka, płynne odsłanianie zdjęć i rytmiczne wejścia tekstów oraz natywne przejście zdjęcia z karty do koncepcji i z powrotem. Krótszy ruch na telefonie oraz obsługa `prefers-reduced-motion`, także podczas trwania efektu.
 - Galeria obsługiwana klawiaturą, Escape i przywracanie fokusu; FAQ; mobilne menu.
 - Trzy kroki briefu: rodzaj projektu → etap i potrzeba → przykładowe dane. Walidacja, cofanie z zachowaniem danych, podsumowanie rzeczywistych odpowiedzi oraz reset.
 - Przejścia z koncepcji do formularza ze wskazanym rodzajem projektu.
@@ -61,7 +61,7 @@ src/components/            nawigacja, galeria, brief, bloki
 src/styles/global.css      system i responsywność
 src/assets/                lokalne WebP i detale
 public/                    ikona, robots, Open Graph
-src/scripts/motion.ts      delikatny ruch tekstu i preferencje ruchu
+src/scripts/motion.ts      wejścia zdjęć, tekstów i preferencje ruchu
 src/styles/motion.css      spójny system animacji
 src/styles/editorial.css   układy katalogowe i paleta
 scripts/                   przygotowanie obrazów, zrzuty, audyt
@@ -79,12 +79,12 @@ node scripts/prepare-assets.mjs
 npm run qa:capture   # wymaga działającego preview na 4322
 npm run qa:audit     # wymaga preview na 4322 i lokalnego Chrome
 node scripts/capture-motion.mjs # nagrania animacji desktop i mobile
-node scripts/capture-scroll.mjs # płynne przewijanie ze stałymi zdjęciami
+node scripts/capture-scroll.mjs # animowane wejścia podczas przewijania
 node scripts/capture-materials.mjs # paleta i drugie ujęcia
 node scripts/measure-page-weights.mjs # rozmiary stron koncepcji
 ```
 
-Zdjęcia pozostają widoczne podczas przewijania; nie znikają ani nie powiększają się pod nieruchomym kursorem. Nagrania przewijania: [desktop](docs/video/scroll-desktop.webm) i [mobile](docs/video/scroll-mobile.webm).
+Zdjęcia płynnie się odsłaniają i delikatnie oddalają do docelowego kadru. Stan początkowy przygotowuje się poza ekranem, a obrazy są wcześniej dekodowane. Widoczna już treść nie jest ponownie wygaszana; efekty nie powtarzają się przy powrocie. Karty mają subtelny zoom po najechaniu. Nagrania przewijania: [desktop](docs/video/scroll-desktop.webm) i [mobile](docs/video/scroll-mobile.webm).
 
 Nagrania systemu ruchu: [desktop](docs/video/animacje-desktop.webm) i [mobile](docs/video/animacje-mobile.webm). Paleta i dodatkowe ujęcia: [desktop](docs/video/materialy-i-ujecia-desktop.webm) i [mobile](docs/video/materialy-i-ujecia-mobile.webm).
 

@@ -1,64 +1,58 @@
 import { test, expect } from '@playwright/test';
 
-test('tekst porusza się raz przed wejściem w ekran, a ograniczenie ruchu kończy efekt', async ({
+test('zdjęcie ma animowane wejście, a ograniczenie ruchu odsłania wszystkie elementy', async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/');
-  const text = page.locator('.process-grid > li').first();
-  await text.evaluate((element) =>
-    window.scrollTo({
-      top: element.getBoundingClientRect().top + scrollY - innerHeight - 60,
-      behavior: 'instant',
-    }),
-  );
-  await expect
-    .poll(() =>
-      text.evaluate((element) =>
-        element
-          .getAnimations()
-          .some((animation) => animation.playState === 'running'),
-      ),
-    )
-    .toBe(true);
-  expect(
-    await text.evaluate((element) => getComputedStyle(element).opacity),
-  ).toBe('1');
-  await page.emulateMedia({ reducedMotion: 'reduce' });
-  await expect
-    .poll(() =>
-      text.evaluate((element) => ({
-        transform: getComputedStyle(element).transform,
-        animations: element.getAnimations().length,
-      })),
-    )
-    .toEqual({ transform: 'none', animations: 0 });
-  await page.emulateMedia({ reducedMotion: 'no-preference' });
-  await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
-  await text.evaluate((element) =>
+  const frame = page.locator('.project-image-link').first();
+  await expect(frame).toHaveAttribute('data-reveal-state', 'pending');
+  await frame.evaluate((element) =>
     element.scrollIntoView({ block: 'center', behavior: 'instant' }),
   );
-  expect(await text.evaluate((element) => element.getAnimations().length)).toBe(
-    0,
-  );
+  await expect(frame).toHaveAttribute('data-reveal-state', 'running');
+  expect(
+    await frame
+      .locator('img')
+      .evaluate((image) => image.getAnimations().length),
+  ).toBeGreaterThan(0);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect(frame).toHaveAttribute('data-reveal-state', 'done');
+  await expect(
+    page.locator(
+      '[data-reveal-state="pending"], [data-reveal-state="running"]',
+    ),
+  ).toHaveCount(0);
+  expect(
+    await frame
+      .locator('img')
+      .evaluate((image) => ({
+        opacity: getComputedStyle(image).opacity,
+        transform: getComputedStyle(image).transform,
+      })),
+  ).toEqual({ opacity: '1', transform: 'none' });
 });
 
-test('szybkie przewinięcie nie uruchamia animacji już widocznego tekstu', async ({
+test('wejścia tekstu i zdjęcia nie powtarzają się po powrocie do sekcji', async ({
   page,
 }) => {
   await page.goto('/');
-  const text = page.locator('.process-grid > li').first();
-  await text.evaluate(async (element) => {
-    element.scrollIntoView({ block: 'center', behavior: 'instant' });
-    await new Promise(requestAnimationFrame);
-    await new Promise(requestAnimationFrame);
-  });
-  expect(await text.evaluate((element) => element.getAnimations().length)).toBe(
-    0,
-  );
-  expect(
-    await text.evaluate((element) => getComputedStyle(element).opacity),
-  ).toBe('1');
+  for (const selector of ['.project-image-link', '.process-grid > li']) {
+    const element = page.locator(selector).first();
+    await element.evaluate((element) =>
+      element.scrollIntoView({ block: 'center', behavior: 'instant' }),
+    );
+    await expect(element).toHaveAttribute('data-reveal-state', 'done');
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+    await element.evaluate((element) =>
+      element.scrollIntoView({ block: 'center', behavior: 'instant' }),
+    );
+    expect(
+      await element.evaluate(
+        (element) => element.getAnimations({ subtree: true }).length,
+      ),
+    ).toBe(0);
+  }
 });
 
 test('ograniczony ruch: brak wejścia nagłówka i animacji sekcji', async ({

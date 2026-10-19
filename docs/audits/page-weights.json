@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-19T08:40:21.748Z",
+  "date": "2026-10-19T09:26:25.055Z",
   "viewport": {
     "width": 412,
     "height": 823
@@ -10,15 +10,15 @@
   "pages": [
     {
       "path": "/projekty/garderoba-we-wnece",
-      "encodedBodyBytes": 420169
+      "encodedBodyBytes": 420846
     },
     {
       "path": "/projekty/zabudowa-salonu",
-      "encodedBodyBytes": 415592
+      "encodedBodyBytes": 416270
     },
     {
       "path": "/projekty/jasna-kuchnia",
-      "encodedBodyBytes": 392167
+      "encodedBodyBytes": 392848
     }
   ]
 }
