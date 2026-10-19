@@ -1,0 +1,72 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+const pathname = Astro.url.pathname;
+const links = [
+  ['/oferta', 'Oferta'],
+  ['/projekty', 'Koncepcje'],
+  ['/pracownia', 'Pracownia'],
+];
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <Logo />
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="main-nav"
+    >
+      <span>Menu</span>
+      <span class="menu-lines" aria-hidden="true"></span>
+    </button>
+    <nav id="main-nav" class="main-nav" aria-label="Nawigacja główna">
+      {links.map(([href, label]) => (
+        <a
+          href={href}
+          aria-current={pathname.startsWith(href) ? 'page' : undefined}
+        >
+          {label}
+        </a>
+      ))}
+      <a
+        class="nav-cta"
+        href="/kontakt"
+        aria-current={pathname.startsWith('/kontakt') ? 'page' : undefined}
+      >
+        Porozmawiajmy <Icon name="diagonal" />
+      </a>
+    </nav>
+  </div>
+</header>
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const nav = document.querySelector<HTMLElement>('#main-nav');
+  function closeMenu() {
+    toggle?.setAttribute('aria-expanded', 'false');
+    nav?.classList.remove('is-open');
+  }
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') !== 'true';
+    toggle.setAttribute('aria-expanded', String(open));
+    nav?.classList.toggle('is-open', open);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (
+      e.key === 'Escape' &&
+      toggle?.getAttribute('aria-expanded') === 'true'
+    ) {
+      closeMenu();
+      toggle.focus();
+    }
+  });
+  document.addEventListener('click', (e) => {
+    if (
+      e.target instanceof Node &&
+      !document.querySelector('.header-inner')?.contains(e.target)
+    )
+      closeMenu();
+  });
+  window.matchMedia('(min-width: 800px)').addEventListener('change', closeMenu);
+</script>

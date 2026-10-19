@@ -1,0 +1,41 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+---
+
+<footer class="site-footer">
+  <div class="container footer-top">
+    <div>
+      <Logo footer />
+      <p>
+        Naturalne materiały.
+        <br />
+        Przemyślana codzienność.
+      </p>
+    </div>
+    <div class="footer-links">
+      <a href="/oferta">Oferta</a>
+      <a href="/projekty">Koncepcje</a>
+      <a href="/pracownia">Pracownia</a>
+      <a href="/kontakt">Twój projekt</a>
+    </div>
+    <div class="footer-about">
+      <span class="eyebrow">O projekcie / Kontakt do autora</span>
+      <p>
+        Projekt demonstracyjny Jakuba Lewosza.
+        <br />
+        Sęk i Forma jest fikcyjną pracownią.
+        <br />
+        Wnętrza to wizualizacje koncepcyjne AI.
+      </p>
+      <a href="/kontakt#autor" class="text-link">
+        Poznaj projekt <Icon name="diagonal" />
+      </a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© {new Date().getFullYear()} Jakub Lewosz · Projekt portfolio</span>
+    <span>Stworzone z uwagą na detal.</span>
+    <a href="#top">Do góry ↑</a>
+  </div>
+</footer>

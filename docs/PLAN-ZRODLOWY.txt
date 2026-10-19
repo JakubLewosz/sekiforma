@@ -1,0 +1,495 @@
+PLAN STRONY DO PORTFOLIO I BRIEF DLA CODEXA
+Sęk i Forma — demonstracyjna strona pracowni mebli na wymiar
+Autor projektu: Jakub Lewosz
+Data planu: 19 października 2026
+
+STATUS
+To plan nowego projektu. Strona, repozytorium i wdrożenie nie powstały w ramach przygotowania tego dokumentu. „Sęk i Forma” jest roboczą nazwą fikcyjnej marki; nie potwierdzono dostępności nazwy ani domeny.
+
+JAK KORZYSTAĆ
+Załącz cały ten plik do nowego projektu w Codexie i użyj polecenia z rozdziału 14. Opis jest kompletnym punktem wyjścia do implementacji. Standardowe decyzje wykonawcze Codex może podejmować sam. Istotną zmianę branży, zakresu lub technologii należy uzasadnić.
+
+1. CEL I PRZYJĘTE ZAŁOŻENIA
+
+Celem jest zbudowanie efektownej, działającej w przeglądarce strony przykładowej firmy, którą można pokazywać w portfolio oraz w przyszłych ofertach tworzenia stron. JobHunter pozostaje odrębnym projektem; obecnie jego publiczny opis dotyczy poszukiwania regularnej współpracy programistycznej około 20 godzin tygodniowo. Oferta stron WWW jest planowanym przyszłym zastosowaniem.
+
+Projekt ma pokazać:
+- umiejętność zaprojektowania spójnego wyglądu marki;
+- prezentację usług i materiałów wizualnych;
+- wygodę korzystania na telefonie;
+- czytelną drogę od zainteresowania do przygotowania zapytania;
+- dopracowanie interakcji, wydajności i dostępności;
+- gotowość do przekazania oraz utrzymywania małej strony.
+
+Przyjęto polską wersję językową i model lokalnej firmy usługowej. Nie ustalono jeszcze konkretnej branży przyszłych odbiorców ofert JobHuntera. Wybór mebli na wymiar wynika z przydatności jako projektu pokazowego, nie z dowodu, że właśnie ta branża kupuje najwięcej stron.
+
+Podstawą oceny obecnego portfolio są publiczne README:
+- AutoRelay: automatyzacje, API i dashboard React;
+- ElektroScan: aplikacja do analizy planów PDF, React i Python;
+- CodeFabric: prototyp generowania projektów z pomocą modeli;
+- FixDesk: lokalny rejestr usterek w Laravel.
+
+Taki zestaw uzasadnia dołożenie projektu, którego główną wartością jest warstwa wizualna i komunikacja oferty. Przegląd README nie jest audytem jakości działających aplikacji.
+
+2. WYBÓR TEMATU I ALTERNATYWY
+
+REKOMENDACJA: pracownia mebli na wymiar.
+Zakres usług w scenariuszu: kuchnie, szafy i garderoby, zabudowy do salonu.
+
+Dlaczego ten temat:
+- duże zdjęcia wnętrz, drewna i detali pozwalają zbudować wyrazisty wygląd;
+- oferta, projekty, proces i zapytanie tworzą naturalną strukturę strony;
+- przydatne funkcje mieszczą się w rozsądnym zakresie;
+- podobny sposób prezentacji można wykorzystać dla wykonawców, firm remontowych i studiów projektowych.
+
+Porównanie według tych samych kryteriów:
+
+MEBLE NA WYMIAR
+Wygląd: bardzo dobry potencjał dla fotografii i typografii.
+Próbka sprzedażowa: jasna prezentacja usług i projektów.
+Treści: średni lub duży nakład, szczególnie spójne zdjęcia.
+Funkcje i utrzymanie: umiarkowany zakres bez sklepu i 3D.
+Transfer: dobry do firm wykonawczych i projektowych.
+
+DETAILING
+Wygląd: duży potencjał, szczególnie przy dobrych zdjęciach aut.
+Próbka sprzedażowa: czytelne pakiety i zapytanie o usługę.
+Treści: potrzebne spójne zdjęcia; wiarygodne pary przed/po są trudniejsze.
+Funkcje i utrzymanie: umiarkowany zakres przy zapytaniu; większy przy rezerwacjach.
+Transfer: dobry do usług pakietowych, stylistyka bardziej związana z motoryzacją.
+
+DOMKI LUB KAMERALNY OBIEKT NOCLEGOWY
+Wygląd: duży potencjał dzięki wnętrzom i otoczeniu.
+Próbka sprzedażowa: atrakcyjna, lecz łatwo wywołać oczekiwanie pełnej rezerwacji.
+Treści: duży nakład na wiarygodny zestaw zdjęć jednego obiektu.
+Funkcje i utrzymanie: małe przy zapytaniu, duże przy dostępności, cenach i płatnościach.
+Transfer: głównie turystyka, pobyty i wydarzenia.
+
+LOKALNA FIRMA INSTALACYJNA
+Wygląd: wymaga więcej pracy nad układem, bo zdjęcia są mniej dekoracyjne.
+Próbka sprzedażowa: bardzo czytelna oferta, obszar działania i kontakt.
+Treści: mały lub średni nakład; oferta musi być merytorycznie poprawna.
+Funkcje i utrzymanie: relatywnie mały zakres.
+Transfer: szeroki do lokalnych usług technicznych.
+
+Najsilniejszy kontrargument wobec wyboru mebli:
+O jakości strony mogą przesądzić materiały wizualne. Przypadkowe zdjęcia różnych wnętrz mogą sprawić, że całość będzie wyglądać jak ogólny szablon. Dlatego materiały i kierunek graficzny trzeba ustalić przed budowaniem wszystkich podstron.
+
+Kiedy zmienić temat:
+Jeżeli dostępna jest prawdziwa zaprzyjaźniona firma z dobrą ofertą, zdjęciami i możliwością pokazania efektu, warto wybrać ją. Rzeczywisty brief, ograniczenia i rezultat mogą dać mocniejszą próbkę niż fikcyjna marka z wybranego z góry sektora. Gdy zabraknie materiałów do mebli, rozsądną alternatywą jest lokalna usługa z mniejszym zapotrzebowaniem na fotografie.
+
+3. KONCEPCJA MARKI
+
+Nazwa robocza: Sęk i Forma.
+Charakter: współczesna, spokojna pracownia rzemieślnicza.
+Odbiorca strony w scenariuszu: osoba urządzająca mieszkanie lub dom.
+Potrzeba odbiorcy: zobaczyć styl i zakres usług, zrozumieć proces, przygotować zapytanie.
+
+Propozycja tekstu pierwszego ekranu:
+„Meble, które pasują do Twojego życia.”
+„Kuchnie, szafy i zabudowy projektowane wokół Twojej przestrzeni.”
+
+Główne wezwanie do działania: „Opowiedz o swoim projekcie”.
+Dodatkowy link: „Zobacz koncepcje”.
+
+Teksty są propozycjami dla fikcyjnej marki. Strona ma widoczne, dyskretne oznaczenie projektu demonstracyjnego. Nazwy podstron i opisów nie powinny sugerować, że fikcyjne wnętrza są wykonanymi zleceniami.
+
+Bez wymyślonych:
+- opinii klientów i ocen Google;
+- liczby wykonanych zleceń;
+- lat działalności, nagród i certyfikatów;
+- adresu pracowni i jej numeru telefonu;
+- gwarancji, terminów lub cen przedstawianych jako realna oferta.
+
+Rzeczywisty kontakt do Jakuba, autora strony, ma osobne miejsce oznaczone „O projekcie / Kontakt do autora”.
+
+4. KIERUNEK WIZUALNY
+
+Klimat: ciepłe jasne tło, ciemny czytelny tekst, duże fotografie, dużo przestrzeni oraz oszczędne animacje. Kompozycja ma przypominać dobrze zaprojektowany katalog wnętrz, przy zachowaniu prostych ścieżek do oferty i zapytania.
+
+Proponowana paleta:
+- tło: #F6F3EE;
+- tekst główny: #242820;
+- kolor głównych przycisków: #3E5143;
+- powierzchnie pomocnicze: #E7DFD3;
+- ciepły akcent: #B78055, głównie dekoracyjnie.
+
+To kierunek projektowy. Kontrast należy sprawdzić dla rzeczywistych par koloru tekstu i tła.
+
+Typografia:
+- czytelny bezszeryfowy krój dla tekstów, np. Manrope;
+- elegancki krój szeryfowy dla wybranych nagłówków, np. DM Serif Display;
+- pełna obsługa polskich znaków;
+- maksymalnie dwie rodziny i ograniczona liczba odmian;
+- docelowo lokalne pliki fontów po sprawdzeniu warunków wykorzystania.
+
+Punkty startowe do projektu:
+- tekst podstawowy około 16–18 px;
+- duży nagłówek na komputerze około 64–84 px;
+- nagłówek na telefonie około 36–44 px;
+- szerokość głównej treści maksymalnie około 1280 px;
+- odstępy oparte na jednej skali;
+- narożniki zdjęć i elementów około 4–8 px;
+- dyskretne linie podziału, ograniczone cienie.
+
+Pierwszy ekran na komputerze:
+Po lewej duży nagłówek, krótki tekst i dwa działania. Po prawej duże zdjęcie kuchni z mocnym kadrem. Poniżej początek sekcji koncepcji, aby było jasne, że strona ma dalszą treść.
+
+Pierwszy ekran na telefonie:
+Logo i menu, nagłówek, główny przycisk, zdjęcie. Kadr i łamanie nagłówka zaprojektowane osobno. Zdjęcie ani menu nie mogą wypychać podstawowej informacji poza kilka ekranów przewijania.
+
+Ruch:
+- krótkie przejścia stanów przycisków i zdjęć;
+- subtelne wejścia wybranych sekcji;
+- pełna treść czytelna także bez animacji;
+- obsługa prefers-reduced-motion;
+- standardowe przewijanie strony.
+
+Ciężkie wideo otwierające, rozbudowane 3D, przejmowanie przewijania i dekoracyjny kursor pozostają poza zakresem.
+
+Punkty odniesienia:
+- FRØPT: relacja między kolekcjami, materiałami, próbkami i zapytaniem;
+- Reform: prezentacja kolekcji kuchni i przejścia do spotkania lub oszacowania;
+- Deer Design: przedstawianie projektów z krótkimi opisami i kategoriami.
+
+Z tych stron należy brać inspirację sposobem organizacji informacji. Nie kopiować układu 1:1, tekstów, identyfikacji ani ich zdjęć.
+
+5. STRUKTURA STRONY
+
+Zakres podstawowy to sześć szablonów i osiem adresów treściowych:
+
+1) / — strona główna.
+2) /oferta — kuchnie, garderoby i zabudowy w jednym widoku.
+3) /projekty — lista trzech koncepcji.
+4) /projekty/[slug] — wspólny szablon szczegółów, użyty trzy razy.
+5) /pracownia — podejście do projektu, materiały i proces.
+6) /kontakt — formularz demonstracyjny i osobny kontakt do autora.
+
+Dodatkowo lekka strona 404. Informacja o demonstracyjnym charakterze projektu może być dostępna ze stałego linku i w stopce; nie wymaga odrębnego rozbudowanego serwisu.
+
+Sekcje strony głównej:
+1. Pierwszy ekran z główną obietnicą i działaniem.
+2. Trzy wybrane koncepcje: duże zdjęcia, krótkie nazwy, czytelne linki.
+3. Oferta: trzy obszary usług.
+4. Proces: rozmowa, projekt, wykonanie, montaż — opis modelowego procesu.
+5. Materiały i detale, pokazane na wybranych zdjęciach.
+6. Krótkie FAQ odpowiadające na pytania o przygotowanie zapytania.
+7. Zaproszenie do przejścia przez formularz.
+8. Stopka z oznaczeniem demo i kontaktem do autora.
+
+Każda podstrona powinna mieć własny cel. Treści nie należy kopiować między podstronami tylko po to, by zwiększać objętość.
+
+6. TREŚCI I MATERIAŁY WIZUALNE
+
+Trzy koncepcje:
+- Jasna kuchnia: naturalne drewno, jasne powierzchnie, funkcjonalna zabudowa.
+- Garderoba we wnęce: wykorzystanie ograniczonej przestrzeni i podział przechowywania.
+- Zabudowa salonu: regał, przechowywanie i miejsce na codzienne przedmioty.
+
+Każdy opis obejmuje:
+- założenie i potrzebę w hipotetycznym scenariuszu;
+- decyzję projektową;
+- zestaw materiałów lub styl;
+- dwa do trzech spójnych ujęć, jeżeli są dostępne;
+- przejście do formularza z wybranym rodzajem projektu.
+
+Każdy wpis ma oznaczenie „Koncepcja demonstracyjna”. Nie przypisujemy fikcyjnym projektom realnych klientów, wyników biznesowych ani wykonania przez pracownię.
+
+Plan zdjęć:
+- jedno mocne zdjęcie pierwszego ekranu;
+- około sześciu do dziewięciu ujęć dla trzech koncepcji;
+- dwa lub trzy kadry detali, także jako przemyślane wycinki tych samych materiałów;
+- łącznie orientacyjnie osiem do dwunastu unikalnych plików, zależnie od zestawu.
+
+Kolejność wyboru materiałów:
+1. Autentyczne zdjęcia, jeżeli można je wykorzystać.
+2. Spójny zestaw materiałów z odpowiednią licencją.
+3. Własne wygenerowane wizualizacje jawnie opisane jako koncepcje.
+
+Nie łączyć różnych wnętrz w jeden projekt, jeżeli mają niezgodny układ i detale. Przy brakach lepiej pokazać mniej ujęć niż udawać spójność.
+
+Przy generowaniu wizualizacji:
+Ustalić jeden styl światła, materiałów, kadrowania i proporcji. Dla kolejnych ujęć tego samego wnętrza korzystać z zatwierdzonego obrazu jako odniesienia i sprawdzać zgodność mebli, uchwytów, okien oraz powierzchni. Opis tekstowy sam nie gwarantuje ciągłości.
+
+W dokumentacji materiałów zapisać pochodzenie, sposób przygotowania i zakres wykorzystania. Zanim rozbudujemy cały serwis, należy mieć dobry zestaw dla pierwszego ekranu i przynajmniej jednej koncepcji.
+
+7. INTERAKCJA WYRÓŻNIAJĄCA
+
+Głównym elementem interaktywnym jest krótki formularz przygotowania briefu.
+
+Krok 1 — Co planujesz?
+- kuchnia;
+- szafa lub garderoba;
+- zabudowa salonu;
+- jeszcze nie wiem.
+
+Krok 2 — Na jakim jesteś etapie?
+- zbieram inspiracje;
+- mam wymiary;
+- mam gotowy projekt.
+Dodatkowo opcjonalny krótki opis potrzeby i preferowany termin. Nie prezentować fikcyjnej dostępności pracowni.
+
+Krok 3 — Podsumowanie i dane przykładowe
+- imię i przykładowy e-mail;
+- telefon opcjonalnie, tylko jeśli pasuje do przyjętego projektu UI;
+- widoczne podsumowanie wcześniejszych wyborów;
+- możliwość cofnięcia i zmiany;
+- przycisk „Zobacz podsumowanie”.
+
+Przed wpisaniem danych widoczna informacja:
+„Formularz demonstracyjny. Użyj danych przykładowych — niczego nie wysyłamy.”
+
+Po zakończeniu:
+Pokazać rzeczywiste podsumowanie wybranych odpowiedzi. Nie używać komunikatu „Wiadomość wysłana”. Dane pozostają w pamięci bieżącej strony; nie zapisujemy ich w bazie, zewnętrznym serwisie ani domyślnie w localStorage.
+
+Co sprawdzić:
+- powrót między krokami zachowuje dane;
+- błędy przypisane do pól;
+- poprawny e-mail jest akceptowany, błędny wymaga poprawki;
+- istnieje wybór dla niezdecydowanego odwiedzającego;
+- podsumowanie odpowiada rzeczywistym wyborom;
+- formularz działa na telefonie i klawiaturą.
+
+Inne interakcje:
+- mobilne menu;
+- otwieranie zdjęć w dostępnej galerii;
+- proste FAQ;
+- przejście z koncepcji do formularza z właściwym wyborem.
+
+Przy trzech koncepcjach filtrowanie i wyszukiwarka nie są potrzebne. Materiały można pokazać statycznie. Konfigurator 3D oraz kalkulator ceny nie wchodzą do pierwszej wersji.
+
+8. TECHNOLOGIA
+
+Rekomendowany wariant:
+- Astro do stron, wspólnego układu i renderowania treści;
+- TypeScript;
+- Tailwind CSS i spójne zmienne projektu;
+- React do formularza wymagającego stanu;
+- zwykły CSS do większości przejść i animacji;
+- lokalne dane lub prosta kolekcja treści dla koncepcji;
+- statyczny build do hostingu.
+
+Mechanizm dopasowania:
+Astro pozwala renderować główną treść do HTML i dołączać JavaScript do wskazanych interaktywnych komponentów. To pasuje do strony z przewagą zdjęć i tekstu oraz jednym bardziej rozbudowanym formularzem. Nie jest gwarancją dobrego UI ani wysokiej wydajności.
+
+Alternatywy:
+
+NEXT.JS
+Ma sens, gdy autor zna już Next albo chce budować stronę rozbudowywaną w aplikację React. Może również generować statyczny HTML. Server Components ograniczają potrzebę wysyłania kodu komponentów do przeglądarki. Przy pełnym eksporcie statycznym trzeba uwzględnić ograniczenia, np. brak Server Actions i domyślnej serwerowej optymalizacji obrazów. Sam fakt używania React/Vite w portfolio nie oznacza znajomości Next.
+
+WORDPRESS
+Ma przewagę, gdy klient chce sam dodawać realizacje i edytować ofertę w panelu. Site Editor z motywem blokowym umożliwia edycję treści oraz elementów układu. Wymaga utrzymywania instalacji, motywu, użytych wtyczek i kopii danych. Dobry efekt wizualny da się uzyskać także tutaj.
+
+WSPÓLNE KRYTERIA
+Wszystkie warianty mogą zapewnić dobry wygląd i HTML dostępny dla wyszukiwarek. Różnicują je przede wszystkim model edycji, koszt nauki, zakres serwerowy i późniejsze utrzymanie.
+
+Granica rekomendacji:
+Jeżeli celem oferty staje się od początku samodzielna edycja stron przez małe firmy, trzeba ponownie porównać WordPress i Astro z CMS-em. W obecnej wersji Astro treści aktualizuje autor w plikach i publikuje nowy build. To konkretna ograniczona funkcjonalność, a nie gotowy panel klienta.
+
+Organizacja projektu:
+- jeden wspólny layout;
+- komponenty nawigacji, stopki, przycisków i bloków treści;
+- dane projektów oddzielone od wyglądu;
+- jeden stan formularza;
+- jedna skala kolorów, typografii i odstępów;
+- zdjęcia przechowywane i przetwarzane w spójny sposób.
+
+Minimalna dokumentacja repo:
+- README.md: cel, demo, uruchomienie, funkcje i ograniczenia;
+- docs/BRIEF.md: uzgodniony zakres;
+- docs/DESIGN.md: system wizualny;
+- docs/ASSETS.md: materiały i źródła;
+- docs/QA.md: rzeczywiście przeprowadzone sprawdzenia.
+
+Wersje zależności wybrać na początku implementacji z aktualnych stabilnych wydań, sprawdzić zgodność i utrwalić w lockfile. Nie przepisywać numerów wersji ze starych tutoriali.
+
+9. KOLEJNOŚĆ REALIZACJI I NAKŁAD PRACY
+
+Estymacja planistyczna dla pierwszej dopracowanej strony tego typu:
+- brief, struktura, teksty: 3–5 godzin;
+- materiały wizualne i kierunek graficzny: 5–8 godzin;
+- system wizualny i strona główna na komputerze oraz telefonie: 6–9 godzin;
+- pozostałe szablony i trzy koncepcje: 5–8 godzin;
+- formularz i interakcje: 3–5 godzin;
+- poprawki, sprawdzenie, publikacja i opis projektu: 5–8 godzin.
+
+Suma przed rezerwą: 27–43 godziny.
+Praktyczny budżet z zapasem: około 35–55 godzin aktywnej pracy.
+To szacunek, nie zmierzona produktywność Codexa. Nie obejmuje oczekiwania na zewnętrzne materiały, zakupu usług ani późniejszych funkcji klienta.
+
+Przykładowy kalendarz:
+- przy 10 godzinach tygodniowo: około 4–6 tygodni;
+- przy 15–20 godzinach tygodniowo: około 2–4 tygodni.
+
+Etap A — Koncepcja i materiały
+Rezultat: zakres, tekst pierwszego ekranu, zestaw zdjęć, kolory i typografia.
+Warunek przejścia: materiały wyglądają jak jeden spójny projekt. Przy problemie ograniczamy zdjęcia lub zmieniamy temat przed rozbudową.
+
+Etap B — Strona główna
+Rezultat: rzeczywista strona z docelową treścią i zdjęciami na komputerze oraz telefonie.
+Warunek przejścia: dobra hierarchia, czytelność, kadry i spójny rytm sekcji.
+
+Etap C — Pozostałe podstrony
+Rezultat: sześć szablonów, osiem adresów i poprawna nawigacja.
+Warunek przejścia: żadnych pustych projektów ani powielonej treści udającej nowe sekcje.
+
+Etap D — Formularz i interakcje
+Rezultat: przejście wszystkich kroków, poprawne podsumowanie, dostępna galeria i menu.
+
+Etap E — Kontrola jakości
+Rezultat: usunięte istotne problemy mobilne, formularza, linków, wydajności i dostępności. Dokumentacja opisuje rzeczywiste wyniki.
+
+Etap F — Udostępnienie i portfolio
+Rezultat: działające demo pod potwierdzonym adresem, link do kodu, zrzuty i opis decyzji projektowych. Publikacja jest elementem późniejszej realizacji; ten plan nie jest dowodem wdrożenia.
+
+Codex powinien uruchamiać stronę, oglądać wynik i poprawiać zauważone problemy. Sam pomyślny build nie rozstrzyga o wyglądzie.
+
+10. KRYTERIA GOTOWOŚCI
+
+WYGLĄD
+- Spójne fonty, kolory, proporcje zdjęć i odstępy na wszystkich widokach.
+- Czytelny pierwszy ekran z jasną informacją, czym zajmuje się marka w scenariuszu.
+- Brak treści zastępczych, przypadkowych ikon i pustych kart.
+- Każda koncepcja ma opis i dopasowane obrazy.
+- Animacje uzupełniają odbiór, a treść pozostaje dostępna bez nich.
+
+TELEFON I DOSTĘPNOŚĆ
+- Sprawdzone szerokości 320, 390, 768 i 1440 px.
+- Brak poziomego przewijania i przycisków zasłaniających treść.
+- Główne cele dotykowe około 44 x 44 CSS px jako założenie projektu.
+- Obsługa klawiatury, widoczny fokus i właściwe etykiety.
+- Zamknięcie galerii przywraca fokus do zdjęcia, które ją otworzyło.
+- Sprawdzony kontrast, powiększenie tekstu i ograniczenie animacji.
+- Główne scenariusze obejrzane na prawdziwym telefonie, jeżeli jest dostępny.
+
+FORMULARZ
+- Jasny tryb demo przed wpisaniem danych.
+- Zachowanie wyborów po cofnięciu.
+- Czytelne błędy i poprawne podsumowanie.
+- Brak pozorowanego sukcesu wysyłki.
+- Brak rzeczywistej transmisji treści formularza.
+- Rzeczywisty kontakt do autora wyraźnie oddzielony od fikcyjnej firmy.
+
+TECHNIKA
+- Build i kontrola typów przechodzą.
+- Wszystkie główne linki, menu, galeria i formularz są sprawdzone.
+- Krótki test przeglądarkowy obejmuje najważniejszą ścieżkę formularza, jego walidację i cofanie. Nie tworzymy testów każdego dekoracyjnego elementu.
+- Główna treść i linki są obecne w HTML.
+- Każda podstrona ma sensowny tytuł i opis; jest ikona strony oraz podgląd linku.
+- Obrazy mają właściwe rozmiary, proporcje i teksty alternatywne.
+- Zdjęcie otwierające nie jest niepotrzebnie opóźniane; dalsze obrazy mogą ładować się później.
+- Demo fikcyjnej firmy nie zawiera fałszywych danych LocalBusiness ani ocen strukturalnych. Można utrzymywać je poza indeksem, a indeksować prawdziwy opis projektu autora.
+
+WYDAJNOŚĆ
+Cel projektu: szybkie wyświetlenie głównej treści, stabilny układ i sprawne interakcje.
+Pomiar laboratoryjny: strona główna i najcięższa podstrona projektu, w zapisanych warunkach.
+Orientacyjny cel laboratoryjny: Lighthouse Performance co najmniej 90 na mobile, jeżeli jest osiągalny bez pogarszania projektu. Wynik musi pochodzić z pomiaru.
+
+Oficjalne progi dobrych Core Web Vitals to LCP do 2,5 s, INP do 200 ms i CLS do 0,1, oceniane na 75. percentylu rzeczywistego ruchu. Nie przedstawiać pojedynczego wyniku Lighthouse jako dowodu spełnienia tych warunków przez wszystkich użytkowników. Nowe demo może nie mieć jeszcze wystarczających danych o rzeczywistych wizytach.
+
+11. KOSZTY I WERSJA DLA REALNEGO KLIENTA
+
+Demo statyczne można zaplanować na darmowym hostingu Cloudflare Pages. Dokumentacja Cloudflare podaje, że żądania do statycznych zasobów niewywołujące Functions są darmowe i nieograniczone. Funkcje serwerowe mają osobne rozliczenie i limity. Warunki planu trzeba ponownie sprawdzić przy wdrożeniu.
+
+Domena jest opcjonalna na etapie demonstratora. Najpierw można użyć przydzielonego adresu hostingu. Nie wybrano ani nie kupiono domeny.
+
+Zdjęcia i fonty: koszt zależy od wybranego źródła. Można przygotować wariant bez zakupów, jeżeli istnieją odpowiednie własne lub bezpłatnie licencjonowane materiały. Użycie narzędzi generujących zależy od dostępnego planu użytkownika. Budżet nie zakłada nowych płatnych subskrypcji.
+
+Główna inwestycja na tym etapie to czas dopracowania projektu.
+
+Dla realnego klienta zakres trzeba uzupełnić o:
+- prawdziwą ofertę, zdjęcia i dane firmy;
+- rzeczywistą obsługę zapytań wraz z walidacją na serwerze, ochroną przed nadużyciami i sprawdzeniem dostarczania;
+- informację o rzeczywistym przetwarzaniu danych;
+- sposób edycji treści: autor strony albo panel klienta;
+- docelową domenę i konfigurację hostingu;
+- jasny zakres utrzymania, aktualizacji oraz przekazania dostępu.
+
+Dobrze zaprojektowany demonstrator formularza nie jest dowodem wdrożonej poczty ani panelu klienta. Te funkcje powinny mieć osobny zakres i odbiór.
+
+12. JAK WYKORZYSTAĆ PROJEKT W PORTFOLIO
+
+Głównym materiałem dla przyszłego klienta ma być działająca strona otwierana jednym linkiem. GitHub jest dodatkowym dowodem sposobu wykonania.
+
+Przygotować:
+- potwierdzony adres działającego demo;
+- repozytorium z jasnym README;
+- trzy do pięciu rzeczywistych zrzutów wersji desktop i mobile;
+- krótkie nagranie przejścia przez stronę i formularz;
+- opis projektu zawierający cel, odbiorcę, decyzje UI, ograniczenia i pomiary;
+- jasne wskazanie udziału autora i wykorzystania Codexa.
+
+Uczciwy opis:
+„Projekt demonstracyjny strony pracowni mebli na wymiar. Przygotowałem koncepcję, interfejs responsywny, prezentację projektów i interaktywny brief. Implementację rozwijałem z pomocą Codexa; zakres i wyniki sprawdzeń opisuję w repozytorium.”
+
+Wyniki sprzedażowe można podać dopiero wtedy, gdy projekt rzeczywiście je wygeneruje i zostaną zmierzone.
+
+Na początek wystarczy opis w README i link w profilu GitHub. Własną stronę portfolio można później wykorzystać jako miejsce prezentacji tego projektu oraz aplikacji AutoRelay i ElektroScan.
+
+W przyszłych ofertach JobHuntera:
+Dobierać link do branży i konkretnej potrzeby firmy. Ten projekt jest szczególnie czytelny dla pracowni, wykonawców i usług opartych na realizacjach. Nie zakładać, że ta sama estetyka będzie właściwa dla każdego odbiorcy.
+
+Przydatność próbki nie dowodzi trwałej przewagi konkurencyjnej. Różnicę może tworzyć jakość dopasowania do firmy, terminowość, poprawna obsługa zapytań, materiały i opieka po publikacji. Samo korzystanie z Codexa nie jest wystarczającym wyróżnikiem.
+
+13. ZAKRES POZA PIERWSZĄ WERSJĄ
+
+Osobnego uzasadnienia wymaga:
+- CMS lub panel administracyjny;
+- prawdziwa wysyłka zapytań;
+- kalkulator cen;
+- konfigurator 3D;
+- rezerwacje i płatności;
+- blog;
+- wiele języków;
+- chatbot;
+- logowanie i konta;
+- integracja z JobHunterem, CRM lub AutoRelay.
+
+Dodanie funkcji powinno wynikać z potrzeby odbiorcy lub celu portfolio. Pierwsza wersja ma osiągnąć jakość wizualną i użytkową w ustalonym zakresie.
+
+14. POLECENIE STARTOWE DLA CODEXA
+
+Zbuduj nowy, oddzielny projekt strony demonstracyjnej „Sęk i Forma” według załączonego planu.
+
+Cel: dopracowana strona firmowa do mojego portfolio, którą w przyszłości pokażę potencjalnym klientom usług tworzenia stron. Marka jest fikcyjna i ma to być uczciwie widoczne. Główny nacisk połóż na wygląd, treści, kadrowanie zdjęć, telefon oraz działającą ścieżkę przygotowania zapytania.
+
+Przyjmij Astro, TypeScript i Tailwind CSS, z Reactem tylko dla potrzebnych interakcji. Treści projektów oddziel od komponentów. Zastosuj wspólny system kolorów, typografii i odstępów opisany w briefie. Korzystaj z aktualnej dokumentacji i zgodnych stabilnych zależności.
+
+Zakres: sześć szablonów, osiem adresów treściowych, trzy koncepcje, mobilne menu, dostępna galeria, FAQ i trzyetapowy formularz demo. Formularz nie wysyła danych; pokazuje podsumowanie wynikające z wyborów. Realny kontakt do mnie ma odrębne miejsce.
+
+Zacznij od przeczytania całego briefu, sprawdzenia projektu i zapisania zwięzłej kolejności prac. Następnie przygotuj stronę główną z docelowymi tekstami i dostępnymi materiałami. Obejrzyj ją na szerokościach desktop i mobile, popraw hierarchię, kadry i odstępy, a dopiero potem rozwijaj pozostałe widoki.
+
+Sam podejmuj standardowe decyzje techniczne i poprawiaj wykryte błędy. Nie dodawaj nowych modułów bez konkretnego powodu. Jeżeli materiałów graficznych brakuje, wskaż dokładne potrzebne ujęcia i rozmiary, a w roboczej implementacji użyj jawnie opisanych zastępników. Przed ukończeniem wszystkie zastępniki wymagają rozwiązania.
+
+Sprawdzaj wygląd w przeglądarce, działanie na telefonie, klawiaturę, formularz, linki i wydajność. Przeprowadź test głównej ścieżki formularza, obejmujący błędy, cofanie i zgodność podsumowania, oraz build i kontrolę typów. Opisuj tylko pomiary i sprawdzenia faktycznie wykonane.
+
+Na koniec przygotuj README, listę źródeł materiałów i krótki opis decyzji projektowych. Prowadź pracę etapami aż do kompletnej lokalnej wersji gotowej do przeglądu i późniejszej publikacji. Nie przedstawiaj planu wdrożenia jako działającego publicznego adresu.
+
+15. ŹRÓDŁA I ZAKRES ICH WYKORZYSTANIA
+
+Przegląd wykonany 19 października 2026. Źródła techniczne potwierdzają możliwości narzędzi. Wybór branży, wyglądu, zakresu oraz estymacja czasu są oceną projektową.
+
+Portfolio i obecny projekt:
+https://github.com/JakubLewosz/JakubLewosz/blob/main/README.md
+https://github.com/JakubLewosz/AutoRelay/blob/main/README.md
+https://github.com/JakubLewosz/ElektroScan/blob/main/README.md
+https://github.com/JakubLewosz/CodeFabric/blob/main/README.md
+https://github.com/JakubLewosz/FixDesk/blob/main/README.md
+https://github.com/JakubLewosz/JobHunter/blob/main/README.md
+
+Referencje branżowe i struktura informacji:
+https://fropt.com/en
+https://www.reformcph.com/en
+https://deerdesign.pl/realizacje/
+
+Możliwości techniczne:
+https://docs.astro.build/en/concepts/islands/
+https://nextjs.org/docs/app/guides/static-exports
+https://wordpress.org/documentation/article/site-editor/
+
+Hosting i wydajność:
+https://developers.cloudflare.com/pages/functions/pricing/
+https://web.dev/articles/defining-core-web-vitals-thresholds
+
+Nie przeprowadzono badania wielkości rynku stron dla stolarni, testu sprzedaży, audytu ich konwersji ani pomiarów nowej witryny. Projekt jeszcze nie istnieje. Powyższe referencje nie stanowią dowodu, że którakolwiek z pokazanych stron zwiększyła sprzedaż o określoną wartość.
+

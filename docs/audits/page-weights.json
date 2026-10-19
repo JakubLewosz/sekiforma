@@ -1,0 +1,25 @@
+{
+  "viewport": {
+    "width": 412,
+    "height": 823,
+    "dpr": 1.75
+  },
+  "note": "Zakodowane zasoby stron po załadowaniu wszystkich obrazów, osobny kontekst bez cache dla każdej strony; bez obrazu otwieranego dopiero w galerii.",
+  "results": [
+    {
+      "slug": "jasna-kuchnia",
+      "bytes": 327460,
+      "images": 180904
+    },
+    {
+      "slug": "garderoba-we-wnece",
+      "bytes": 348710,
+      "images": 202154
+    },
+    {
+      "slug": "zabudowa-salonu",
+      "bytes": 338932,
+      "images": 192376
+    }
+  ]
+}

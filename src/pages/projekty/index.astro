@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import Invitation from '../../components/Invitation.astro';
+import { projects } from '../../data/projects';
+---
+
+<Layout
+  title="Koncepcje wnętrz"
+  description="Trzy demonstracyjne koncepcje: jasna kuchnia, garderoba we wnęce i zabudowa salonu. Odkryj pomysły na meble w naturalnej estetyce."
+>
+  <section class="page-intro container">
+    <span class="eyebrow">KATALOG POMYSŁÓW</span>
+    <div class="page-lead-grid">
+      <h1>
+        Przestrzeń na
+        <br />
+        <em>dobre pomysły.</em>
+      </h1>
+      <p>
+        Trzy wnętrza. Trzy codzienne potrzeby. Odkryj, jak naturalne materiały i
+        przemyślany układ mogą nadać im wspólny rytm.
+      </p>
+    </div>
+  </section>
+  <section class="container projects-page" aria-label="Koncepcje wnętrz">
+    <div class="demo-banner">
+      To koncepcje demonstracyjne, a nie wykonane zlecenia. Wizualizacje
+      powstały z pomocą AI na potrzeby tego projektu portfolio.
+    </div>
+    <div class="projects-grid">
+      {projects.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+  </section>
+  <Invitation />
+</Layout>

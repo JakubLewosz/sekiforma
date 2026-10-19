@@ -1,0 +1,132 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Invitation from '../components/Invitation.astro';
+import { processSteps } from '../data/projects';
+import detail from '../assets/kitchen-detail.webp';
+import living from '../assets/living.webp';
+---
+
+<Layout
+  title="Pracownia — podejście i materiały"
+  description="Poznaj ideę Sęk i Forma: naturalne materiały, świadome detale i meble planowane wokół codziennych potrzeb. Fikcyjna pracownia, autorski projekt portfolio."
+>
+  <section class="container page-intro">
+    <span class="eyebrow">IDEA PRACOWNI</span>
+    <h1>
+      Z szacunku do materiału.
+      <br />
+      <em>Z uwagą na codzienność.</em>
+    </h1>
+    <p>
+      Sęk i Forma to pomysł na współczesną pracownię, w której spokojna estetyka
+      spotyka się z praktyczną stroną mieszkania.
+    </p>
+  </section>
+  <section class="container studio-intro">
+    <Image
+      src={living}
+      alt="Koncepcja naturalnego salonu z dębowym regałem i zielonym fotelem — wizualizacja AI."
+      widths={[480, 800, 1100]}
+      sizes="(max-width:799px) 100vw, 45vw"
+      loading="eager"
+    />
+    <div>
+      <span class="eyebrow">FORMA MA SWÓJ POWÓD</span>
+      <h2>
+        Mniej przypadku.
+        <br />
+        <em>Więcej sensu.</em>
+      </h2>
+      <p>
+        Nie każdy centymetr musi być wypełniony. Czasem najlepszą decyzją jest
+        zostawienie miejsca na światło, ruch lub przedmiot, który ma dla Ciebie
+        znaczenie.
+      </p>
+      <p>
+        W tej koncepcji pracowni projekt zaczyna się od słuchania. Materiał,
+        proporcje i sposób otwierania szafki wynikają z potrzeb, a nie z
+        gotowego zestawu.
+      </p>
+      <p>
+        To idea fikcyjnej marki, przygotowana jako projekt portfolio Jakuba
+        Lewosza. Pokazane wnętrza są wizualizacjami AI.
+      </p>
+    </div>
+  </section>
+  <section class="section studio-process">
+    <div class="container">
+      <span class="eyebrow">MODELOWA DROGA PROJEKTU</span>
+      <h2>
+        Od rozmowy
+        <br />
+        <em>do ostatniego detalu.</em>
+      </h2>
+      <ol class="process-grid">
+        {processSteps.map((step, i) => (
+          <li>
+            <span class="step-number">0{i + 1}</span>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </li>
+        ))}
+      </ol>
+      <p style="font-size:12px;margin-top:35px">
+        To przykładowy proces współpracy. Projekt demonstracyjny nie oferuje
+        rzeczywistej produkcji ani montażu.
+      </p>
+    </div>
+  </section>
+  <section class="section container" id="materialy">
+    <div class="studio-intro" style="padding-bottom:0">
+      <div>
+        <span class="eyebrow">MATERIAŁY Z CHARAKTEREM</span>
+        <h2>
+          To, co naturalne,
+          <br />
+          <em>nie jest jednakowe.</em>
+        </h2>
+        <p>
+          Rysunek drewna bywa nieregularny. Kamień zmienia się wraz ze światłem.
+          Właśnie te różnice nadają wnętrzu głębię.
+        </p>
+        <p>
+          Paleta koncepcji łączy dąb, jasne mineralne powierzchnie i matowe
+          wykończenia. W realnym projekcie wybór wymaga próbek, sprawdzenia
+          właściwości i dopasowania do użytkowania.
+        </p>
+      </div>
+      <Image
+        src={detail}
+        alt="Wycinek wizualizacji: jasny kamienny blat i zaokrąglona dębowa wyspa."
+        widths={[480, 800, 1000]}
+        sizes="(max-width:799px) 100vw, 45vw"
+        loading="lazy"
+      />
+    </div>
+    <div class="values-grid">
+      <div>
+        <h3>Dotyk</h3>
+        <p>
+          Gładka krawędź i wygodny chwyt są tak samo ważne jak wygląd całej
+          zabudowy.
+        </p>
+      </div>
+      <div>
+        <h3>Proporcje</h3>
+        <p>
+          Podziały frontów i rytm półek powinny odpowiadać skali pokoju, a nie z
+          nim konkurować.
+        </p>
+      </div>
+      <div>
+        <h3>Codzienność</h3>
+        <p>
+          Piękny materiał ma sens, kiedy pasuje także do sposobu sprzątania,
+          gotowania i przechowywania.
+        </p>
+      </div>
+    </div>
+  </section>
+  <Invitation />
+</Layout>

@@ -1,0 +1,218 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import FAQ from '../components/FAQ.astro';
+import Invitation from '../components/Invitation.astro';
+import { projects, processSteps } from '../data/projects';
+import kitchen from '../assets/kitchen.webp';
+import detail from '../assets/kitchen-detail.webp';
+---
+
+<Layout
+  title="Meble, które pasują do Twojego życia"
+  description="Kuchnie, garderoby i zabudowy w spokojnej, naturalnej estetyce. Odkryj Sęk i Forma — demonstracyjny projekt pracowni mebli na wymiar."
+>
+  <section class="hero container">
+    <div class="hero-copy">
+      <span class="eyebrow">
+        <span class="tiny-line"></span> MEBLE NA WYMIAR · KONCEPCJA PRACOWNI
+      </span>
+      <h1>
+        Meble, które
+        <br />
+        pasują do
+        <br />
+        <em>Twojego życia.</em>
+      </h1>
+      <p>
+        Kuchnie, szafy i zabudowy projektowane
+        <br class="desktop-only" /> wokół Twojej przestrzeni. Naturalnie.
+      </p>
+      <div class="hero-actions">
+        <a class="button" href="/kontakt">
+          Opowiedz o swoim projekcie <Icon name="diagonal" />
+        </a>
+        <a class="text-link" href="/projekty">
+          Zobacz koncepcje <Icon />
+        </a>
+      </div>
+      <div class="hero-foot">
+        <span class="small-mark" aria-hidden="true">
+          ✳
+        </span>
+        <span>Dobry projekt zaczyna się od Ciebie.</span>
+      </div>
+    </div>
+    <figure class="hero-visual">
+      <Image
+        src={kitchen}
+        alt="Koncepcja kuchni z dębową zabudową, jasnym kamiennym blatem i miękkim światłem z okna."
+        widths={[480, 768, 1100, 1536]}
+        sizes="(max-width: 799px) 100vw, 54vw"
+        format="webp"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <figcaption>
+        <span>DĄB. ŚWIATŁO. CODZIENNOŚĆ.</span>
+        <span>01 / JASNA KUCHNIA</span>
+      </figcaption>
+      <span class="hero-photo-note">Wizualizacja koncepcyjna AI</span>
+    </figure>
+  </section>
+  <div class="container intro-strip">
+    <span>
+      Przemyślane od środka.
+      <br />
+      <strong>Dopasowane do Ciebie.</strong>
+    </span>
+    <p>
+      Wierzymy, że dobra forma wynika z codzienności.
+      <br />Z rzeczy, które lubisz. I z miejsca, które nazywasz domem.
+    </p>
+    <span class="demo-label">
+      <span></span> Projekt demonstracyjny
+    </span>
+  </div>
+  <section class="section projects-section">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">WYBRANE KONCEPCJE</span>
+          <h2>
+            Różne przestrzenie.
+            <br />
+            <em>Ta sama uważność.</em>
+          </h2>
+        </div>
+        <a class="text-link" href="/projekty">
+          Wszystkie koncepcje <Icon />
+        </a>
+      </div>
+      <div class="projects-grid">
+        {projects.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="section offer-section">
+    <div class="container offer-grid">
+      <div>
+        <span class="eyebrow">DOBRZE W TWOJEJ PRZESTRZENI</span>
+        <h2>
+          Nie z katalogu.
+          <br />
+          <em>Z Twojego życia.</em>
+        </h2>
+        <p>
+          Od pierwszej kawy po odkładanie ostatniej książki. Każdy mebel ma
+          swoją rolę.
+        </p>
+        <a class="text-link" href="/oferta">
+          Poznaj zakres pracowni <Icon />
+        </a>
+      </div>
+      <div class="service-list">
+        {[
+          [
+            '01',
+            'Kuchnie',
+            'Serce domu, zaplanowane wokół Twojego rytmu.',
+            'kuchnia',
+          ],
+          [
+            '02',
+            'Szafy i garderoby',
+            'Więcej porządku. Więcej miejsca dla Ciebie.',
+            'garderoba',
+          ],
+          [
+            '03',
+            'Zabudowy salonu',
+            'Przestrzeń na książki, przedmioty i wspomnienia.',
+            'salon',
+          ],
+        ].map(([n, title, text, type]) => (
+          <a href={`/oferta#${type}`} class="service-row">
+            <span>{n}</span>
+            <div>
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </div>
+            <Icon name="diagonal" />
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="section process-section">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">OD POMYSŁU DO PRZESTRZENI</span>
+          <h2>
+            Dobra forma.
+            <br />
+            <em>Krok po kroku.</em>
+          </h2>
+        </div>
+        <p class="section-aside">
+          Tak może wyglądać współpraca.
+          <br />
+          Poznaj modelowy proces projektowy.
+        </p>
+      </div>
+      <ol class="process-grid">
+        {processSteps.map((step, i) => (
+          <li>
+            <span class="step-number">0{i + 1}</span>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+  <section class="materials-section container">
+    <div class="material-visual">
+      <Image
+        src={detail}
+        alt="Detal wizualizacji kuchni: dębowy front, miękki narożnik i jasny kamienny blat."
+        widths={[480, 800, 1000]}
+        sizes="(max-width: 799px) 100vw, 50vw"
+        loading="lazy"
+      />
+    </div>
+    <div class="material-copy">
+      <span class="eyebrow">NATURALNIE, ŻE DETAL</span>
+      <h2>
+        Piękno, które
+        <br />
+        <em>czuć pod palcami.</em>
+      </h2>
+      <p>
+        Rysunek drewna, spokojny mat, miękka krawędź. Materiały nadają
+        przestrzeni charakter — i sprawiają, że chce się w niej zostać.
+      </p>
+      <div class="swatches" aria-label="Paleta koncepcji">
+        <span>
+          <i class="swatch oak"></i>Naturalny dąb
+        </span>
+        <span>
+          <i class="swatch stone"></i>Ciepły kamień
+        </span>
+        <span>
+          <i class="swatch green"></i>Głęboka zieleń
+        </span>
+      </div>
+      <a class="text-link" href="/pracownia#materialy">
+        O podejściu do materiałów <Icon />
+      </a>
+    </div>
+  </section>
+  <FAQ />
+  <Invitation />
+</Layout>

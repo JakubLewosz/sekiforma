@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+---
+
+<Layout
+  title="Nie znaleziono strony"
+  description="Ta przestrzeń jest jeszcze pusta. Wróć do strony głównej demonstracyjnej pracowni Sęk i Forma."
+>
+  <section class="container not-found">
+    <span class="error-number">404</span>
+    <h1>
+      Tu jeszcze
+      <br />
+      <em>nie ma formy.</em>
+    </h1>
+    <p>
+      Ten adres nie prowadzi do żadnej strony. Wróć do początku i znajdź swoją
+      inspirację.
+    </p>
+    <a class="button" href="/">
+      Wróć na stronę główną <Icon />
+    </a>
+  </section>
+</Layout>

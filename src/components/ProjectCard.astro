@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import type { projects } from '../data/projects';
+interface Props {
+  project: (typeof projects)[number];
+}
+const { project } = Astro.props;
+---
+
+<article class="project-card">
+  <a
+    href={`/projekty/${project.slug}`}
+    class="project-image-link"
+    aria-label={`Zobacz koncepcję: ${project.title}`}
+  >
+    <Image
+      src={project.image}
+      alt={project.alt}
+      widths={[400, 640, 900]}
+      sizes="(max-width: 600px) 100vw, (max-width: 900px) 45vw, 32vw"
+      format="webp"
+      loading="lazy"
+    />
+    <span class="image-note">Koncepcja demonstracyjna</span>
+    <span class="image-arrow">
+      <Icon name="diagonal" />
+    </span>
+  </a>
+  <div class="project-meta">
+    <span>
+      {project.number} / {project.category}
+    </span>
+    <h3>
+      <a href={`/projekty/${project.slug}`}>{project.title}</a>
+    </h3>
+    <p>{project.subtitle}</p>
+  </div>
+</article>

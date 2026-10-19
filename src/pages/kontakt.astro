@@ -1,0 +1,82 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import BriefForm from '../components/BriefForm';
+import Icon from '../components/Icon.astro';
+import detail from '../assets/wardrobe-detail.webp';
+---
+
+<Layout
+  title="Opowiedz o swoim projekcie"
+  description="Przejdź przez trzy kroki formularza demo i przygotuj własny brief meblowy. Bez wysyłania danych. Osobny kontakt do autora strony, Jakuba Lewosza."
+>
+  <section class="container page-intro">
+    <span class="eyebrow">ZACZNIJMY OD POMYSŁU</span>
+    <h1>
+      Opowiedz o swojej
+      <br />
+      <em>przestrzeni.</em>
+    </h1>
+    <p>
+      Trzy krótkie kroki pomogą Ci uporządkować potrzeby. Na końcu zobaczysz
+      swój przykładowy brief.
+    </p>
+  </section>
+  <div class="container contact-layout">
+    <aside class="contact-aside">
+      <h2>
+        Nie musisz mieć
+        <br />
+        <em>wszystkich odpowiedzi.</em>
+      </h2>
+      <p>
+        Wystarczy punkt wyjścia. Rodzaj pomieszczenia, kilka codziennych potrzeb
+        albo pomysł na zmianę.
+      </p>
+      <Image
+        src={detail}
+        alt="Detal koncepcji garderoby: dębowe półki i uporządkowane przechowywanie — wycinek wizualizacji AI."
+        widths={[300, 500]}
+        sizes="25vw"
+        loading="lazy"
+      />
+      <p>
+        Chcesz porozmawiać o stworzeniu strony?
+        <br />
+        <a class="text-link" href="#autor">
+          Kontakt do autora <Icon />
+        </a>
+      </p>
+    </aside>
+    <BriefForm client:load />
+  </div>
+  <section class="container author-block" id="autor">
+    <div>
+      <span class="eyebrow">O PROJEKCIE / PRAWDZIWY KONTAKT</span>
+      <h2>
+        Za tą stroną
+        <br />
+        <em>stoi Jakub.</em>
+      </h2>
+    </div>
+    <div>
+      <p>
+        Nazywam się Jakub Lewosz. Sęk i Forma to mój projekt demonstracyjny
+        strony pracowni mebli na wymiar, rozwijany z pomocą Codexa. Pokazuje
+        projekt interfejsu, responsywną prezentację koncepcji i interaktywny
+        brief.
+      </p>
+      <p>
+        Marka jest fikcyjna, a wnętrza wygenerowane z pomocą AI. Formularz służy
+        do demonstracji. Poniżej znajdziesz osobny, rzeczywisty kontakt do mnie
+        jako autora strony.
+      </p>
+      <a class="text-link" href="mailto:jakublewosz6@gmail.com">
+        Napisz do autora <Icon name="diagonal" />
+      </a>
+      <a class="text-link" href="https://github.com/JakubLewosz">
+        Profil GitHub <Icon name="diagonal" />
+      </a>
+    </div>
+  </section>
+</Layout>

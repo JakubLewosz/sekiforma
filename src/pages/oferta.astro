@@ -1,0 +1,96 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import Invitation from '../components/Invitation.astro';
+import FAQ from '../components/FAQ.astro';
+import { projects } from '../data/projects';
+const services = [
+  {
+    title: 'Kuchnie',
+    subtitle: 'Wokół codziennych rytuałów.',
+    text: 'Blat na wspólne gotowanie. Miejsce na ulubione filiżanki. Przemyślana zabudowa łączy to, co widać, z tym, co ma działać bez zastanowienia.',
+    points: [
+      'Układ stref gotowania, zmywania i przechowywania',
+      'Spójność kuchni ze strefą dzienną',
+      'Dobór frontów, blatu i wygodnych detali',
+    ],
+  },
+  {
+    title: 'Szafy i garderoby',
+    subtitle: 'Porządek, który przychodzi naturalnie.',
+    text: 'Od niewielkiej wnęki po osobne pomieszczenie. Dobry podział zaczyna się od tego, co chcesz przechowywać i jak często po to sięgasz.',
+    points: [
+      'Zabudowy wnęk i wykorzystanie wysokości',
+      'Podział półek, szuflad i drążków',
+      'Otwarte oraz zamknięte strefy przechowywania',
+    ],
+  },
+  {
+    title: 'Zabudowy salonu',
+    subtitle: 'Miejsce na własne historie.',
+    text: 'Regał na książki, zamknięte szafki na codzienne drobiazgi i przestrzeń na ulubione przedmioty. Jedna kompozycja, wiele potrzeb.',
+    points: [
+      'Biblioteki, regały i niskie komody',
+      'Łączenie ekspozycji z przechowywaniem',
+      'Proporcje mebla dopasowane do wnętrza',
+    ],
+  },
+];
+---
+
+<Layout
+  title="Oferta — kuchnie, garderoby i zabudowy"
+  description="Poznaj modelowy zakres pracowni Sęk i Forma: kuchnie na wymiar, szafy, garderoby i zabudowy salonu. Strona demonstracyjna."
+>
+  <section class="container page-intro">
+    <span class="eyebrow">CO MOŻE POWSTAĆ</span>
+    <div class="page-lead-grid">
+      <h1>
+        Dopasowane do miejsca.
+        <br />
+        <em>I do Ciebie.</em>
+      </h1>
+      <p>
+        Meble na wymiar zaczynają się od pytań o codzienność. Zobacz trzy
+        obszary, wokół których zbudowaliśmy koncepcję pracowni.
+      </p>
+    </div>
+  </section>
+  <div class="container">
+    <div class="demo-banner">
+      Poniżej prezentujemy modelowy zakres fikcyjnej pracowni. To inspiracja do
+      rozmowy o projekcie, bez rzeczywistych cen, terminów i oferty handlowej.
+    </div>
+    {services.map((service, i) => (
+      <section class="service-block" id={projects[i].type}>
+        <div class="service-photo">
+          <Image
+            src={projects[i].image}
+            alt={projects[i].alt}
+            widths={[480, 800, 1100]}
+            sizes="(max-width:799px) 100vw, 45vw"
+            loading={i === 0 ? 'eager' : 'lazy'}
+          />
+        </div>
+        <div class="service-description">
+          <span class="eyebrow">
+            0{i + 1} / {service.subtitle}
+          </span>
+          <h2>{service.title}</h2>
+          <p>{service.text}</p>
+          <ul>
+            {service.points.map((point) => (
+              <li>{point}</li>
+            ))}
+          </ul>
+          <a class="text-link" href={`/kontakt?typ=${projects[i].type}`}>
+            Przygotuj brief <Icon name="diagonal" />
+          </a>
+        </div>
+      </section>
+    ))}
+  </div>
+  <FAQ />
+  <Invitation />
+</Layout>

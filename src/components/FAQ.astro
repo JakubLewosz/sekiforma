@@ -1,0 +1,32 @@
+---
+import { faqs } from '../data/projects';
+import Icon from './Icon.astro';
+---
+
+<section class="section faq-section">
+  <div class="container faq-grid">
+    <div>
+      <span class="eyebrow">DOBRY POCZĄTEK</span>
+      <h2>
+        Zanim pojawi się
+        <br />
+        <em>pierwszy szkic.</em>
+      </h2>
+      <p>
+        Kilka odpowiedzi, które pomogą
+        <br class="desktop-only" /> uporządkować pierwsze myśli.
+      </p>
+    </div>
+    <div class="faq-list">
+      {faqs.map(([question, answer]) => (
+        <details>
+          <summary>
+            {question}
+            <Icon name="plus" />
+          </summary>
+          <p>{answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

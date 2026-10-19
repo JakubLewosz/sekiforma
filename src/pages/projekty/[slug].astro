@@ -1,0 +1,118 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import Gallery from '../../components/Gallery.astro';
+import Icon from '../../components/Icon.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projects } from '../../data/projects';
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+const { project } = Astro.props;
+const related = projects.filter((p) => p.slug !== project.slug);
+---
+
+<Layout
+  title={project.title}
+  description={`${project.subtitle} Poznaj założenia i materiały demonstracyjnej koncepcji Sęk i Forma.`}
+>
+  <div class="container">
+    <nav class="breadcrumbs" aria-label="Ścieżka strony">
+      <a href="/">Strona główna</a>
+      <span aria-hidden="true">/</span>
+      <a href="/projekty">Koncepcje</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{project.title}</span>
+    </nav>
+    <section class="page-intro">
+      <span class="eyebrow">KONCEPCJA DEMONSTRACYJNA / {project.number}</span>
+      <div class="page-lead-grid">
+        <h1>
+          {project.title}
+          <br />
+          <em>po swojemu.</em>
+        </h1>
+        <p>{project.intro}</p>
+      </div>
+    </section>
+    <figure class="project-cover">
+      <Image
+        src={project.image}
+        alt={project.alt}
+        widths={[480, 800, 1200, 1536]}
+        sizes="(max-width: 799px) 100vw, 90vw"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <figcaption class="image-note">
+        Koncepcja demonstracyjna · Wizualizacja AI
+      </figcaption>
+    </figure>
+    <dl class="project-facts">
+      <div>
+        <dt>PRZESTRZEŃ</dt>
+        <dd>{project.category.toLocaleLowerCase('pl')}</dd>
+      </div>
+      <div>
+        <dt>PALETA MATERIAŁÓW</dt>
+        <dd>{project.materials.join(' · ')}</dd>
+      </div>
+      <div>
+        <dt>CHARAKTER PROJEKTU</dt>
+        <dd>Fikcyjny scenariusz aranżacyjny</dd>
+      </div>
+    </dl>
+    <section class="project-story">
+      <div>
+        <span class="eyebrow">POTRZEBA. DECYZJA. FORMA.</span>
+        <h2>{project.subtitle}</h2>
+        <a
+          class="text-link"
+          href={`/kontakt?typ=${project.type}`}
+          style="margin-top:26px"
+        >
+          Zacznij podobny brief <Icon name="diagonal" />
+        </a>
+      </div>
+      <div class="prose">
+        <p>{project.need}</p>
+        <h3>Pomysł na tę przestrzeń</h3>
+        <p>{project.decision}</p>
+        <p>{project.note}</p>
+      </div>
+    </section>
+    <Gallery
+      items={[
+        {
+          image: project.image,
+          alt: project.alt,
+          caption: 'Całość koncepcji — wizualizacja AI',
+        },
+        {
+          image: project.detail,
+          alt: project.detailAlt,
+          caption: 'Detal — wycinek tej samej wizualizacji',
+        },
+      ]}
+    />
+    <section class="related-section">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">JESZCZE WIĘCEJ PRZESTRZENI</span>
+          <h2>Inny punkt widzenia.</h2>
+        </div>
+        <a class="text-link" href="/projekty">
+          Wróć do koncepcji <Icon />
+        </a>
+      </div>
+      <div class="projects-grid">
+        {related.map((p) => (
+          <ProjectCard project={p} />
+        ))}
+      </div>
+    </section>
+  </div>
+</Layout>

@@ -1,0 +1,148 @@
+---
+import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Icon from './Icon.astro';
+interface Props {
+  items: { image: ImageMetadata; alt: string; caption: string }[];
+}
+const { items } = Astro.props;
+const pictures = await Promise.all(
+  items.map(async (item) => ({
+    ...item,
+    full: (
+      await getImage({
+        src: item.image,
+        width: item.image.width,
+        format: 'webp',
+      })
+    ).src,
+  })),
+);
+---
+
+<div class="gallery">
+  {pictures.map((item, index) => (
+    <figure>
+      <button
+        type="button"
+        class="gallery-trigger"
+        data-full={item.full}
+        data-alt={item.alt}
+        data-caption={item.caption}
+        aria-label={`Powiększ: ${item.caption}`}
+        aria-haspopup="dialog"
+      >
+        <Image
+          src={item.image}
+          alt={item.alt}
+          widths={[480, 800, 1200]}
+          sizes="(max-width:799px) 100vw, 55vw"
+          loading="lazy"
+        />
+        <span class="gallery-hint">Powiększ ↗</span>
+      </button>
+      <figcaption>
+        0{index + 1} / {item.caption}
+      </figcaption>
+    </figure>
+  ))}
+</div>
+<dialog class="lightbox" aria-label="Galeria wizualizacji">
+  <button type="button" class="lightbox-close">
+    Zamknij <Icon name="close" />
+  </button>
+  <img class="lightbox-image" alt="" />
+  <p class="lightbox-caption" aria-live="polite"></p>
+  <div class="lightbox-nav">
+    <button type="button" class="lightbox-prev" aria-label="Poprzednie zdjęcie">
+      ←
+    </button>
+    <span class="lightbox-count"></span>
+    <button type="button" class="lightbox-next" aria-label="Następne zdjęcie">
+      →
+    </button>
+  </div>
+</dialog>
+<script>
+  const triggers = Array.from(
+    document.querySelectorAll<HTMLButtonElement>('.gallery-trigger'),
+  );
+  const dialog = document.querySelector<HTMLDialogElement>('.lightbox');
+  const img = dialog?.querySelector<HTMLImageElement>('.lightbox-image');
+  let active = 0;
+  let opener: HTMLButtonElement | undefined;
+  function display(index: number) {
+    active = (index + triggers.length) % triggers.length;
+    const button = triggers[active];
+    if (img) {
+      img.src = button.dataset.full ?? '';
+      img.alt = button.dataset.alt ?? '';
+    }
+    const caption = dialog?.querySelector('.lightbox-caption');
+    if (caption) caption.textContent = button.dataset.caption ?? '';
+    const counter = dialog?.querySelector('.lightbox-count');
+    if (counter) counter.textContent = `${active + 1} / ${triggers.length}`;
+  }
+  triggers.forEach((button, index) =>
+    button.addEventListener('click', () => {
+      opener = button;
+      display(index);
+      dialog?.showModal();
+      document.body.style.overflow = 'hidden';
+    }),
+  );
+  dialog
+    ?.querySelector('.lightbox-close')
+    ?.addEventListener('click', () => dialog.close());
+  dialog
+    ?.querySelector('.lightbox-prev')
+    ?.addEventListener('click', () => display(active - 1));
+  dialog
+    ?.querySelector('.lightbox-next')
+    ?.addEventListener('click', () => display(active + 1));
+  dialog?.addEventListener('close', () => {
+    document.body.style.overflow = '';
+    opener?.focus();
+  });
+  dialog?.addEventListener('click', (event) => {
+    if (event.target === dialog) {
+      const bounds = dialog.getBoundingClientRect();
+      if (
+        event.clientX < bounds.left ||
+        event.clientX > bounds.right ||
+        event.clientY < bounds.top ||
+        event.clientY > bounds.bottom
+      )
+        dialog.close();
+    }
+  });
+  dialog?.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowRight') {
+      display(active + 1);
+      event.preventDefault();
+    }
+    if (event.key === 'ArrowLeft') {
+      display(active - 1);
+      event.preventDefault();
+    }
+  });
+</script>
+
+<script>
+  const modal = document.querySelector<HTMLDialogElement>('.lightbox');
+  modal?.addEventListener('keydown', (event) => {
+    if (event.key !== 'Tab') return;
+    const controls = Array.from(
+      modal.querySelectorAll<HTMLButtonElement>('button'),
+    );
+    const first = controls[0],
+      last = controls.at(-1);
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last?.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first?.focus();
+    }
+  });
+</script>

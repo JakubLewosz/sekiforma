@@ -1,0 +1,7 @@
+node_modules
+dist
+.astro
+docs/audits
+docs/qa-tests.json
+docs/PLAN-ZRODLOWY.txt
+package-lock.json
