@@ -14,7 +14,11 @@ Katalog współczesnych wnętrz: kremowe płaszczyzny, spokojne linie i duża fo
 
 ## Obrazy i interakcje
 
-Trzy spójne wizualizacje AI. Detale są rzeczywistymi wycinkami, opisanymi jako wycinki, aby nie sugerować kolejnych ujęć nieistniejącego wnętrza. Obrazy konwertowane do WebP i generowane przez Astro w rozmiarach responsywnych. Główny obraz ładowany od razu.
+Trzy koncepcje mają po dwa wygenerowane ujęcia AI i po jednym opisanym wycinku pierwszej wizualizacji. Nowe ujęcia powstały z referencji pierwotnych obrazów; zachowują paletę i charakter wnętrz. Obrazy są konwertowane do WebP i generowane przez Astro w rozmiarach responsywnych. Główny obraz ładowany od razu.
+
+Na stronie głównej duża kuchnia otwiera kompozycję, a dwie mniejsze koncepcje tworzą drugi rytm. W katalogu pierwsza koncepcja łączy zdjęcie z opisem obok; dwie kolejne mają przesunięcie pionowe. Galeria szczegółów zestawia jeden duży obraz z dwoma mniejszymi. Na telefonie wszystkie układy przechodzą do jednej kolumny.
+
+Paleta materiałów ma trzy zakładki: dąb, jasny kamień i zgaszona zieleń. Wybór zmienia obraz, opis oraz odnośnik do koncepcji. Strzałki, Home i End przenoszą fokus; Enter i Spacja aktywują wybór, Tab przechodzi do panelu. Kontrolki pojawiają się po uruchomieniu skryptu; bez JavaScript wszystkie trzy opisy i obrazy pozostają dostępne. Obrazy pozostałych paneli są wczytywane, gdy paleta zbliża się do ekranu.
 
 Menu mobilne ujawnia nawigację, Escape je zamyka. Galeria używa natywnego `dialog`, zatrzymuje fokus i przywraca go po zamknięciu. FAQ to natywne `details`. Formularz zachowuje dane podczas cofania; metody i stan nie inicjują transmisji.
 
@@ -26,7 +30,7 @@ Sekcje: jednorazowe wejście 20 px / 620 ms na komputerze oraz 12 px / 460 ms na
 
 Koncepcje: natywne przejście między dokumentami łączy tylko wybrane zdjęcie z okładką projektu, także przy powrocie. Czas 620 ms na komputerze i 420 ms na telefonie. Nazwy przejścia są tymczasowe, obsługiwane w `pageswap` i `pagereveal`, z czyszczeniem dla historii przeglądarki. Pozostaje klasyczna nawigacja wielostronicowa; brak dodatkowego routera i bibliotek.
 
-Mikrointerakcje: menu 180–220 ms z nieaktywnymi ukrytymi odnośnikami, galeria 160–280 ms z ochroną przed spóźnionym wczytaniem zdjęcia, krok formularza 280 ms i pasek postępu 360 ms. Przyciski, strzałki i karty mają ten sam spokojny rytm.
+Mikrointerakcje: zmiana materiału 260 ms, menu 180–220 ms z nieaktywnymi ukrytymi odnośnikami, galeria 160–280 ms z ochroną przed spóźnionym wczytaniem zdjęcia, krok formularza 280 ms i pasek postępu 360 ms. Przyciski, strzałki i karty mają ten sam spokojny rytm.
 
 `prefers-reduced-motion` wyłącza wejścia, przejścia dokumentów i płynne przewijanie. Zmiana preferencji w trakcie anuluje aktywne animacje skryptowe. Brak obsługi natywnych przejść oznacza zwykłą nawigację. Pełna treść pozostaje dostępna bez JavaScript.
 

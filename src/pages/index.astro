@@ -7,7 +7,7 @@ import FAQ from '../components/FAQ.astro';
 import Invitation from '../components/Invitation.astro';
 import { projects, processSteps } from '../data/projects';
 import kitchen from '../assets/kitchen.webp';
-import detail from '../assets/kitchen-detail.webp';
+import MaterialsExplorer from '../components/MaterialsExplorer.astro';
 ---
 
 <Layout
@@ -97,9 +97,12 @@ import detail from '../assets/kitchen-detail.webp';
           Wszystkie koncepcje <Icon />
         </a>
       </div>
-      <div class="projects-grid">
-        {projects.map((project) => (
-          <ProjectCard project={project} />
+      <div class="projects-grid projects-grid-editorial">
+        {projects.map((project, index) => (
+          <ProjectCard
+            project={project}
+            variant={index === 0 ? 'featured' : 'compact'}
+          />
         ))}
       </div>
     </div>
@@ -182,43 +185,7 @@ import detail from '../assets/kitchen-detail.webp';
       </ol>
     </div>
   </section>
-  <section class="materials-section container">
-    <div class="material-visual">
-      <Image
-        src={detail}
-        alt="Detal wizualizacji kuchni: dębowy front, miękki narożnik i jasny kamienny blat."
-        widths={[480, 800, 1000]}
-        sizes="(max-width: 799px) 100vw, 50vw"
-        loading="lazy"
-      />
-    </div>
-    <div class="material-copy">
-      <span class="eyebrow">NATURALNIE, ŻE DETAL</span>
-      <h2>
-        Piękno, które
-        <br />
-        <em>czuć pod palcami.</em>
-      </h2>
-      <p>
-        Rysunek drewna, spokojny mat, miękka krawędź. Materiały nadają
-        przestrzeni charakter — i sprawiają, że chce się w niej zostać.
-      </p>
-      <div class="swatches" aria-label="Paleta koncepcji">
-        <span>
-          <i class="swatch oak"></i>Naturalny dąb
-        </span>
-        <span>
-          <i class="swatch stone"></i>Ciepły kamień
-        </span>
-        <span>
-          <i class="swatch green"></i>Głęboka zieleń
-        </span>
-      </div>
-      <a class="text-link" href="/pracownia#materialy">
-        O podejściu do materiałów <Icon />
-      </a>
-    </div>
-  </section>
+  <MaterialsExplorer />
   <FAQ />
   <Invitation />
 </Layout>

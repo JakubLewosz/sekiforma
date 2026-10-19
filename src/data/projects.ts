@@ -1,9 +1,12 @@
 import kitchen from '../assets/kitchen.webp';
 import kitchenDetail from '../assets/kitchen-detail.webp';
+import kitchenAngle from '../assets/kitchen-angle.webp';
 import wardrobe from '../assets/wardrobe.webp';
 import wardrobeDetail from '../assets/wardrobe-detail.webp';
+import wardrobeAngle from '../assets/wardrobe-angle.webp';
 import living from '../assets/living.webp';
 import livingDetail from '../assets/living-detail.webp';
+import livingAngle from '../assets/living-angle.webp';
 export const projects = [
   {
     slug: 'jasna-kuchnia',
@@ -14,6 +17,9 @@ export const projects = [
     type: 'kuchnia',
     image: kitchen,
     detail: kitchenDetail,
+    alternate: kitchenAngle,
+    alternateAlt:
+      'Drugie ujęcie koncepcji kuchni: kamienny blat, ceramiczna misa i zaokrąglony dębowy front wyspy.',
     alt: 'Wizualizacja jasnej kuchni: dębowa wyspa z kamiennym blatem i zabudowa przy dużym oknie.',
     detailAlt:
       'Wycinek wizualizacji kuchni: zaokrąglony narożnik dębowej wyspy i jasny blat.',
@@ -34,6 +40,9 @@ export const projects = [
     type: 'garderoba',
     image: wardrobe,
     detail: wardrobeDetail,
+    alternate: wardrobeAngle,
+    alternateAlt:
+      'Drugie ujęcie garderoby pod kątem: trzy otwarte moduły i trzy dębowe szuflady we wnęce.',
     alt: 'Wizualizacja dębowej garderoby we wnęce z szufladami, półkami i podświetlanymi drążkami.',
     detailAlt:
       'Wycinek wizualizacji garderoby: podział półek, drążków i dębowych szuflad.',
@@ -58,6 +67,9 @@ export const projects = [
     type: 'salon',
     image: living,
     detail: livingDetail,
+    alternate: livingAngle,
+    alternateAlt:
+      'Drugie ujęcie salonu: oliwkowy fotel na pierwszym planie, dębowy regał i stolik w tle.',
     alt: 'Wizualizacja salonu: dębowy regał na całą ścianę, dolne szafki i zielony fotel.',
     detailAlt:
       'Wycinek wizualizacji salonu: dębowe półki z ceramiką i książkami.',

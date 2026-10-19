@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { SubmitEvent } from 'react';
 const types = [
   ['kuchnia', 'Kuchnia'],
@@ -32,19 +32,25 @@ export default function BriefForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const region = useRef<HTMLDivElement>(null);
   const firstRender = useRef(true);
+  const invalidField = useRef<string | null>(null);
   useEffect(() => {
     const value = new URLSearchParams(window.location.search).get('typ');
     if (types.some(([key]) => key === value))
       setData((prev) => ({ ...prev, type: value! }));
     setReady(true);
   }, []);
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;
       return;
     }
     region.current?.focus();
   }, [step]);
+  useLayoutEffect(() => {
+    if (!invalidField.current) return;
+    document.getElementById(invalidField.current)?.focus();
+    invalidField.current = null;
+  }, [errors]);
   function change(key: keyof Brief, value: string) {
     setData((prev) => ({ ...prev, [key]: value }));
     setErrors((prev) => {
@@ -67,12 +73,10 @@ export default function BriefForm() {
         nextErrors.email =
           'Wpisz poprawny przykładowy e-mail, np. anna@example.com.';
     }
-    setErrors(nextErrors);
     const keys = Object.keys(nextErrors);
-    if (keys.length) {
-      requestAnimationFrame(() => document.getElementById(keys[0])?.focus());
-      return;
-    }
+    invalidField.current = keys[0] ?? null;
+    setErrors(nextErrors);
+    if (keys.length) return;
     setStep((value) => value + 1);
   }
   const summary = (contact = false) => (

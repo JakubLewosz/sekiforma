@@ -151,7 +151,15 @@ test('galeria: klawiatura, zmiana zdjęcia, fokus i Escape', async ({
   await expect(page.getByRole('dialog')).toBeVisible();
   await expect(page.getByRole('button', { name: 'Zamknij' })).toBeFocused();
   await page.keyboard.press('ArrowRight');
+  await expect(page.locator('.lightbox-caption')).toContainText(
+    'Drugie ujęcie',
+  );
+  await expect(page.locator('.lightbox-count')).toHaveText('2 / 3');
+  await page.keyboard.press('ArrowRight');
   await expect(page.locator('.lightbox-caption')).toContainText('wycinek');
+  await expect(page.locator('.lightbox-count')).toHaveText('3 / 3');
+  await page.keyboard.press('ArrowRight');
+  await expect(page.locator('.lightbox-count')).toHaveText('1 / 3');
   await page.keyboard.press('Tab');
   await page.keyboard.press('Tab');
   await page.keyboard.press('Tab');
@@ -289,6 +297,15 @@ test('statyczna treść bez JavaScript, 404, powiększenie tekstu i ograniczenie
   await expect(staticPage.getByRole('heading', { level: 1 })).toContainText(
     'Meble, które',
   );
+  await expect(staticPage.locator('.material-controls')).not.toBeVisible();
+  for (const title of [
+    'Drewno, które nadaje ton.',
+    'Światło zatrzymane w detalu.',
+    'Odrobina koloru. Więcej głębi.',
+  ])
+    await expect(
+      staticPage.getByRole('heading', { name: title }),
+    ).toBeVisible();
   await staticPage.goto('http://127.0.0.1:4322/projekty/jasna-kuchnia');
   await expect(
     staticPage.getByRole('link', { name: 'Zacznij podobny brief' }),

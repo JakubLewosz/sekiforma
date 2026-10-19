@@ -4,15 +4,18 @@ Przygotowano 19 października 2026. Żadne zdjęcia referencyjnych pracowni nie 
 
 ## Wnętrza
 
-Wbudowany ImageGen wygenerował trzy samodzielne obrazy bazowe 1536 × 1024 px, w jednakowej stylistyce naturalnego dębu, jasnych mineralnych powierzchni i ciepłego światła. Użyto trybu narzędzia, bez API ani CLI. Pełne prompty: [assets/PROMPTS.json](assets/PROMPTS.json).
+Wbudowany ImageGen wygenerował sześć obrazów bazowych 1536 × 1024 px: trzy pierwotne wnętrza i trzy dodatkowe ujęcia. Drugą serię przygotowano na podstawie pierwszych obrazów jako referencji, zachowując charakter zabudowy, paletę i kierunek światła. Użyto wbudowanego narzędzia, bez API ani CLI. Pełne prompty: [pierwsza seria](assets/PROMPTS.json) i [drugie ujęcia](assets/SECOND-VIEWS-PROMPTS.json).
 
-| Pliki bazowe w `docs/assets` | Warianty używane przez stronę                                 | Zastosowanie                    |
-| ---------------------------- | ------------------------------------------------------------- | ------------------------------- |
-| `kitchen-original.png`       | `src/assets/kitchen.webp`, `src/assets/kitchen-detail.webp`   | Hero, kuchnia, materiał i detal |
-| `wardrobe-original.png`      | `src/assets/wardrobe.webp`, `src/assets/wardrobe-detail.webp` | Garderoba, detal, kontakt       |
-| `living-original.png`        | `src/assets/living.webp`, `src/assets/living-detail.webp`     | Salon, pracownia, detal         |
+| Pliki bazowe w `docs/assets`  | Warianty używane przez stronę                                 | Zastosowanie                           |
+| ----------------------------- | ------------------------------------------------------------- | -------------------------------------- |
+| `kitchen-original.png`        | `src/assets/kitchen.webp`, `src/assets/kitchen-detail.webp`   | Hero, kuchnia, dąb i detal             |
+| `wardrobe-original.png`       | `src/assets/wardrobe.webp`, `src/assets/wardrobe-detail.webp` | Garderoba, detal, kontakt              |
+| `living-original.png`         | `src/assets/living.webp`, `src/assets/living-detail.webp`     | Salon, pracownia, detal                |
+| `kitchen-angle-original.png`  | `src/assets/kitchen-angle.webp`                               | Drugie ujęcie kuchni i jasny kamień    |
+| `wardrobe-angle-original.png` | `src/assets/wardrobe-angle.webp`                              | Drugie ujęcie garderoby                |
+| `living-angle-original.png`   | `src/assets/living-angle.webp`                                | Drugie ujęcie salonu i zgaszona zieleń |
 
-Pliki źródłowe skopiowano do repozytorium. WebP i wycinki tworzy `node scripts/prepare-assets.mjs` przy użyciu Sharp. Nie zmieniano zawartości wnętrz: detale są kadrami tych samych obrazów, jawnie opisanymi w galerii. Zachowano trzy obrazy i trzy wycinki zamiast mnożyć niespójne ujęcia. Astro dodatkowo tworzy responsywne rozmiary podczas buildu. `public/og-image.jpg` jest kadrem kuchni z autorskim podpisem marki.
+Wszystkie sześć źródeł skopiowano do repozytorium. WebP i trzy wycinki tworzy `node scripts/prepare-assets.mjs` przy użyciu Sharp. Każda galeria pokazuje całość koncepcji, nowe ujęcie oraz jawnie opisany wycinek pierwszej wizualizacji. Drugie ujęcia są odrębnymi generacjami AI; nie stanowią dowodu dokładnej zgodności geometrii między widokami. Astro dodatkowo tworzy responsywne rozmiary podczas buildu. `public/og-image.jpg` jest kadrem kuchni z autorskim podpisem marki.
 
 Obrazy przeznaczono do demonstracji fikcyjnych koncepcji w tym projekcie i jego portfolio. Nie są dokumentacją realizacji, projektem wykonawczym ani dowodem pracy z rzeczywistymi klientami. Nie deklarujemy ich wyłączności ani autentyczności fotograficznej. Na stronie widnieją oznaczenia AI i demonstracji.
 

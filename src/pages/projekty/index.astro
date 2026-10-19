@@ -28,9 +28,12 @@ import { projects } from '../../data/projects';
       To koncepcje demonstracyjne, a nie wykonane zlecenia. Wizualizacje
       powstały z pomocą AI na potrzeby tego projektu portfolio.
     </div>
-    <div class="projects-grid">
-      {projects.map((project) => (
-        <ProjectCard project={project} />
+    <div class="projects-grid projects-grid-catalog">
+      {projects.map((project, index) => (
+        <ProjectCard
+          project={project}
+          variant={index === 0 ? 'featured' : 'standard'}
+        />
       ))}
     </div>
   </section>

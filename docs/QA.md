@@ -10,14 +10,14 @@ macOS arm64, Node 24.11.0, npm 11.6.1, Astro 7.4.0, lokalny Google Chrome 154 w 
 
 - `npm run build`: poprawny statyczny build, 8 adresów treściowych oraz 404, razem 9 stron.
 - `npm run check`: bez błędów i ostrzeżeń.
-- `npm test`: **16 testów przeszło**. Pełny zapis: [qa-tests.json](qa-tests.json).
+- `npm test`: **20 testów przeszło**. Pełny zapis: [qa-tests.json](qa-tests.json).
 
 ## Testy przeglądarkowe
 
 1. Formularz: brak wyboru rodzaju i etapu wywołuje przypisany błąd. Wybór „Jeszcze nie wiem” działa. Cofanie zachowuje etap, opis, termin, imię i e-mail. Błędny adres wymaga poprawki, `anna@example.com` jest akceptowany. Fokus trafia do błędnego pola. Podsumowanie odpowiada wszystkim wpisanym danym. Odświeżenie usuwa stan.
 2. Kontrola sieci w ścieżce formularza: po załadowaniu zasobów nie powstają żadne nowe żądania podczas wypełniania, walidacji i podsumowania; brak wysyłania treści formularza. localStorage i sessionStorage pozostają puste. Kod formularza nie używa fetch, XHR ani sendBeacon; metoda `dialog` dodatkowo blokuje zwykłą transmisję formularza.
 3. Wszystkie trzy koncepcje poprawnie ustawiają rodzaj briefu.
-4. Galeria: otwarcie Enterem, fokus na zamknięciu, zmiana zdjęć strzałkami, pętla Tab, Escape i powrót fokusu do pierwotnego zdjęcia.
+4. Galeria: po trzy widoki każdej koncepcji, otwarcie Enterem, fokus na zamknięciu, zmiana zdjęć strzałkami, pętla Tab, Escape i powrót fokusu do pierwotnego zdjęcia. Szybkie zmiany nie podmieniają aktywnego obrazu spóźnioną odpowiedzią. Dialog jest wyśrodkowany i mieści się w dostępnym obszarze ekranu.
 5. Mobilne menu i FAQ działają klawiaturą. Escape zamyka menu i przywraca fokus.
 6. Każdy z ośmiu adresów sprawdzono przy **320, 390, 768 i 1440 px**: brak poziomego przewijania, pojedynczy H1, metadane, wczytanie obrazów, działające lokalne linki i brak wyjątków JavaScript.
 7. Pełną ścieżkę formularza przeprowadzono także przy **320 px samą klawiaturą**, łącznie z podsumowaniem i resetem.
@@ -29,13 +29,16 @@ macOS arm64, Node 24.11.0, npm 11.6.1, Astro 7.4.0, lokalny Google Chrome 154 w 
 12. Natywne przejście wybranego zdjęcia z karty do okładki koncepcji i po powrocie sprawdzono przy 390 i 1440 px. Przeglądarka faktycznie utworzyła wspólną grupę obrazu z czasem 420 lub 620 ms.
 13. Po wyłączeniu natywnych przejść w CSS nawigacja, otwarcie galerii i jej zamknięcie nadal działają. To symulacja braku efektu w Chrome, bez deklaracji sprawdzenia innych silników.
 
-W czasie kontroli poprawiono kontrast numerów usług i etapów, łamanie tekstu przy powiększeniu oraz zawijanie fokusu w galerii oraz dostępność pól dopiero po uruchomieniu interakcji, aby wybór przed hydratacją nie został utracony.
+14. Paleta materiałów: wskaźnik i klawiatura (strzałki, Home, End, Enter, Spacja, Tab), właściwy obraz, opis i odnośnik, jeden aktywny panel. Wszystkie trzy wybory sprawdzono przy 320 i 1440 px, także przy ograniczonym ruchu i powiększonym tekście. W zwykłym widoku zmiana materiału nie przesuwa kolejnej treści; brak poziomego przewijania.
+15. Każdy panel palety przeszedł skan axe WCAG A/AA. Bez JavaScript wszystkie trzy opisy pozostają widoczne, a nieaktywne kontrolki są ukryte.
+
+W czasie kontroli poprawiono kontrast numerów usług i etapów, łamanie tekstu przy powiększeniu oraz zawijanie fokusu w galerii oraz dostępność pól dopiero po uruchomieniu interakcji, aby wybór przed hydratacją nie został utracony. Końcowa regresja wykryła wyścig opóźnionego fokusu błędu z szybkim wypełnianiem pól; fokus przenosi się teraz po aktualizacji DOM w efekcie układu, bez opóźnionego requestAnimationFrame.
 
 ## Ocena wizualna
 
-Obejrzano zrzuty strony głównej na komputerze i telefonie, szczegóły kuchni, formularz na telefonie i podsumowanie na komputerze. Sprawdzono hierarchię, kadry, widoczność oznaczeń demo, rytm sekcji i stopkę. Dopracowano rozmiary opisów oraz układ stopki mobilnej. Obejrzano też pełną stronę główną z wczytanym detalem materiału.
+Obejrzano zrzuty strony głównej na komputerze i telefonie, szczegóły kuchni, formularz na telefonie i podsumowanie na komputerze. Sprawdzono hierarchię, kadry, widoczność oznaczeń demo, rytm sekcji i stopkę. Dopracowano rozmiary opisów oraz układ stopki mobilnej. Obejrzano też pełną stronę główną z wczytanym detalem materiału, nowy katalog na komputerze i telefonie, trzy warianty palety oraz dodatkowe ujęcie w powiększeniu. Poprawiono szerokość zakładek przy powiększeniu tekstu, stałą wysokość opisów na małym ekranie oraz położenie dialogu galerii.
 
-[Zrzuty ekranu](screenshots/) są rzeczywistymi obrazami strony. Pełne zrzuty pokazują ustalony układ przy ograniczonym ruchu, aby uniknąć uchwycenia połowy wejścia sekcji; osobne kadry przejść i nagrania zachowują animacje. [Nagranie](video/przejscie-przez-strone.webm) pokazuje przejście od strony głównej przez kuchnię do podsumowania briefu. Dodatkowe nagrania prezentują animacje na [komputerze](video/animacje-desktop.webm) i [telefonie](video/animacje-mobile.webm). Obejrzano również kadry w trakcie natywnego przejścia przy obu szerokościach. Scenariusz można odtworzyć przez `npm run qa:capture` przy działającym preview na porcie 4322.
+[Zrzuty ekranu](screenshots/) są rzeczywistymi obrazami strony. Pełne zrzuty pokazują ustalony układ przy ograniczonym ruchu, aby uniknąć uchwycenia połowy wejścia sekcji; osobne kadry przejść i nagrania zachowują animacje. [Nagranie](video/przejscie-przez-strone.webm) pokazuje przejście od strony głównej przez kuchnię do podsumowania briefu. Dodatkowe nagrania prezentują animacje na [komputerze](video/animacje-desktop.webm) i [telefonie](video/animacje-mobile.webm). Obejrzano również kadry w trakcie natywnego przejścia przy obu szerokościach. Paletę i dodatkowe ujęcia dokumentują nagrania na [komputerze](video/materialy-i-ujecia-desktop.webm) i [telefonie](video/materialy-i-ujecia-mobile.webm). Przejrzano próbne kadry z obu nagrań. Scenariusze można odtworzyć przez `npm run qa:capture`, `node scripts/capture-motion.mjs` i `node scripts/capture-materials.mjs` przy działającym preview na porcie 4322.
 
 ## Kontrast
 
@@ -50,14 +53,14 @@ Obliczone współczynniki dla głównych par sRGB:
 
 ## Lighthouse mobile
 
-Końcowy pomiar po dodaniu animacji: 19 października 2026 około 10:10 czasu Europe/Warsaw, Lighthouse **13.5.0**, Chrome **154**, lokalny build na `127.0.0.1:4322`. Domyślny mobilny profil symulacji: RTT 150 ms, przepustowość 1638,4 Kbps, spowolnienie CPU ×4, `throttlingMethod: simulate`. Brak ostrzeżeń w obu raportach. Tabela przedstawia ostatni zapisany pomiar każdej strony.
+Końcowy pomiar po dodaniu animacji, palety i dodatkowych obrazów: 19 października 2026 około 10:40 czasu Europe/Warsaw, Lighthouse **13.5.0**, Chrome **154**, lokalny build na `127.0.0.1:4322`. Domyślny mobilny profil symulacji: RTT 150 ms, przepustowość 1638,4 Kbps, spowolnienie CPU ×4, `throttlingMethod: simulate`. Brak ostrzeżeń w obu raportach. Tabela przedstawia ostatni zapisany pomiar każdej strony.
 
 | Strona                         | Performance | Accessibility | Best Practices | SEO |   LCP |  TBT |   CLS |
 | ------------------------------ | ----------: | ------------: | -------------: | --: | ----: | ---: | ----: |
-| `/`                            |     **100** |           100 |            100 |  66 | 1,7 s | 0 ms |     0 |
-| `/projekty/garderoba-we-wnece` |     **100** |           100 |            100 |  66 | 1,7 s | 0 ms | 0,001 |
+| `/`                            |     **100** |           100 |            100 |  66 | 1,1 s | 0 ms |     0 |
+| `/projekty/garderoba-we-wnece` |     **100** |           100 |            100 |  66 | 1,4 s | 0 ms | 0,001 |
 
-Najcięższą podstronę wybrano przed etapem animacji, porównując zakodowane zasoby wszystkich koncepcji przy 412 × 823 px, DPR 1,75, z wczytaniem wszystkich zdjęć i osobnym kontekstem bez cache. Garderoba: 348 710 B; salon: 338 932 B; kuchnia: 327 460 B. Szczegóły: [page-weights.json](audits/page-weights.json).
+Najcięższą podstronę wybrano ponownie po dodaniu ujęć, porównując zakodowany dokument i zasoby wszystkich koncepcji przy 412 × 823 px, DPR 1,75, z wczytaniem wszystkich zdjęć osadzonych w stronie i osobnym kontekstem bez cache. Garderoba: 420 169 B; salon: 415 592 B; kuchnia: 392 167 B. Pełne obrazy powiększenia są wczytywane dopiero po otwarciu galerii i nie wchodzą do tej sumy. Szczegóły: [page-weights.json](audits/page-weights.json), odtworzenie: `node scripts/measure-page-weights.mjs`.
 
 - [Strona główna — raport HTML](audits/home.html), [JSON](audits/home.json).
 - [Garderoba — raport HTML](audits/wardrobe.html), [JSON](audits/wardrobe.json).

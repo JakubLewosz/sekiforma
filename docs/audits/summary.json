@@ -1,7 +1,7 @@
 [
   {
     "path": "/",
-    "date": "2026-10-19T08:10:28.545Z",
+    "date": "2026-10-19T08:40:25.789Z",
     "lighthouse": "13.5.0",
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
     "formFactor": "mobile",
@@ -21,9 +21,9 @@
       "seo": 66
     },
     "metrics": {
-      "first-contentful-paint": "1.2 s",
-      "largest-contentful-paint": "1.7 s",
-      "speed-index": "1.2 s",
+      "first-contentful-paint": "0.8 s",
+      "largest-contentful-paint": "1.1 s",
+      "speed-index": "0.8 s",
       "total-blocking-time": "0 ms",
       "cumulative-layout-shift": "0"
     },
@@ -31,7 +31,7 @@
   },
   {
     "path": "/projekty/garderoba-we-wnece",
-    "date": "2026-10-19T08:10:34.373Z",
+    "date": "2026-10-19T08:40:31.756Z",
     "lighthouse": "13.5.0",
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
     "formFactor": "mobile",
@@ -51,9 +51,9 @@
       "seo": 66
     },
     "metrics": {
-      "first-contentful-paint": "1.2 s",
-      "largest-contentful-paint": "1.7 s",
-      "speed-index": "1.2 s",
+      "first-contentful-paint": "1.1 s",
+      "largest-contentful-paint": "1.4 s",
+      "speed-index": "1.1 s",
       "total-blocking-time": "0 ms",
       "cumulative-layout-shift": "0.001"
     },

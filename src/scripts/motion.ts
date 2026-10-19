@@ -23,8 +23,8 @@ for (const selector of groups) {
 const selectors = [
   '.section-heading',
   '.offer-grid > div:first-child',
-  '.material-visual',
-  '.material-copy',
+  '.material-controls',
+  '.material-panels',
   '.faq-grid > div',
   '.invitation-inner > div',
   '.service-block > div',

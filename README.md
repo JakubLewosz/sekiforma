@@ -29,7 +29,9 @@ Testy wykorzystują lokalny Google Chrome w standardowej lokalizacji macOS. Na i
 ## Co działa
 
 - Osiem adresów treściowych: strona główna, oferta, koncepcje, trzy szczegóły, pracownia i kontakt; dodatkowo własne 404.
-- Trzy spójne koncepcje z opisami założeń, materiałów i decyzji.
+- Trzy spójne koncepcje z opisami założeń, materiałów i decyzji. Każda ma dwa ujęcia AI i jeden opisany wycinek.
+- Zróżnicowany układ strony głównej i katalogu, większa prezentacja pierwszej koncepcji i galerie z trzema obrazami.
+- Interaktywna paleta dębu, kamienia i zieleni: zmiana obrazu, opisu i odnośnika, obsługa klawiaturą oraz pełna treść bez JavaScript.
 - Animowane wejście nagłówka, jednorazowe pojawianie sekcji oraz natywne przejście zdjęcia z karty do koncepcji i z powrotem. Krótszy ruch na telefonie oraz obsługa `prefers-reduced-motion`, także podczas trwania efektu.
 - Galeria obsługiwana klawiaturą, Escape i przywracanie fokusu; FAQ; mobilne menu.
 - Trzy kroki briefu: rodzaj projektu → etap i potrzeba → przykładowe dane. Walidacja, cofanie z zachowaniem danych, podsumowanie rzeczywistych odpowiedzi oraz reset.
@@ -51,7 +53,8 @@ Nie ma CMS, edytora dla klienta, rzeczywistej obsługi zapytań ani publicznego 
 Astro 7.4.0, React 19.3.1, Tailwind CSS 4.3.3, TypeScript 6.0.3. Dokładne wersje i zależności są w `package-lock.json`. Główna treść jest statycznym HTML; React jest dołączany tylko na stronie formularza. Przejścia między dokumentami korzystają z natywnego View Transitions API. W przeglądarkach bez tej funkcji działają zwykłe odnośniki. Nie dodano routera SPA ani biblioteki animacji.
 
 ```text
-src/data/projects.ts        koncepcje, proces, FAQ
+src/data/projects.ts       koncepcje, proces, FAQ
+src/data/materials.ts      paleta materiałów
 src/pages/                 osiem adresów i 404
 src/layouts/Layout.astro   wspólny dokument i metadane
 src/components/            nawigacja, galeria, brief, bloki
@@ -60,6 +63,7 @@ src/assets/                lokalne WebP i detale
 public/                    ikona, robots, Open Graph
 src/scripts/motion.ts      pojawianie sekcji i preferencje ruchu
 src/styles/motion.css      spójny system animacji
+src/styles/editorial.css   układy katalogowe i paleta
 scripts/                   przygotowanie obrazów, zrzuty, audyt
 ```
 
@@ -75,9 +79,11 @@ node scripts/prepare-assets.mjs
 npm run qa:capture   # wymaga działającego preview na 4322
 npm run qa:audit     # wymaga preview na 4322 i lokalnego Chrome
 node scripts/capture-motion.mjs # nagrania animacji desktop i mobile
+node scripts/capture-materials.mjs # paleta i drugie ujęcia
+node scripts/measure-page-weights.mjs # rozmiary stron koncepcji
 ```
 
-Nagrania nowego systemu ruchu: [desktop](docs/video/animacje-desktop.webm) i [mobile](docs/video/animacje-mobile.webm).
+Nagrania systemu ruchu: [desktop](docs/video/animacje-desktop.webm) i [mobile](docs/video/animacje-mobile.webm). Paleta i dodatkowe ujęcia: [desktop](docs/video/materialy-i-ujecia-desktop.webm) i [mobile](docs/video/materialy-i-ujecia-mobile.webm).
 
 Dokumentacja:
 

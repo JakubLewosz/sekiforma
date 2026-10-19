@@ -20,7 +20,7 @@ const pictures = await Promise.all(
 );
 ---
 
-<div class="gallery">
+<div class:list={['gallery', { 'gallery-expanded': pictures.length > 2 }]}>
   {pictures.map((item, index) => (
     <figure>
       <button
@@ -84,7 +84,11 @@ const pictures = await Promise.all(
     const caption = dialog?.querySelector('.lightbox-caption');
     const counter = dialog?.querySelector('.lightbox-count');
     const thumbnail = button.querySelector('img')?.currentSrc;
-    if (image && !dialog?.open && thumbnail) image.src = thumbnail;
+    if (image && !dialog?.open) {
+      image.alt = button.dataset.alt ?? '';
+      if (thumbnail) image.src = thumbnail;
+      else image.removeAttribute('src');
+    }
     if (caption && !dialog?.open)
       caption.textContent = button.dataset.caption ?? '';
     if (counter) counter.textContent = `${active + 1} / ${triggers.length}`;

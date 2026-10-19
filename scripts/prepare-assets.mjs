@@ -4,6 +4,9 @@ await mkdir('src/assets', { recursive: true });
 for (const name of ['kitchen', 'wardrobe', 'living']) {
   const file = `docs/assets/${name}-original.png`;
   await sharp(file).webp({ quality: 87 }).toFile(`src/assets/${name}.webp`);
+  await sharp(`docs/assets/${name}-angle-original.png`)
+    .webp({ quality: 87 })
+    .toFile(`src/assets/${name}-angle.webp`);
   const crop =
     name === 'kitchen'
       ? { left: 360, top: 450, width: 880, height: 574 }

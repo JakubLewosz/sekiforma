@@ -1,25 +1,24 @@
 {
+  "date": "2026-10-19T08:40:21.748Z",
   "viewport": {
     "width": 412,
-    "height": 823,
-    "dpr": 1.75
+    "height": 823
   },
-  "note": "Zakodowane zasoby stron po załadowaniu wszystkich obrazów, osobny kontekst bez cache dla każdej strony; bez obrazu otwieranego dopiero w galerii.",
-  "results": [
+  "deviceScaleFactor": 1.75,
+  "cache": "fresh browser context for every page",
+  "scope": "document and resources after loading all inline images; lightbox full-size assets excluded",
+  "pages": [
     {
-      "slug": "jasna-kuchnia",
-      "bytes": 327460,
-      "images": 180904
+      "path": "/projekty/garderoba-we-wnece",
+      "encodedBodyBytes": 420169
     },
     {
-      "slug": "garderoba-we-wnece",
-      "bytes": 348710,
-      "images": 202154
+      "path": "/projekty/zabudowa-salonu",
+      "encodedBodyBytes": 415592
     },
     {
-      "slug": "zabudowa-salonu",
-      "bytes": 338932,
-      "images": 192376
+      "path": "/projekty/jasna-kuchnia",
+      "encodedBodyBytes": 392167
     }
   ]
 }

@@ -4,11 +4,16 @@ import Icon from './Icon.astro';
 import type { projects } from '../data/projects';
 interface Props {
   project: (typeof projects)[number];
+  variant?: 'standard' | 'featured' | 'compact';
 }
-const { project } = Astro.props;
+const { project, variant = 'standard' } = Astro.props;
+const featured = variant === 'featured';
+const imageSizes = featured
+  ? '(max-width: 799px) 100vw, 55vw'
+  : '(max-width: 799px) 100vw, 44vw';
 ---
 
-<article class="project-card" data-reveal>
+<article class:list={['project-card', `project-card-${variant}`]} data-reveal>
   <a
     href={`/projekty/${project.slug}`}
     class="project-image-link"
@@ -18,8 +23,8 @@ const { project } = Astro.props;
     <Image
       src={project.image}
       alt={project.alt}
-      widths={[400, 640, 900]}
-      sizes="(max-width: 600px) 100vw, (max-width: 900px) 45vw, 32vw"
+      widths={featured ? [480, 800, 1200, 1536] : [400, 640, 1000]}
+      sizes={imageSizes}
       format="webp"
       loading="lazy"
     />
@@ -36,5 +41,6 @@ const { project } = Astro.props;
       <a href={`/projekty/${project.slug}`}>{project.title}</a>
     </h3>
     <p>{project.subtitle}</p>
+    {featured && <p class="project-card-description">{project.intro}</p>}
   </div>
 </article>

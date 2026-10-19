@@ -11,8 +11,12 @@ Publikacja oraz rzeczywista wysyłka danych są poza tą realizacją. Marka i wn
 
 ## Stan końcowy — 19 października 2026
 
-Etapy 1–6 wykonane. Powstał lokalny serwis, komplet treści i wizualizacji, formularz, galeria, dokumentacja, zrzuty i nagranie. Build i typy przechodzą; 16 testów przeszło. Lighthouse mobile po animacjach: 100 dla strony głównej i 100 dla najcięższej koncepcji. Szczegóły w QA.md. Publikacja pozostaje osobnym krokiem.
+Etapy 1–6 wykonane. Powstał lokalny serwis, komplet treści i wizualizacji, formularz, galeria, dokumentacja, zrzuty i nagranie. Build i typy przechodzą; 20 testów przeszło. Lighthouse mobile po pełnym rozszerzeniu: 100 dla strony głównej i 100 dla najcięższej koncepcji. Szczegóły w QA.md. Publikacja pozostaje osobnym krokiem.
 
 ## Etap animacji — wykonany
 
 Dodano wejście trzech linii nagłówka, jednorazowe pojawianie sekcji, natywne przejście zdjęcia między kartą a koncepcją w obie strony oraz mikrointerakcje menu, galerii, przycisków i formularza. Zachowano zwykłą nawigację, treść bez JavaScript i obsługę ograniczonego ruchu. Bez dodatkowych zależności. Przygotowano nowe nagrania desktop/mobile i ponowiono pomiary.
+
+## Rozszerzenie katalogu — wykonane
+
+Dodano interaktywną paletę dębu, jasnego kamienia i zieleni, z obsługą klawiatury, ograniczonego ruchu oraz pełną treścią bez JavaScript. Strona główna, katalog i galerie otrzymały zróżnicowane proporcje zdjęć. Wygenerowano trzy dodatkowe ujęcia z referencjami pierwotnych wizualizacji; każda koncepcja ma teraz dwa ujęcia i jeden opisany wycinek. Zaktualizowano testy, pomiary, zrzuty i nagrania. Wszystkie uzgodnione ulepszenia wizualne są wykonane. Kod jest zapisany w repozytorium GitHub; publiczny hosting pozostaje poza zakresem.

@@ -1,0 +1,166 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import { materials } from '../data/materials';
+---
+
+<section
+  class="materials-studio container"
+  id="materialy"
+  aria-labelledby="materials-title"
+>
+  <div class="section-heading">
+    <div>
+      <span class="eyebrow">NATURALNIE, ŻE DETAL</span>
+      <h2 id="materials-title">
+        Piękno, które
+        <br />
+        <em>czuć pod palcami.</em>
+      </h2>
+    </div>
+    <p class="materials-intro">
+      Rysunek drewna, jasny kamień, spokojny kolor.
+      <br />
+      Zobacz, jak każdy z nich zmienia charakter wnętrza.
+    </p>
+  </div>
+  <div class="material-explorer">
+    <div
+      class="material-controls"
+      role="tablist"
+      aria-label="Paleta materiałów"
+      hidden
+    >
+      {materials.map((material, index) => (
+        <button
+          type="button"
+          role="tab"
+          id={`material-tab-${material.id}`}
+          aria-controls={`material-panel-${material.id}`}
+          aria-selected={index === 0 ? 'true' : 'false'}
+          tabindex={index === 0 ? 0 : -1}
+          data-material={material.id}
+        >
+          <span
+            class:list={['material-swatch', `material-swatch-${material.id}`]}
+            aria-hidden="true"
+          ></span>
+          <span>{material.label}</span>
+          <span class="material-tab-number" aria-hidden="true">
+            0{index + 1}
+          </span>
+        </button>
+      ))}
+    </div>
+    <div class="material-panels">
+      {materials.map((material, index) => (
+        <section
+          id={`material-panel-${material.id}`}
+          class="material-panel"
+          data-material-panel
+          aria-labelledby={`material-heading-${material.id}`}
+        >
+          <figure class="material-panel-visual">
+            <Image
+              src={material.image}
+              alt={material.alt}
+              widths={[400, 640, 1000]}
+              sizes="(max-width: 799px) 100vw, 55vw"
+              loading="lazy"
+            />
+            <figcaption>{material.caption}</figcaption>
+          </figure>
+          <div class="material-panel-copy">
+            <span class="eyebrow">
+              0{index + 1} / {material.tone}
+            </span>
+            <h3 id={`material-heading-${material.id}`}>{material.title}</h3>
+            <p>{material.description}</p>
+            <p class="material-pairing">{material.pairing}</p>
+            <a class="text-link" href={material.href}>
+              {material.link}
+              <Icon name="diagonal" />
+            </a>
+          </div>
+        </section>
+      ))}
+    </div>
+    <p class="materials-note">
+      Paleta koncepcyjna. Rzeczywisty wybór materiału wymaga obejrzenia próbek.
+    </p>
+  </div>
+</section>
+<script>
+  document
+    .querySelectorAll<HTMLElement>('.material-explorer')
+    .forEach((root) => {
+      const controls = root.querySelector<HTMLElement>('.material-controls');
+      const tabs = Array.from(
+        root.querySelectorAll<HTMLButtonElement>('[role="tab"]'),
+      );
+      const panels = Array.from(
+        root.querySelectorAll<HTMLElement>('[data-material-panel]'),
+      );
+      const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let animation: Animation | undefined;
+      function select(index: number, animate = true) {
+        animation?.cancel();
+        tabs.forEach((tab, i) => {
+          tab.setAttribute('aria-selected', String(i === index));
+          tab.tabIndex = i === index ? 0 : -1;
+        });
+        panels.forEach((panel, i) => {
+          panel.hidden = i !== index;
+        });
+        if (animate && !preference.matches)
+          animation = panels[index].animate(
+            [
+              { opacity: 0.4, transform: 'translateY(6px)' },
+              { opacity: 1, transform: 'none' },
+            ],
+            { duration: 260, easing: 'cubic-bezier(.22,1,.36,1)' },
+          );
+      }
+      panels.forEach((panel, index) => {
+        panel.setAttribute('role', 'tabpanel');
+        panel.setAttribute('aria-labelledby', tabs[index].id);
+        panel.tabIndex = 0;
+      });
+      root.classList.add('is-enhanced');
+      select(0, false);
+      if (controls) controls.hidden = false;
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => select(index));
+        tab.addEventListener('keydown', (event) => {
+          const keys: Record<string, number> = {
+            ArrowRight: (index + 1) % tabs.length,
+            ArrowLeft: (index - 1 + tabs.length) % tabs.length,
+            Home: 0,
+            End: tabs.length - 1,
+          };
+          if (!(event.key in keys)) return;
+          event.preventDefault();
+          tabs[keys[event.key]].focus();
+        });
+      });
+      preference.addEventListener('change', () => {
+        if (preference.matches) animation?.cancel();
+      });
+      const preload = () =>
+        root
+          .querySelectorAll<HTMLImageElement>('img')
+          .forEach((image) => (image.loading = 'eager'));
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            if (entries.some((entry) => entry.isIntersecting)) {
+              preload();
+              observer.disconnect();
+            }
+          },
+          { rootMargin: '300px' },
+        );
+        observer.observe(root);
+      } else preload();
+    });
+</script>

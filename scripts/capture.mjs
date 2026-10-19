@@ -22,6 +22,11 @@ async function loaded(page) {
       .every((i) => i.complete && i.naturalWidth > 0),
   );
   await page.evaluate(async () => {
+    await Promise.all(
+      [...document.images]
+        .filter((image) => image.hasAttribute('src'))
+        .map((image) => image.decode().catch(() => {})),
+    );
     await new Promise(requestAnimationFrame);
     await new Promise(requestAnimationFrame);
     await Promise.all(
@@ -38,6 +43,8 @@ for (const [width, height, path, name, fullPage] of [
   [390, 844, '/', 'home-mobile', true],
   [1440, 1000, '/', 'home-desktop-first-screen', false],
   [390, 844, '/', 'home-mobile-first-screen', false],
+  [1440, 1000, '/projekty', 'projects-desktop', true],
+  [390, 844, '/projekty', 'projects-mobile', true],
   [1440, 1000, '/projekty/jasna-kuchnia', 'kitchen-desktop', true],
   [390, 844, '/kontakt?typ=kuchnia', 'brief-mobile', true],
   [1440, 1000, '/pracownia', 'studio-desktop', true],
