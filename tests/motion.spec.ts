@@ -180,3 +180,33 @@ test('nawigacja i galeria działają także bez natywnych przejść', async ({
   await page.getByRole('button', { name: 'Zamknij' }).click();
   await expect(page.getByRole('dialog')).not.toBeVisible();
 });
+
+test('przerwane natywne przejście: zwykła nawigacja bez nieobsłużonej odmowy', async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.addInitScript(() => {
+    window.addEventListener('pagereveal', (event) => {
+      const transition = (
+        event as Event & {
+          viewTransition?: { skipTransition(): void; ready: Promise<void> };
+        }
+      ).viewTransition;
+      transition?.ready.catch(() => {});
+      transition?.skipTransition();
+    });
+  });
+  await page.goto('/');
+  await page
+    .getByRole('link', { name: 'Zobacz koncepcję: Jasna kuchnia' })
+    .click();
+  await expect(page).toHaveURL(/\/projekty\/jasna-kuchnia\/?$/);
+  await page.locator('.gallery-trigger').first().click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog')).toBeHidden();
+  await page.locator('.site-header .logo').click();
+  await expect(page).toHaveURL(/:\d+\/$/);
+  expect(errors).toEqual([]);
+});

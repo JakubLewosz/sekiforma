@@ -1,5 +1,7 @@
 # Sęk i Forma
 
+**[Zobacz demo](https://sek-i-forma-portfolio.frostyclove2.chatgpt.site)** · [Kod na GitHubie](https://github.com/JakubLewosz/sekiforma)
+
 Demonstracyjna strona fikcyjnej pracowni mebli na wymiar. Projekt portfolio Jakuba Lewosza: spokojny katalog wnętrz, dopracowana wersja mobilna i interaktywny brief. Implementacja, teksty oraz kontrola jakości zostały rozwinięte z pomocą Codexa; wizualizacje wnętrz przygotowano w ImageGen.
 
 Repozytorium: [github.com/JakubLewosz/sekiforma](https://github.com/JakubLewosz/sekiforma).
@@ -33,8 +35,8 @@ Testy wykorzystują lokalny Google Chrome w standardowej lokalizacji macOS. Na i
 - Zróżnicowany układ strony głównej i katalogu, większa prezentacja pierwszej koncepcji i galerie z trzema obrazami.
 - Interaktywna paleta dębu, kamienia i zieleni: zmiana obrazu, opisu i odnośnika, obsługa klawiaturą oraz pełna treść bez JavaScript.
 - Animowane wejście nagłówka, płynne odsłanianie zdjęć i rytmiczne wejścia tekstów oraz natywne przejście zdjęcia z karty do koncepcji i z powrotem. Krótszy ruch na telefonie oraz obsługa `prefers-reduced-motion`, także podczas trwania efektu.
-- Galeria obsługiwana klawiaturą, Escape i przywracanie fokusu; FAQ; mobilne menu.
-- Trzy kroki briefu: rodzaj projektu → etap i potrzeba → przykładowe dane. Walidacja, cofanie z zachowaniem danych, podsumowanie rzeczywistych odpowiedzi oraz reset.
+- Galeria obsługiwana klawiaturą, Escape i przywracanie fokusu, także na niskim ekranie; FAQ; mobilne menu z dostępem do odnośników również bez JavaScriptu.
+- Trzy kroki briefu: rodzaj projektu → etap i potrzeba → przykładowe dane. Walidacja, cofanie z zachowaniem danych, podsumowanie rzeczywistych odpowiedzi, dyskretne przejście do autora w sprawie stworzenia strony internetowej oraz reset.
 - Przejścia z koncepcji do formularza ze wskazanym rodzajem projektu.
 - Lokalne fonty z polskimi znakami, responsywne WebP, metadane, favicon i obraz Open Graph.
 
@@ -46,7 +48,7 @@ Formularz **niczego nie wysyła**. Używaj danych przykładowych. Odpowiedzi poz
 
 Realny kontakt do Jakuba jest oddzielony w sekcji „O projekcie / Prawdziwy kontakt”. Email i profil GitHub pochodzą z publicznego README autora.
 
-Nie ma CMS, edytora dla klienta, rzeczywistej obsługi zapytań ani publicznego wdrożenia. Projekt jest kompletną wersją lokalną do przeglądu. Demo domyślnie blokuje indeksowanie (`noindex` i `robots.txt`). Nie generuje fikcyjnych danych LocalBusiness.
+Demo jest opublikowane publicznie w Sites, bez logowania. Nie ma CMS, edytora dla klienta ani rzeczywistej obsługi zapytań meblowych. Demo domyślnie blokuje indeksowanie (`noindex` i `robots.txt`). Nie generuje fikcyjnych danych LocalBusiness.
 
 ## Technologia i układ
 
@@ -69,7 +71,7 @@ scripts/                   przygotowanie obrazów, zrzuty, audyt
 
 ## Sprawdzenia i materiały portfolio
 
-Zakres i rzeczywiste wyniki: [docs/QA.md](docs/QA.md). Zrzuty desktop i mobile są w [docs/screenshots](docs/screenshots), a [krótkie nagranie](docs/video/przejscie-przez-strone.webm) pokazuje przejście od strony głównej do podsumowania briefu.
+Bieżący zakres i rzeczywiste wyniki: [kontrola z 20 października 2026](docs/QA-2026-10-20.md). [Raport z 19 października](docs/QA.md) i jego pomiary Lighthouse są historyczne. Zrzuty desktop i mobile są w [docs/screenshots](docs/screenshots), a [krótkie nagranie](docs/video/przejscie-przez-strone.webm) pokazuje przejście od strony głównej przez podsumowanie briefu do kontaktu z autorem.
 
 Dodatkowe narzędzia:
 
@@ -93,13 +95,22 @@ Dokumentacja:
 - [Zakres](docs/BRIEF.md) i [oryginalny plan](docs/PLAN-ZRODLOWY.txt).
 - [System wizualny i decyzje](docs/DESIGN.md).
 - [Materiały, źródła, licencje i prompty](docs/ASSETS.md).
-- [Wyniki kontroli jakości](docs/QA.md).
+- [Aktualne wyniki kontroli jakości](docs/QA-2026-10-20.md) i [archiwum z 19 października](docs/QA.md).
+- [Publikacja i aktualizacja demo](docs/DEPLOYMENT.md).
 
-## Późniejsza publikacja
+## Publiczne demo i aktualizacja
 
-Gotowy `dist/` można udostępnić na hostingu statycznym, np. Cloudflare Pages. Typowe ustawienia to `npm run build` i katalog wyjściowy `dist`. Konfiguracja domeny i wdrożenia nie została wykonana w tej realizacji.
+Demo działa pod adresem [sek-i-forma-portfolio.frostyclove2.chatgpt.site](https://sek-i-forma-portfolio.frostyclove2.chatgpt.site). Konfigurację statycznego hostingu Sites zapisano w `.openai/hosting.json`. `SITE_URL` wskazuje ten origin; można go nadpisać przy przeniesieniu strony. Pełne adresy canonical i Open Graph są generowane podczas buildu. Celowe `noindex` i oznaczenia demo pozostają aktywne.
 
-Przed publikacją ustaw `SITE_URL` na docelowy adres, aby Open Graph i adresy kanoniczne używały właściwej domeny. Decyzję o indeksowaniu podejmij osobno; zachowanie `noindex` jest celowe dla fikcyjnej firmy. Przed użyciem dla rzeczywistego klienta należy zastąpić treści i obrazy, skonfigurować prawdziwą obsługę zapytań i ustalić utrzymanie.
+Instrukcja: [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md). Pełny projekt i materiały portfolio są na GitHubie; Sites otrzymuje lekki katalog źródeł z informacją o odpowiadającym commicie. Sam push do GitHuba nie uruchamia wdrożenia.
+
+```bash
+node scripts/verify-demo.mjs  # kontrola publicznego serwisu
+npx playwright install webkit
+PW_BROWSER=webkit QA_REPORT=docs/qa-webkit-2026-10-20.json npm test -- tests/portfolio.spec.ts tests/materials.spec.ts tests/site.spec.ts --grep 'nawigacja|paleta|trzy widoki|brief:|galeria:|każda koncepcja|menu mobilne'
+```
+
+Przed użyciem dla rzeczywistego klienta trzeba zastąpić treści i obrazy, ustalić obsługę zapytań i utrzymanie. Bieżące demo nie zbiera zapytań meblowych; kontakt do Jakuba dotyczy tworzenia stron internetowych.
 
 ## Opis do portfolio
 

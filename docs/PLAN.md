@@ -1,4 +1,6 @@
-# Kolejność realizacji
+# Historia realizacji
+
+Poniższy plan i stan z 19 października opisują wcześniejszy zakres. Rozszerzenie portfolio i publikację z 20 października opisano na końcu.
 
 1. Ustalić styl, przygotować spójne wizualizacje koncepcji, lokalne fonty i dane.
 2. Zbudować stronę główną; obejrzeć ją na komputerze i telefonie, poprawić kadry i rytm.
@@ -24,3 +26,7 @@ Dodano interaktywną paletę dębu, jasnego kamienia i zieleni, z obsługą klaw
 ## Płynne animowane wejścia — wykonane
 
 Zdjęcia odsłaniają się z subtelnym oddaleniem kadru, a teksty i etapy wchodzą w delikatnym rytmie. Stan początkowy ustawiany jest poza ekranem; widoczny już element nie jest ukrywany po starcie skryptu. Obrazy są wcześniej wczytywane i dekodowane. Osobna warstwa odpowiada za zoom kart po najechaniu. Testy wymagają rzeczywistych animacji, sprawdzają ich jednokierunkowy przebieg i odporność na opóźniony skrypt oraz dekodowanie. Zachowano ograniczony ruch, klawiaturę i treść bez JavaScript.
+
+## Portfolio i publiczne demo — 20 października 2026
+
+Dodano progresywną mobilną nawigację, przejście z podsumowania briefu do oferty autora oraz poprawki galerii na niskim ekranie i klawiatury WebKit. Przygotowano publiczny hosting Sites bez zakupu domeny. Pełną historię i materiały zachowano na GitHubie; lekki katalog źródeł wdrożenia omija limit przesyłania repozytorium w Sites. Obsłużono odrzucenie natywnego przejścia podczas zwykłej nawigacji i ograniczono wykrywanie klas Tailwind do źródeł aplikacji. Aktualne wyniki i granice weryfikacji: [QA-2026-10-20.md](QA-2026-10-20.md). Formularz pozostaje demonstracyjny.

@@ -5,6 +5,7 @@ import {
   existsSync,
   mkdirSync,
   readFileSync,
+  readdirSync,
   writeFileSync,
 } from 'node:fs';
 import { resolve, relative, join } from 'node:path';
@@ -12,10 +13,27 @@ const root = resolve(import.meta.dirname, '..');
 const target = process.argv[2] && resolve(process.argv[2]);
 if (!target || target === root || !relative(root, target).startsWith('..'))
   throw new Error('Provide a separate directory outside this repository.');
+if (
+  execFileSync('git', ['status', '--porcelain'], {
+    cwd: root,
+    encoding: 'utf8',
+  }).trim()
+)
+  throw new Error(
+    'Commit the source and portfolio changes before creating the snapshot.',
+  );
 const project = JSON.parse(
   readFileSync(join(root, '.openai/hosting.json'), 'utf8'),
 );
 const existing = join(target, '.openai/hosting.json');
+if (
+  existsSync(target) &&
+  !existsSync(existing) &&
+  readdirSync(target).some((name) => name !== '.git')
+)
+  throw new Error(
+    'Use an empty directory or the existing checkout of this Site.',
+  );
 if (
   existsSync(existing) &&
   JSON.parse(readFileSync(existing, 'utf8')).project_id !== project.project_id

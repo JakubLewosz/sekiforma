@@ -67,7 +67,7 @@ try {
       await loaded();
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
         'href',
-        new URL(route, origin).href,
+        new URL(route === '/' ? route : `${route}/`, origin).href,
       );
       await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
         'content',
