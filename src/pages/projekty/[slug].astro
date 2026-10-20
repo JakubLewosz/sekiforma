@@ -23,7 +23,7 @@ const related = projects.filter((p) => p.slug !== project.slug);
     <nav class="breadcrumbs" aria-label="Ścieżka strony">
       <a href="/">Strona główna</a>
       <span aria-hidden="true">/</span>
-      <a href="/projekty">Koncepcje</a>
+      <a href="/projekty/">Koncepcje</a>
       <span aria-hidden="true">/</span>
       <span aria-current="page">{project.title}</span>
     </nav>
@@ -75,7 +75,7 @@ const related = projects.filter((p) => p.slug !== project.slug);
         <h2>{project.subtitle}</h2>
         <a
           class="text-link"
-          href={`/kontakt?typ=${project.type}`}
+          href={`/kontakt/?typ=${project.type}`}
           style="margin-top:26px"
         >
           Zacznij podobny brief <Icon name="diagonal" />
@@ -113,7 +113,7 @@ const related = projects.filter((p) => p.slug !== project.slug);
           <span class="eyebrow">JESZCZE WIĘCEJ PRZESTRZENI</span>
           <h2>Inny punkt widzenia.</h2>
         </div>
-        <a class="text-link" href="/projekty">
+        <a class="text-link" href="/projekty/">
           Wróć do koncepcji <Icon />
         </a>
       </div>

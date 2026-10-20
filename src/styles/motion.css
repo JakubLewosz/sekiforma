@@ -2,10 +2,7 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Native navigation: every page remains an ordinary static document. */
-@view-transition {
-  navigation: auto;
-}
+/* The native navigation opt-in lives in Layout's head, before external CSS. */
 ::view-transition-old(root) {
   animation-duration: 160ms;
 }
@@ -286,9 +283,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  @view-transition {
-    navigation: none;
-  }
   ::view-transition-group(*),
   ::view-transition-old(*),
   ::view-transition-new(*) {

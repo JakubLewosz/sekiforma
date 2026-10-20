@@ -15,7 +15,7 @@ const imageSizes = featured
 
 <article class:list={['project-card', `project-card-${variant}`]}>
   <a
-    href={`/projekty/${project.slug}`}
+    href={`/projekty/${project.slug}/`}
     class="project-image-link"
     data-project-visual={project.slug}
     aria-label={`Zobacz koncepcję: ${project.title}`}
@@ -40,7 +40,7 @@ const imageSizes = featured
       {project.number} / {project.category}
     </span>
     <h3>
-      <a href={`/projekty/${project.slug}`}>{project.title}</a>
+      <a href={`/projekty/${project.slug}/`}>{project.title}</a>
     </h3>
     <p>{project.subtitle}</p>
     {featured && <p class="project-card-description">{project.intro}</p>}

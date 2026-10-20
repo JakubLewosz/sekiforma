@@ -22,6 +22,17 @@ const canonical = Astro.site
 <html lang="pl">
   <head>
     <meta charset="UTF-8" />
+    <style is:inline>
+      /* Native navigation needs its opt-in before external CSS is available. */
+      @view-transition {
+        navigation: auto;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        @view-transition {
+          navigation: none;
+        }
+      }
+    </style>
     <PageTransitions />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />

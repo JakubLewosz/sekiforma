@@ -152,6 +152,13 @@ test('brief: błędy, cofanie, podsumowanie i brak transmisji', async ({
 });
 
 test('każda koncepcja wybiera właściwy typ briefu', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.route('**/_astro/*.css', async (route) => {
+    // Reproduce the hosting race: native opt-in must be known before slow CSS.
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    await route.continue();
+  });
   for (const [slug, label] of [
     ['jasna-kuchnia', 'Kuchnia'],
     ['garderoba-we-wnece', 'Szafa lub garderoba'],
@@ -163,6 +170,7 @@ test('każda koncepcja wybiera właściwy typ briefu', async ({ page }) => {
       page.getByRole('radio', { name: label, exact: true }),
     ).toBeChecked();
   }
+  expect(errors).toEqual([]);
 });
 
 test('galeria: klawiatura, zmiana zdjęcia, fokus i Escape', async ({
@@ -283,8 +291,13 @@ for (const width of [320, 390, 768, 1440])
           links
             .map((link) => link.getAttribute('href') ?? '')
             .filter((h) => h.startsWith('/')),
-        ))
+        )) {
+        expect(
+          new URL(url, 'https://example.test').pathname.endsWith('/'),
+          url,
+        ).toBe(true);
         targets.add(url);
+      }
     }
     for (const target of targets) {
       const response = await request.get(target);

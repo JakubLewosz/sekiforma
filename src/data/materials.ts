@@ -13,7 +13,7 @@ export const materials = [
       'Wyraźny rysunek słojów porządkuje duże płaszczyzny. W tej koncepcji dąb łączy wysokie szafy z wyspą, tworząc spokojną, naturalną całość.',
     pairing:
       'Jasny blat i proste podziały frontów zostawiają miejsce na sam materiał.',
-    href: '/projekty/jasna-kuchnia',
+    href: '/projekty/jasna-kuchnia/',
     link: 'Zobacz dąb w kuchni',
     caption: 'Detal dębowej wyspy · Wycinek wizualizacji AI',
   },
@@ -28,7 +28,7 @@ export const materials = [
       'Ciepła, mineralna powierzchnia rozjaśnia kompozycję. Miękka linia narożnika łączy blat z drewnianym frontem i łagodzi geometrię kuchni.',
     pairing:
       'Drobne różnice tonu najlepiej odkrywa się z bliska, w naturalnym świetle.',
-    href: '/projekty/jasna-kuchnia',
+    href: '/projekty/jasna-kuchnia/',
     link: 'Obejrzyj koncepcję kuchni',
     caption: 'Blat z bliższej perspektywy · Wizualizacja AI',
   },
@@ -43,7 +43,7 @@ export const materials = [
       'Oliwkowy akcent wprowadza do salonu wyraźny, spokojny punkt. Miękka tapicerka kontrastuje z rytmem dębowego regału i jasnym tłem.',
     pairing:
       'Zieleń, drewno i kremowe tkaniny tworzą paletę pokazaną w koncepcji salonu.',
-    href: '/projekty/zabudowa-salonu',
+    href: '/projekty/zabudowa-salonu/',
     link: 'Odkryj paletę salonu',
     caption: 'Kolor i faktura fotela · Wizualizacja AI',
   },

@@ -3,9 +3,9 @@ import Logo from './Logo.astro';
 import Icon from './Icon.astro';
 const pathname = Astro.url.pathname;
 const links = [
-  ['/oferta', 'Oferta'],
-  ['/projekty', 'Koncepcje'],
-  ['/pracownia', 'Pracownia'],
+  ['/oferta/', 'Oferta'],
+  ['/projekty/', 'Koncepcje'],
+  ['/pracownia/', 'Pracownia'],
 ];
 ---
 
@@ -32,7 +32,7 @@ const links = [
       ))}
       <a
         class="nav-cta"
-        href="/kontakt"
+        href="/kontakt/"
         aria-current={pathname.startsWith('/kontakt') ? 'page' : undefined}
       >
         <span>Porozmawiajmy</span> <Icon name="diagonal" />

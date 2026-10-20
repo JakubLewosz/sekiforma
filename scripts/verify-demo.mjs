@@ -17,11 +17,31 @@ const context = await browser.newContext({
   viewport: { width: 390, height: 844 },
 });
 const page = await context.newPage();
+await page.addInitScript(() => {
+  window.nativeTransition = null;
+  addEventListener('pagereveal', (event) => {
+    event.viewTransition?.ready.then(
+      () => {
+        const style = getComputedStyle(
+          document.documentElement,
+          '::view-transition-group(project-image)',
+        );
+        window.nativeTransition = {
+          name: style.animationName,
+          duration: style.animationDuration,
+        };
+      },
+      () => {},
+    );
+  });
+});
 const errors = [],
   failed = [],
   fonts = new Set(),
   links = new Set();
-page.on('pageerror', (error) => errors.push(error.message));
+page.on('pageerror', (error) =>
+  errors.push({ url: page.url(), message: error.message }),
+);
 page.on('response', (response) => {
   if (response.request().resourceType() === 'font') fonts.add(response.url());
   if (
@@ -119,6 +139,13 @@ try {
   await page
     .getByRole('link', { name: 'Zobacz koncepcję: Jasna kuchnia' })
     .click();
+  await expect
+    .poll(() => page.evaluate(() => window.nativeTransition))
+    .toMatchObject({ duration: '0.42s' });
+  assert.notEqual(
+    await page.evaluate(() => window.nativeTransition.name),
+    'none',
+  );
   const opener = page.locator('.gallery-trigger').first();
   await opener.click();
   for (const count of ['1 / 3', '2 / 3', '3 / 3']) {
@@ -141,6 +168,13 @@ try {
   await expect(opener).toBeFocused();
   await page.locator('.site-header .logo').click();
   await expect(page).toHaveURL(`${origin}/`);
+  await expect
+    .poll(() => page.evaluate(() => window.nativeTransition))
+    .toMatchObject({ duration: '0.42s' });
+  assert.notEqual(
+    await page.evaluate(() => window.nativeTransition.name),
+    'none',
+  );
   for (const [slug, name] of [
     ['jasna-kuchnia', 'Kuchnia'],
     ['garderoba-we-wnece', 'Szafa lub garderoba'],
@@ -229,6 +263,7 @@ try {
       'local links',
       'all three materials',
       'home → concept → three gallery images → home',
+      'native shared photograph transition in both directions: 390px, 420ms',
       'all concept brief prefills',
       'brief validation, correction, summary, author anchor, edit and reset',
       'no brief requests apart from favicon refresh; empty web storage',

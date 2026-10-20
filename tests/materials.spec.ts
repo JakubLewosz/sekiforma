@@ -45,9 +45,9 @@ for (const width of [320, 1440])
     const tabs = page.getByRole('tab');
     const positions: number[] = [];
     for (const [index, target] of [
-      '/projekty/jasna-kuchnia',
-      '/projekty/jasna-kuchnia',
-      '/projekty/zabudowa-salonu',
+      '/projekty/jasna-kuchnia/',
+      '/projekty/jasna-kuchnia/',
+      '/projekty/zabudowa-salonu/',
     ].entries()) {
       await tabs.nth(index).click();
       const panel = page.getByRole('tabpanel');

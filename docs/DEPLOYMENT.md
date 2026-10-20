@@ -20,4 +20,4 @@ GitHub `origin` pozostaje repozytorium `JakubLewosz/sekiforma`. Sam `git push` n
 
 Cały serwis jest statyczny: bez backendu, bazy i integracji formularza. Celowe `noindex, nofollow` i `robots.txt` blokują indeksowanie demonstracji fikcyjnej pracowni. Canonical i Open Graph wskazują pełne adresy publicznego hosta. Fonty, obrazy i ikona są lokalne.
 
-Przy ewentualnej migracji wystarczy hosting statyczny obsługujący katalogi `*/index.html` oraz własny `404.html` z kodem HTTP 404. Pliki buduje `npm run build`, katalog wyjściowy to `dist/`, serwis działa w głównym katalogu domeny. Ścieżka `/sekiforma/` wymagałaby dodatkowej konfiguracji `base` i odnośników; nie jest używana w tym wdrożeniu.
+Przy ewentualnej migracji wystarczy hosting statyczny obsługujący katalogi `*/index.html` oraz własny `404.html` z kodem HTTP 404. Pliki buduje `npm run build`, katalog wyjściowy to `dist/`, serwis działa w głównym katalogu domeny. `trailingSlash: always` i odnośniki z końcowym ukośnikiem odpowiadają formatowi `*/index.html` na hostingu. Ścieżka `/sekiforma/` wymagałaby dodatkowej konfiguracji `base` i odnośników; nie jest używana w tym wdrożeniu.

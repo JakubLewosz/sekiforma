@@ -37,10 +37,10 @@ import MaterialsExplorer from '../components/MaterialsExplorer.astro';
         <br class="desktop-only" /> wokół Twojej przestrzeni. Naturalnie.
       </p>
       <div class="hero-actions">
-        <a class="button" href="/kontakt">
+        <a class="button" href="/kontakt/">
           Opowiedz o swoim projekcie <Icon name="diagonal" />
         </a>
-        <a class="text-link" href="/projekty">
+        <a class="text-link" href="/projekty/">
           Zobacz koncepcje <Icon />
         </a>
       </div>
@@ -93,7 +93,7 @@ import MaterialsExplorer from '../components/MaterialsExplorer.astro';
             <em>Ta sama uważność.</em>
           </h2>
         </div>
-        <a class="text-link" href="/projekty">
+        <a class="text-link" href="/projekty/">
           Wszystkie koncepcje <Icon />
         </a>
       </div>
@@ -120,7 +120,7 @@ import MaterialsExplorer from '../components/MaterialsExplorer.astro';
           Od pierwszej kawy po odkładanie ostatniej książki. Każdy mebel ma
           swoją rolę.
         </p>
-        <a class="text-link" href="/oferta">
+        <a class="text-link" href="/oferta/">
           Poznaj zakres pracowni <Icon />
         </a>
       </div>
@@ -145,7 +145,7 @@ import MaterialsExplorer from '../components/MaterialsExplorer.astro';
             'salon',
           ],
         ].map(([n, title, text, type]) => (
-          <a href={`/oferta#${type}`} class="service-row">
+          <a href={`/oferta/#${type}`} class="service-row">
             <span>{n}</span>
             <div>
               <h3>{title}</h3>
