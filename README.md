@@ -100,6 +100,8 @@ Dokumentacja:
 
 ## Publiczne demo i aktualizacja
 
+Publiczną wersję sprawdzono na 8 podstronach i ich odświeżeniach, z formularzem, galerią, paletą, zasobami i własnym 404. [Rzeczywisty wynik kontroli](docs/qa-public-2026-10-20.json).
+
 Demo działa pod adresem [sek-i-forma-portfolio.frostyclove2.chatgpt.site](https://sek-i-forma-portfolio.frostyclove2.chatgpt.site). Konfigurację statycznego hostingu Sites zapisano w `.openai/hosting.json`. `SITE_URL` wskazuje ten origin; można go nadpisać przy przeniesieniu strony. Pełne adresy canonical i Open Graph są generowane podczas buildu. Celowe `noindex` i oznaczenia demo pozostają aktywne.
 
 Instrukcja: [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md). Pełny projekt i materiały portfolio są na GitHubie; Sites otrzymuje lekki katalog źródeł z informacją o odpowiadającym commicie. Sam push do GitHuba nie uruchamia wdrożenia.

@@ -1,0 +1,12 @@
+{
+  "githubCommit": "c2c11101f7221b626409f4280f3b1aad5d4b4ef6",
+  "siteSource": "989dcddfc40d5e11cfcd89863319605851f29864",
+  "version": "appgprj_6ad71ae3e6048191b88761f375a3ba20~appgver_0957dfc3145c8191b7b627c849ac56ce",
+  "deployment": "appgdep_6ad724c03dd88191a0137a5c4aaacd81",
+  "at": "2026-10-20T08:22:40.538059+00:00",
+  "url": "https://sek-i-forma-portfolio.frostyclove2.chatgpt.site",
+  "project_id": "appgprj_6ad71ae3e6048191b88761f375a3ba20",
+  "version_number": 3,
+  "archive_hash": "sha256:8ee095890ad20af81476b78714dd8a4af7121d294bd8825afa9f27e6d5b322d3",
+  "verification": "docs/qa-public-2026-10-20.json"
+}

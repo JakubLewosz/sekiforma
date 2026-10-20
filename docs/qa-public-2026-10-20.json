@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-20T08:23:04.677Z",
+  "origin": "https://sek-i-forma-portfolio.frostyclove2.chatgpt.site",
+  "browser": "155.0.8059.85",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "routes": [
+    {
+      "route": "/",
+      "direct": 200,
+      "reload": 200
+    },
+    {
+      "route": "/oferta",
+      "direct": 200,
+      "reload": 200
+    },
+    {
+      "route": "/projekty",
+      "direct": 200,
+      "reload": 200
+    },
+    {
+      "route": "/projekty/jasna-kuchnia",
+      "direct": 200,
+      "reload": 200
+    },
+    {
+      "route": "/projekty/garderoba-we-wnece",
+      "direct": 200,
+      "reload": 200
+    },
+    {
+      "route": "/projekty/zabudowa-salonu",
+      "direct": 200,
+      "reload": 200
+    },
+    {
+      "route": "/pracownia",
+      "direct": 200,
+      "reload": 200
+    },
+    {
+      "route": "/kontakt",
+      "direct": 200,
+      "reload": 200
+    }
+  ],
+  "localLinks": 15,
+  "fonts": [
+    "https://sek-i-forma-portfolio.frostyclove2.chatgpt.site/_astro/dm-serif-display-latin-ext-400-normal.p18AlW_x.woff2",
+    "https://sek-i-forma-portfolio.frostyclove2.chatgpt.site/_astro/manrope-latin-ext-400-normal.CMDvPJRp.woff2",
+    "https://sek-i-forma-portfolio.frostyclove2.chatgpt.site/_astro/dm-serif-display-latin-ext-400-italic.DiLdooSn.woff2",
+    "https://sek-i-forma-portfolio.frostyclove2.chatgpt.site/_astro/manrope-latin-ext-500-normal.dm74KBQw.woff2",
+    "https://sek-i-forma-portfolio.frostyclove2.chatgpt.site/_astro/manrope-latin-ext-600-normal._gBojHdJ.woff2",
+    "https://sek-i-forma-portfolio.frostyclove2.chatgpt.site/_astro/dm-serif-display-latin-400-normal.C5_t9oOD.woff2",
+    "https://sek-i-forma-portfolio.frostyclove2.chatgpt.site/_astro/manrope-latin-600-normal.4f0koTD-.woff2",
+    "https://sek-i-forma-portfolio.frostyclove2.chatgpt.site/_astro/manrope-latin-500-normal.BYYD-dBL.woff2",
+    "https://sek-i-forma-portfolio.frostyclove2.chatgpt.site/_astro/manrope-latin-400-normal.PaqtzbVb.woff2",
+    "https://sek-i-forma-portfolio.frostyclove2.chatgpt.site/_astro/dm-serif-display-latin-400-italic.DpcbibHm.woff2"
+  ],
+  "checks": [
+    "all direct routes and reloads",
+    "all embedded images and local fonts",
+    "canonical, OG, favicon, noindex and robots",
+    "local links",
+    "all three materials",
+    "home → concept → three gallery images → home",
+    "native shared photograph transition in both directions: 390px, 420ms",
+    "all concept brief prefills",
+    "brief validation, correction, summary, author anchor, edit and reset",
+    "no brief requests apart from favicon refresh; empty web storage",
+    "custom HTTP 404; author mailto and GitHub href"
+  ],
+  "javascriptErrors": [],
+  "failedResponses": [],
+  "result": "passed"
+}
