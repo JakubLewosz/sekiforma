@@ -237,7 +237,7 @@
   ::view-transition-new(project-image) {
     animation-duration: 420ms;
   }
-  .main-nav {
+  .nav-enhanced .main-nav {
     display: flex;
     opacity: 0;
     visibility: hidden;
@@ -248,7 +248,7 @@
       transform 220ms var(--ease-out),
       visibility 0s 180ms;
   }
-  .main-nav.is-open {
+  .nav-enhanced .main-nav.is-open {
     opacity: 1;
     visibility: visible;
     transform: none;

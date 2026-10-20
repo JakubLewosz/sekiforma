@@ -1,4 +1,6 @@
-# Kontrola jakości — 19 października 2026
+# Archiwum kontroli jakości — 19 października 2026
+
+Aktualna kontrola i wdrożenie: [20 października 2026](QA-2026-10-20.md). Poniższy opis i pomiary Lighthouse są historyczne; nie opisują ponownego audytu dzisiejszej publikacji.
 
 Sprawdzono lokalny build produkcyjny. To opis wykonanych kontroli, nie certyfikat dostępności i nie pomiar rzeczywistego ruchu.
 
@@ -10,7 +12,7 @@ macOS arm64, Node 24.11.0, npm 11.6.1, Astro 7.4.0, lokalny Google Chrome 154 w 
 
 - `npm run build`: poprawny statyczny build, 8 adresów treściowych oraz 404, razem 9 stron.
 - `npm run check`: bez błędów i ostrzeżeń.
-- `npm test`: **26 testów przeszło**. Pełny zapis: [qa-tests.json](qa-tests.json).
+- `npm test`: **26 testów przeszło**. Pełny zapis: [qa-tests-2026-10-19.json](qa-tests-2026-10-19.json).
 
 ## Testy przeglądarkowe
 

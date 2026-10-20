@@ -50,7 +50,9 @@ test('brief: błędy, cofanie, podsumowanie i brak transmisji', async ({
   const outbound: string[] = [];
   let started = false;
   page.on('request', (r) => {
-    if (started) outbound.push(`${r.method()} ${r.url()}`);
+    // Chrome can refresh the favicon after changing the same-page hash.
+    if (started && new URL(r.url()).pathname !== '/favicon.svg')
+      outbound.push(`${r.method()} ${r.url()}`);
   });
   await page.goto('/kontakt');
   await expect(page.getByRole('button', { name: 'Dalej' })).toBeEnabled();
@@ -112,6 +114,30 @@ test('brief: błędy, cofanie, podsumowanie i brak transmisji', async ({
     'anna@example.com',
   ])
     await expect(summary).toContainText(value);
+  await expect(
+    page.getByRole('heading', {
+      name: 'Chcesz podobną stronę dla swojej firmy?',
+    }),
+  ).toBeVisible();
+  await page
+    .getByRole('link', { name: 'Porozmawiaj z Jakubem o swoim projekcie' })
+    .click();
+  await expect(page).toHaveURL(/#autor$/);
+  await expect(page.locator('#autor')).toBeFocused();
+  await expect(
+    page.locator('#autor a[href="mailto:jakublewosz6@gmail.com"]'),
+  ).toBeVisible();
+  await page.getByRole('button', { name: 'Zmień odpowiedzi' }).click();
+  await expect(
+    page.getByLabel('Jeszcze nie wiem', { exact: true }),
+  ).toBeChecked();
+  await page.getByRole('button', { name: 'Dalej' }).click();
+  await expect(page.getByLabel('Co jest dla Ciebie ważne?')).toHaveValue(
+    'Jasne drewno, miejsce na książki.',
+  );
+  await page.getByRole('button', { name: 'Dalej' }).click();
+  await expect(page.getByLabel('Przykładowe imię')).toHaveValue('Anna');
+  await page.getByRole('button', { name: 'Zobacz podsumowanie' }).click();
   expect(outbound).toEqual([]);
   expect(
     await page.evaluate(() => ({
@@ -161,22 +187,38 @@ test('galeria: klawiatura, zmiana zdjęcia, fokus i Escape', async ({
   await page.keyboard.press('ArrowRight');
   await expect(page.locator('.lightbox-count')).toHaveText('1 / 3');
   await page.keyboard.press('Tab');
+  await expect(
+    page.getByRole('button', { name: 'Poprzednie zdjęcie' }),
+  ).toBeFocused();
   await page.keyboard.press('Tab');
+  await expect(
+    page.getByRole('button', { name: 'Następne zdjęcie' }),
+  ).toBeFocused();
   await page.keyboard.press('Tab');
   await expect(page.getByRole('button', { name: 'Zamknij' })).toBeFocused();
+  await page.keyboard.press('Shift+Tab');
+  await expect(
+    page.getByRole('button', { name: 'Następne zdjęcie' }),
+  ).toBeFocused();
+  await page.keyboard.press('Tab');
   await page.keyboard.press('Escape');
   await expect(page.getByRole('dialog')).not.toBeVisible();
   await expect(opener).toBeFocused();
 });
 
-test('menu mobilne i FAQ działają klawiaturą', async ({ page }) => {
+test('menu mobilne i FAQ działają klawiaturą', async ({
+  page,
+  browserName,
+}) => {
+  // macOS WebKit uses Option+Tab for full navigation through links.
+  const nextLink = browserName === 'webkit' ? 'Alt+Tab' : 'Tab';
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
   const menu = page.getByRole('button', { name: 'Menu' });
   await menu.focus();
   await page.keyboard.press('Enter');
   await expect(menu).toHaveAttribute('aria-expanded', 'true');
-  await page.keyboard.press('Tab');
+  await page.keyboard.press(nextLink);
   await expect(
     page
       .locator('#main-nav')
@@ -185,6 +227,24 @@ test('menu mobilne i FAQ działają klawiaturą', async ({ page }) => {
   await page.keyboard.press('Escape');
   await expect(menu).toBeFocused();
   await expect(menu).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.locator('#main-nav')).toHaveJSProperty('inert', true);
+  await page.keyboard.press(nextLink);
+  expect(
+    await page
+      .locator('#main-nav')
+      .evaluate((nav) => nav.contains(document.activeElement)),
+  ).toBe(false);
+  await menu.click();
+  await page.mouse.click(2, 500);
+  await expect(menu).toHaveAttribute('aria-expanded', 'false');
+  await menu.click();
+  await page
+    .locator('#main-nav')
+    .getByRole('link', { name: 'Oferta', exact: true })
+    .click();
+  await expect(page).toHaveURL(/\/oferta\/?$/);
+  await expect(menu).toHaveAttribute('aria-expanded', 'false');
+  await page.goto('/');
   const faq = page.getByText('Czy potrzebuję gotowego projektu?', {
     exact: true,
   });

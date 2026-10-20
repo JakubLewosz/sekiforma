@@ -78,4 +78,6 @@ const links = [
   });
   window.addEventListener('pageshow', closeMenu);
   closeMenu();
+  // Enhance only after the controls are ready; plain links work without JS.
+  toggle?.closest('.site-header')?.classList.add('nav-enhanced');
 </script>

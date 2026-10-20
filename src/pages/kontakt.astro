@@ -50,10 +50,15 @@ import detail from '../assets/wardrobe-detail.webp';
     </aside>
     <BriefForm client:load />
   </div>
-  <section class="container author-block" id="autor">
+  <section
+    class="container author-block"
+    id="autor"
+    tabindex="-1"
+    aria-labelledby="author-title"
+  >
     <div>
       <span class="eyebrow">O PROJEKCIE / PRAWDZIWY KONTAKT</span>
-      <h2>
+      <h2 id="author-title">
         Za tą stroną
         <br />
         <em>stoi Jakub.</em>
@@ -70,6 +75,10 @@ import detail from '../assets/wardrobe-detail.webp';
         Marka jest fikcyjna, a wnętrza wygenerowane z pomocą AI. Formularz służy
         do demonstracji. Poniżej znajdziesz osobny, rzeczywisty kontakt do mnie
         jako autora strony.
+      </p>
+      <p>
+        Jeśli chcesz podobną stronę internetową dla swojej firmy, napisz do mnie
+        o swoim pomyśle.
       </p>
       <a class="text-link" href="mailto:jakublewosz6@gmail.com">
         Napisz do autora <Icon name="diagonal" />

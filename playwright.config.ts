@@ -3,16 +3,24 @@ import { existsSync } from 'node:fs';
 const chrome =
   process.env.CHROME_PATH ??
   '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const browserName = process.env.PW_BROWSER === 'webkit' ? 'webkit' : 'chromium';
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
   workers: 2,
   timeout: 45000,
-  reporter: [['list'], ['json', { outputFile: 'docs/qa-tests.json' }]],
+  reporter: [
+    ['list'],
+    ['json', { outputFile: process.env.QA_REPORT ?? 'docs/qa-tests.json' }],
+  ],
   use: {
+    browserName,
     baseURL: 'http://127.0.0.1:4322',
     headless: true,
-    launchOptions: existsSync(chrome) ? { executablePath: chrome } : {},
+    launchOptions:
+      browserName === 'chromium' && existsSync(chrome)
+        ? { executablePath: chrome }
+        : {},
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
   },

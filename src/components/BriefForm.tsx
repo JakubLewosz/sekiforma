@@ -339,6 +339,24 @@ export default function BriefForm() {
             nie wysłaliśmy.
           </p>
           {summary(true)}
+          <aside
+            className="brief-author-cta"
+            aria-labelledby="brief-author-title"
+          >
+            <span className="eyebrow">STRONA INTERNETOWA DLA TWOJEJ FIRMY</span>
+            <h3 id="brief-author-title">
+              Chcesz podobną stronę dla swojej firmy?
+            </h3>
+            <p>
+              Ten brief pokazuje możliwości strony. O stworzeniu witryny dla
+              Twojej firmy możesz porozmawiać ze mną — Jakubem, autorem
+              projektu.
+            </p>
+            <a className="text-link" href="#autor">
+              Porozmawiaj z Jakubem o swoim projekcie{' '}
+              <span aria-hidden="true">→</span>
+            </a>
+          </aside>
           <div className="form-actions">
             <button
               className="back-button"
