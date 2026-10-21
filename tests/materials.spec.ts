@@ -110,7 +110,7 @@ test('trzy widoki każdej koncepcji: szybka zmiana zdjęć zachowuje właściwy 
     'garderoba-we-wnece',
     'zabudowa-salonu',
   ]) {
-    await page.goto(`/projekty/${slug}`);
+    await page.goto(`/projekty/${slug}/`);
     const triggers = page.locator('.gallery-trigger');
     await expect(triggers).toHaveCount(3);
     expect(

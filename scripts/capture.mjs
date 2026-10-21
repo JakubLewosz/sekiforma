@@ -43,11 +43,11 @@ for (const [width, height, path, name, fullPage] of [
   [390, 844, '/', 'home-mobile', true],
   [1440, 1000, '/', 'home-desktop-first-screen', false],
   [390, 844, '/', 'home-mobile-first-screen', false],
-  [1440, 1000, '/projekty', 'projects-desktop', true],
-  [390, 844, '/projekty', 'projects-mobile', true],
-  [1440, 1000, '/projekty/jasna-kuchnia', 'kitchen-desktop', true],
-  [390, 844, '/kontakt?typ=kuchnia', 'brief-mobile', true],
-  [1440, 1000, '/pracownia', 'studio-desktop', true],
+  [1440, 1000, '/projekty/', 'projects-desktop', true],
+  [390, 844, '/projekty/', 'projects-mobile', true],
+  [1440, 1000, '/projekty/jasna-kuchnia/', 'kitchen-desktop', true],
+  [390, 844, '/kontakt/?typ=kuchnia', 'brief-mobile', true],
+  [1440, 1000, '/pracownia/', 'studio-desktop', true],
 ]) {
   const page = await browser.newPage({
     viewport: { width, height },
@@ -117,7 +117,7 @@ const mobile = await browser.newPage({
   viewport: { width: 390, height: 844 },
   reducedMotion: 'reduce',
 });
-await mobile.goto('http://127.0.0.1:4322/kontakt?typ=kuchnia');
+await mobile.goto('http://127.0.0.1:4322/kontakt/?typ=kuchnia');
 await mobile.getByRole('button', { name: 'Dalej' }).click();
 await mobile.getByLabel('Mam wymiary', { exact: true }).check();
 await mobile
@@ -152,7 +152,7 @@ const short = await browser.newPage({
   viewport: { width: 850, height: 360 },
   reducedMotion: 'reduce',
 });
-await short.goto('http://127.0.0.1:4322/projekty/jasna-kuchnia');
+await short.goto('http://127.0.0.1:4322/projekty/jasna-kuchnia/');
 await loaded(short);
 await short.locator('.gallery-trigger').first().click();
 await short.waitForFunction(

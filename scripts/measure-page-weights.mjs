@@ -19,7 +19,7 @@ try {
       reducedMotion: 'reduce',
     });
     const page = await context.newPage();
-    await page.goto(`http://127.0.0.1:4322/projekty/${slug}`);
+    await page.goto(`http://127.0.0.1:4322/projekty/${slug}/`);
     await page.evaluate(() =>
       [...document.images]
         .filter((image) => image.hasAttribute('src'))
@@ -39,7 +39,7 @@ try {
         0,
       );
     });
-    pages.push({ path: `/projekty/${slug}`, encodedBodyBytes: weight });
+    pages.push({ path: `/projekty/${slug}/`, encodedBodyBytes: weight });
     await context.close();
   }
   pages.sort((a, b) => b.encodedBodyBytes - a.encodedBodyBytes);

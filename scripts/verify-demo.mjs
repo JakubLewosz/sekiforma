@@ -46,7 +46,7 @@ page.on('response', (response) => {
   if (response.request().resourceType() === 'font') fonts.add(response.url());
   if (
     response.status() >= 400 &&
-    !response.url().includes('/nie-ma-takiej-strony')
+    !response.url().includes('/nie-ma-takiej-strony/')
   )
     failed.push(`${response.status()} ${response.url()}`);
 });
@@ -69,13 +69,13 @@ async function loaded() {
 }
 const routes = [
   '/',
-  '/oferta',
-  '/projekty',
-  '/projekty/jasna-kuchnia',
-  '/projekty/garderoba-we-wnece',
-  '/projekty/zabudowa-salonu',
-  '/pracownia',
-  '/kontakt',
+  '/oferta/',
+  '/projekty/',
+  '/projekty/jasna-kuchnia/',
+  '/projekty/garderoba-we-wnece/',
+  '/projekty/zabudowa-salonu/',
+  '/pracownia/',
+  '/kontakt/',
 ];
 const checked = [];
 try {
@@ -87,7 +87,7 @@ try {
       await loaded();
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
         'href',
-        new URL(route === '/' ? route : `${route}/`, origin).href,
+        new URL(route, origin).href,
       );
       await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
         'content',
@@ -180,7 +180,7 @@ try {
     ['garderoba-we-wnece', 'Szafa lub garderoba'],
     ['zabudowa-salonu', 'Zabudowa salonu'],
   ]) {
-    await page.goto(`/projekty/${slug}`);
+    await page.goto(`/projekty/${slug}/`);
     await page.getByRole('link', { name: 'Zacznij podobny brief' }).click();
     await expect(page.getByRole('radio', { name, exact: true })).toBeChecked();
   }
@@ -241,7 +241,7 @@ try {
     [0, 0],
   );
   page.off('request', listener);
-  const missing = await page.goto('/nie-ma-takiej-strony');
+  const missing = await page.goto('/nie-ma-takiej-strony/');
   assert.equal(missing.status(), 404);
   await expect(page.getByRole('heading', { level: 1 })).toContainText(
     'nie ma formy',

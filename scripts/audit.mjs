@@ -12,7 +12,7 @@ const summary = [];
 try {
   for (const [slug, path] of [
     ['home', '/'],
-    ['wardrobe', '/projekty/garderoba-we-wnece'],
+    ['wardrobe', '/projekty/garderoba-we-wnece/'],
   ]) {
     const result = await lighthouse(`http://127.0.0.1:4322${path}`, {
       port: chrome.port,

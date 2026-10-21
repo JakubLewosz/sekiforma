@@ -10,10 +10,10 @@ for (const width of [320, 390, 768])
     });
     const page = await context.newPage();
     for (const [name, path] of [
-      ['Oferta', '/oferta'],
-      ['Koncepcje', '/projekty'],
-      ['Pracownia', '/pracownia'],
-      ['Porozmawiajmy', '/kontakt'],
+      ['Oferta', '/oferta/'],
+      ['Koncepcje', '/projekty/'],
+      ['Pracownia', '/pracownia/'],
+      ['Porozmawiajmy', '/kontakt/'],
     ]) {
       await page.goto('http://127.0.0.1:4322/');
       await expect(page.getByRole('button', { name: 'Menu' })).toBeHidden();
@@ -30,7 +30,7 @@ for (const width of [320, 390, 768])
         link.press('Enter'),
       ]);
       expect(response?.status()).toBe(200);
-      expect(new URL(page.url()).pathname.replace(/\/$/, '')).toBe(path);
+      expect(new URL(page.url()).pathname).toBe(path);
       expect(
         await page
           .locator('html')
@@ -64,7 +64,7 @@ test('nawigacja przy 799/800–900px i galeria na niskim ekranie', async ({
     ).toBe(true);
   }
   await page.setViewportSize({ width: 850, height: 360 });
-  await page.goto('/projekty/jasna-kuchnia');
+  await page.goto('/projekty/jasna-kuchnia/');
   const opener = page.locator('.gallery-trigger').first();
   await opener.click();
   const dialog = page.getByRole('dialog');

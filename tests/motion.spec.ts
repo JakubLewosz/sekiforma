@@ -113,7 +113,7 @@ for (const width of [390, 1440])
         );
       });
     });
-    await page.goto('/projekty');
+    await page.goto('/projekty/');
     await page
       .getByRole('link', { name: 'Zobacz koncepcję: Jasna kuchnia' })
       .click();
@@ -166,7 +166,7 @@ for (const width of [390, 1440])
 test('nawigacja i galeria działają także bez natywnych przejść', async ({
   page,
 }) => {
-  await page.goto('/projekty');
+  await page.goto('/projekty/');
   await page.addStyleTag({ content: '@view-transition { navigation: none; }' });
   await page
     .getByRole('link', { name: 'Zobacz koncepcję: Jasna kuchnia' })

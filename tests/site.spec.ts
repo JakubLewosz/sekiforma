@@ -35,13 +35,13 @@ async function settleMotion(page: Page) {
 }
 const routes = [
   '/',
-  '/oferta',
-  '/projekty',
-  '/projekty/jasna-kuchnia',
-  '/projekty/garderoba-we-wnece',
-  '/projekty/zabudowa-salonu',
-  '/pracownia',
-  '/kontakt',
+  '/oferta/',
+  '/projekty/',
+  '/projekty/jasna-kuchnia/',
+  '/projekty/garderoba-we-wnece/',
+  '/projekty/zabudowa-salonu/',
+  '/pracownia/',
+  '/kontakt/',
 ];
 
 test('brief: błędy, cofanie, podsumowanie i brak transmisji', async ({
@@ -54,7 +54,7 @@ test('brief: błędy, cofanie, podsumowanie i brak transmisji', async ({
     if (started && new URL(r.url()).pathname !== '/favicon.svg')
       outbound.push(`${r.method()} ${r.url()}`);
   });
-  await page.goto('/kontakt');
+  await page.goto('/kontakt/');
   await expect(page.getByRole('button', { name: 'Dalej' })).toBeEnabled();
   await readyImages(page);
   started = true;
@@ -164,7 +164,7 @@ test('każda koncepcja wybiera właściwy typ briefu', async ({ page }) => {
     ['garderoba-we-wnece', 'Szafa lub garderoba'],
     ['zabudowa-salonu', 'Zabudowa salonu'],
   ]) {
-    await page.goto(`/projekty/${slug}`);
+    await page.goto(`/projekty/${slug}/`);
     await page.getByRole('link', { name: 'Zacznij podobny brief' }).click();
     await expect(
       page.getByRole('radio', { name: label, exact: true }),
@@ -176,7 +176,7 @@ test('każda koncepcja wybiera właściwy typ briefu', async ({ page }) => {
 test('galeria: klawiatura, zmiana zdjęcia, fokus i Escape', async ({
   page,
 }) => {
-  await page.goto('/projekty/jasna-kuchnia');
+  await page.goto('/projekty/jasna-kuchnia/');
   const opener = page.getByRole('button', {
     name: 'Powiększ: Całość koncepcji — wizualizacja AI',
   });
@@ -273,6 +273,7 @@ for (const width of [320, 390, 768, 1440])
     for (const route of routes) {
       const response = await page.goto(route);
       expect(response?.status()).toBe(200);
+      expect(new URL(page.url()).pathname).toBe(route);
       await expect(page.locator('h1')).toHaveCount(1);
       await expect(page.locator('meta[name="description"]')).toHaveAttribute(
         'content',
@@ -325,7 +326,7 @@ test('dostępność automatyczna WCAG 2.2 AA na głównych stronach i krokach fo
       route,
     ).toEqual([]);
   }
-  await page.goto('/kontakt');
+  await page.goto('/kontakt/');
   await page.getByLabel('Kuchnia', { exact: true }).check();
   await page.getByRole('button', { name: 'Dalej' }).click();
   await settleMotion(page);
@@ -380,16 +381,16 @@ test('statyczna treść bez JavaScript, 404, powiększenie tekstu i ograniczenie
     await expect(
       staticPage.getByRole('heading', { name: title }),
     ).toBeVisible();
-  await staticPage.goto('http://127.0.0.1:4322/projekty/jasna-kuchnia');
+  await staticPage.goto('http://127.0.0.1:4322/projekty/jasna-kuchnia/');
   await expect(
     staticPage.getByRole('link', { name: 'Zacznij podobny brief' }),
   ).toBeVisible();
-  await staticPage.goto('http://127.0.0.1:4322/kontakt');
+  await staticPage.goto('http://127.0.0.1:4322/kontakt/');
   await expect(
     staticPage.getByRole('button', { name: 'Dalej' }),
   ).toBeDisabled();
   await context.close();
-  const response = await page.goto('/nie-ma-takiej-strony');
+  const response = await page.goto('/nie-ma-takiej-strony/');
   expect(response?.status()).toBe(404);
   await expect(page.getByRole('heading', { level: 1 })).toContainText(
     'nie ma formy',
@@ -417,7 +418,7 @@ test('brief na telefonie 320px: pełna ścieżka klawiaturą i reset', async ({
   page,
 }) => {
   await page.setViewportSize({ width: 320, height: 844 });
-  await page.goto('/kontakt');
+  await page.goto('/kontakt/');
   await expect(page.getByRole('button', { name: 'Dalej' })).toBeEnabled();
   await page.getByLabel('Kuchnia', { exact: true }).focus();
   await page.keyboard.press('Space');

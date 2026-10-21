@@ -9,10 +9,10 @@ for (const width of [390, 1440]) {
     await page.mouse.move(width / 2, 450);
     for (const route of [
       '/',
-      '/projekty',
-      '/oferta',
-      '/projekty/jasna-kuchnia',
-      '/pracownia',
+      '/projekty/',
+      '/oferta/',
+      '/projekty/jasna-kuchnia/',
+      '/pracownia/',
     ]) {
       await page.goto(route);
       await page.evaluate(async () => {

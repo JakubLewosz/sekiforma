@@ -19,6 +19,8 @@ npm run dev
 
 Otwórz adres wypisany przez Astro, domyślnie `http://127.0.0.1:4321`.
 
+Projekt celowo używa `trailingSlash: 'always'` i statycznych plików `*/index.html`. Kanoniczne adresy podstron kończą się `/`, np. `/kontakt/`. Testy i skrypty QA otwierają te adresy bezpośrednio; lokalny Astro może zwrócić 404 dla `/kontakt` bez końcowego ukośnika. Normalizacja takich adresów na publicznej stronie zależy od hostingu.
+
 ```bash
 npm run check     # TypeScript i szablony Astro
 npm run build     # statyczne pliki w dist/
@@ -71,7 +73,7 @@ scripts/                   przygotowanie obrazów, zrzuty, audyt
 
 ## Sprawdzenia i materiały portfolio
 
-Bieżący zakres i rzeczywiste wyniki: [kontrola z 20 października 2026](docs/QA-2026-10-20.md). [Raport z 19 października](docs/QA.md) i jego pomiary Lighthouse są historyczne. Zrzuty desktop i mobile są w [docs/screenshots](docs/screenshots), a [krótkie nagranie](docs/video/przejscie-przez-strone.webm) pokazuje przejście od strony głównej przez podsumowanie briefu do kontaktu z autorem.
+Bieżąca kontrola lokalna: [nowy kontakt i zgodność tras — 21 października 2026](docs/QA-2026-10-21.md). Wyniki wcześniejszej weryfikacji publicznej wersji: [kontrola z 20 października 2026](docs/QA-2026-10-20.md). [Raport z 19 października](docs/QA.md) i jego pomiary Lighthouse są historyczne. Zrzuty desktop i mobile są w [docs/screenshots](docs/screenshots), a [krótkie nagranie](docs/video/przejscie-przez-strone.webm) pokazuje przejście od strony głównej przez podsumowanie briefu do kontaktu z autorem.
 
 Dodatkowe narzędzia:
 
