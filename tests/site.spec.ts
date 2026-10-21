@@ -125,7 +125,7 @@ test('brief: błędy, cofanie, podsumowanie i brak transmisji', async ({
   await expect(page).toHaveURL(/#autor$/);
   await expect(page.locator('#autor')).toBeFocused();
   await expect(
-    page.locator('#autor a[href="mailto:jakublewosz6@gmail.com"]'),
+    page.locator('#autor a[href="mailto:jakub.lewosz.it@gmail.com"]'),
   ).toBeVisible();
   await page.getByRole('button', { name: 'Zmień odpowiedzi' }).click();
   await expect(
